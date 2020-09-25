@@ -1,0 +1,34 @@
+version: '3.1'
+user:
+  - regis
+
+services:
+
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: plugindb
+      WORDPRESS_DB_PASSWORD: plugindb
+      WORDPRESS_DB_NAME: plugindb
+    volumes:
+      - wordpress:/var/www/html
+      - ./wp-etransaction:/var/www/html/wp-content/plugins/wp-etransaction
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: plugindb
+      MYSQL_USER: plugindb
+      MYSQL_PASSWORD: plugindb
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - db:/var/etransaction/mysql
+
+volumes:
+  wordpress:
+  db:
+
