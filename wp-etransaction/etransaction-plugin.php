@@ -83,7 +83,7 @@ add_action('admin_init', function () {
 
     add_settings_section(
         'etransactions_section_settings',               // ID
-        __('The Matrix has you.', 'etransactions'),     // Title
+        __('CA e-Transactions settings', 'etransactions'),     // Title
         'etransactions_settings_callback',              // Callback
         'etransactions'                                 // page
     );
@@ -96,7 +96,7 @@ add_action('admin_init', function () {
         'etransactions_section_settings',
         [
             'label_for' => 'site_id',
-            'type'=> 'text',
+            'type' => 'text',
             'maxlength' => '7',
             'help' => __('The Site ID given by the e-Transaction support (7 digits max)', 'etransactions')
         ]
@@ -110,7 +110,7 @@ add_action('admin_init', function () {
         'etransactions_section_settings',
         [
             'label_for' => 'rang_id',
-            'type'=> 'text',
+            'type' => 'text',
             'maxlength' => '3',
             'help' => __('The Rang ID given by the e-Transaction support (3 digits max)', 'etransactions')
 
@@ -125,7 +125,7 @@ add_action('admin_init', function () {
         'etransactions_section_settings',
         [
             'label_for' => 'customer_id',
-            'type'=> 'text',
+            'type' => 'text',
             'maxlength' => '9',
             'help' => __('Your customer ID given by the e-Transaction support (from 1 to 9 digitis)', 'etransactions')
 
@@ -140,7 +140,7 @@ add_action('admin_init', function () {
         'etransactions_section_settings',
         [
             'label_for' => 'secret_key',
-            'type'=> 'password',
+            'type' => 'password',
             'help' => __('The secret key generated into the etransaction.fr backoffice', 'etransactions')
         ]
     );
@@ -148,7 +148,14 @@ add_action('admin_init', function () {
     function etransactions_settings_callback($args)
     {
         ?>
-        <p id="<?php echo esc_attr($args['id']); ?>"><?php esc_html_e('Follow the white rabbit.', 'etransactions'); ?></p>
+        <div class="clear">
+            <p>
+                <img src="<?php echo plugin_dir_url(__FILE__) . 'assets/images/logo_moncommerce_ca.jpg'; ?>"/>
+            </p>
+            <p id="<?php echo esc_attr($args['id']); ?>">
+                <?php esc_html_e('Fill the IDs you received from the e-Transaction support. ', 'etransactions'); ?>
+            </p>
+        </div>
         <?php
     }
 
@@ -162,7 +169,7 @@ add_action('admin_init', function () {
                 id="<?php echo $label_for; ?>"
                 name="etransactions_options[<?php echo $label_for; ?>]"
                 type="<?php echo $args['type']; ?>"
-            <?php if (isset($args['maxlength'])) {  ?>
+            <?php if (isset($args['maxlength'])) { ?>
                 maxlength="<?php echo $args['maxlength']; ?>"
             <?php } ?>
                 placeholder="<?php echo __('Site ID', 'etransactions'); ?>"
