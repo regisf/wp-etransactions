@@ -145,6 +145,9 @@ add_action('admin_init', function () {
         ]
     );
 
+    /*
+     * Display the CA logo and a message.
+     */
     function etransactions_settings_callback($args)
     {
         ?>
@@ -159,6 +162,10 @@ add_action('admin_init', function () {
         <?php
     }
 
+    /**
+     * Display an entry field
+     * @param array $args
+     */
     function etransactions_field_cb($args)
     {
         $options = get_option('etransactions_options');
