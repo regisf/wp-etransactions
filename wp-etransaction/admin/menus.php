@@ -13,7 +13,7 @@ add_action('admin_menu', function () {
         function () {
             require_once __DIR__ . '/settings_page.php';
         },
-        plugin_dir_url(__FILE__) . 'assets/images/ca_icon.png',
+        plugin_dir_url(__FILE__) . '../assets/images/ca_icon.png',
         200
     );
 

@@ -97,6 +97,11 @@ if (!class_exists('ProductsDb')) {
                 ['name' => $name, 'price' => $price, 'active'=> $active],
                 ['product_id' => $product_id]);
         }
+
+        public function get_actives()
+        {
+            return $this->db->get_results('SELECT * FROM ' . $this->db_name . ' WHERE `active`=true');
+        }
     }
 }
 

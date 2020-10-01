@@ -75,7 +75,7 @@ add_action('admin_init', function () {
         ?>
         <div class="clear">
             <p>
-                <img src="<?php echo plugin_dir_url(__FILE__) . 'assets/images/logo_moncommerce_ca.jpg'; ?>"/>
+                <img src="<?php echo plugin_dir_url(__FILE__) . '../assets/images/logo_moncommerce_ca.jpg'; ?>"/>
             </p>
             <p id="<?php echo esc_attr($args['id']); ?>">
                 <?php esc_html_e('Fill the IDs you received from the e-Transaction support. ', 'etransactions'); ?>
