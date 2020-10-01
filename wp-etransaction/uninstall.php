@@ -9,3 +9,6 @@ if (!current_user_can('manage_options')) {
 }
 
 delete_options('etransaction_options');
+
+global $wpdb;
+$wpdb->query('DROP TABLE `etransactions_product`');
