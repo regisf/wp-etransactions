@@ -18,3 +18,4 @@ require_once __DIR__ . '/admin/menus.php';
 require_once __DIR__ . '/admin/products-post.php';
 require_once __DIR__ . '/admin/hooks/filters.php';
 require_once __DIR__ . '/admin/hooks/register.php';
+require_once __DIR__ . '/shortcode.php';
