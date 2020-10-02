@@ -2,7 +2,7 @@
 
 register_activation_hook(__FILE__, function () {
     // Install database
-    $productDb = new ProductsDb();
+    $productDb = ProductsDb::get_instance();
     $productDb->install();
 });
 

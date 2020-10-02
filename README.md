@@ -8,3 +8,13 @@ Do not use it in production, it will not work.
 
 PHP 5.5
 
+
+## Installation
+
+### Callback pages
+
+#### Payement accepted page
+
+#### Payement rejected page
+
+#### Payement canceled page

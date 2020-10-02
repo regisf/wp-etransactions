@@ -6,7 +6,7 @@ if (!current_user_can('manage_options')) {
 require_once 'productsdb.php';
 require_once 'product_list_table.php';
 
-$product_db = new ProductsDb();
+$product_db = ProductsDb::get_instance();
 $product_list_table = new Product_List_Table($product_db);
 $status = $_REQUEST['product_status'];
 $product_action = $_REQUEST['product_action'];

@@ -3,14 +3,24 @@
 if (!class_exists('ProductsDb')) {
     class ProductsDb
     {
+        private static $instance = null;
         private $db_name;
         private $db;
 
-        public function __construct()
+        private function __construct()
         {
             global $wpdb;
             $this->db = $wpdb;
             $this->db_name = $this->db->prefix . 'etransactions_product';
+        }
+
+        public static function get_instance()
+        {
+            if (self::$instance === null) {
+                self::$instance = new ProductsDb();
+            }
+
+            return self::$instance;
         }
 
         public function getProducts($per_page = 5, $page_number = 1, $status = 'all')
