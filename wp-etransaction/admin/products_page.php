@@ -8,8 +8,8 @@ require_once 'product_list_table.php';
 
 $product_db = ProductsDb::get_instance();
 $product_list_table = new Product_List_Table($product_db);
-$status = $_REQUEST['product_status'];
-$product_action = $_REQUEST['product_action'];
+$status = isset($_REQUEST['product_status']) ? $_REQUEST['product_status'] : 'all';
+$product_action = isset($_REQUEST['product_action']) ? $_REQUEST['product_action'] : '';
 
 ?>
 

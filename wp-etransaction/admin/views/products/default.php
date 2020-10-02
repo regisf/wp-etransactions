@@ -4,7 +4,7 @@ if (!current_user_can('manage_options')) {
 }
 
 $product_list_table = new Product_List_Table($product_db);
-$status = $_REQUEST['product_status'];
+$status = isset($_REQUEST['product_status']) ? $_REQUEST['product_status'] : 'all';
 ?>
 
 <a class="page-title-action" href="admin.php?page=etransactions_products&product_action=new">Add</a>
