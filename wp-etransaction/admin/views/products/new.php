@@ -14,12 +14,12 @@ $active = isset($item) ? $item->active : '';
     <h2>Edit product</h2>
 <?php endif; ?>
 
-<form method="post" action="<?php echo admin_url('admin-post.php') ;?>" id="form_new_product">
+<form method="post" action="<?php echo admin_url('admin-post.php'); ?>" id="form_new_product">
     <?php if (!isset($item)): ?>
         <input type="hidden" name="action" value="add_product"/>
     <?php else: ?>
         <input type="hidden" name="action" value="edit_product"/>
-    <input type="hidden" name="product_ID" value="<?php echo $_REQUEST['product']; ?>"/>
+        <input type="hidden" name="product_ID" value="<?php echo $_REQUEST['product']; ?>"/>
     <?php endif; ?>
     <?php echo apply_filters('nonce_input', NonceName); ?>
 
@@ -30,9 +30,10 @@ $active = isset($item) ? $item->active : '';
                 <label for="id_name">Name:</label>
             </th>
             <td>
-                <input type="text" name="name" id="id_name" value="<?php echo $name; ?>" required placeholder="Enter here the product name"/>
+                <input type="text" name="name" id="id_name" value="<?php echo $name; ?>" required
+                       placeholder="Enter here the product name"/>
                 <div class="description">
-                    <?php echo __('The product name as displayed on the web site', 'etransactions'); ?>
+                    <?php echo esc_html__('The product name as displayed on the web site', 'etransactions'); ?>
                 </div>
             </td>
         </tr>
@@ -55,7 +56,9 @@ $active = isset($item) ? $item->active : '';
                 <label for="id_active">Is active:</label>
             </th>
             <td>
-                <input type="checkbox" name="active" <?php if ($active) { echo "checked"; } ?> id="id_active" />
+                <input type="checkbox" name="active" <?php if ($active) {
+                    echo "checked";
+                } ?> id="id_active"/>
             </td>
         </tr>
         </tbody>
