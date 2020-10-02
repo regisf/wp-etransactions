@@ -38,5 +38,4 @@ add_action('admin_menu', function () {
             require_once __DIR__ . '/payements_page.php';
         }
     );
-
 });
