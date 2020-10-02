@@ -47,7 +47,7 @@ $canceled = isset($options['canceled_key']) ? $options['canceled_key'] : null;
     </div>
     <?php } ?>
 
-    <form action="options.php" method="post">
+    <form action="<?php echo admin_url('options.php'); ?>" method="post">
         <?php
         settings_fields('etransactions');
         do_settings_sections('etransactions');

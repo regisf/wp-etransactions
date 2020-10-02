@@ -14,7 +14,7 @@ $active = isset($item) ? $item->active : '';
     <h2>Edit product</h2>
 <?php endif; ?>
 
-<form action="/wp-admin/admin-post.php" method="post" id="form_new_product">
+<form method="post" action="<?php echo admin_url('admin-post.php') ;?>" id="form_new_product">
     <?php if (!isset($item)): ?>
         <input type="hidden" name="action" value="add_product"/>
     <?php else: ?>
