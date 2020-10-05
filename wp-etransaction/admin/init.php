@@ -4,6 +4,26 @@ add_action('admin_init', function () {
     register_setting('etransactions', 'etransactions_options');
 
     add_settings_section(
+        'etransactions_section_debug',
+        _('Test mode', 'etransactions'),
+        'etransaction_test_mode_page',
+        'etransactions'
+    );
+
+    add_settings_field(
+        'etransactions_test_mode_id',
+        __('Test mode', 'extransactions'),
+        'etransactions_checkbox_cb',
+        'etransactions',
+        'etransactions_section_debug',
+        [
+            'label_for' => 'test_id',
+            'help'=> __('<span style="color: red">By checking this option, you will switch you payement system into ' .
+                        'to test mode and you will not be able to receive real payement.</span>'),
+        ]
+    );
+
+    add_settings_section(
         'etransactions_section_settings',               // ID
         __('Credentials', 'etransactions'), // Title
         'etransactions_settings_callback',         // Callback
@@ -170,6 +190,34 @@ add_action('admin_init', function () {
         <div class="description">
             <?php echo $args['help']; ?>
         </div>
+        <?php
+    }
+
+    function etransactions_checkbox_cb($args)
+    {
+        $options = get_option('etransactions_options');
+        $label_for = esc_attr($args['label_for']);
+        ?>
+        <input
+                id="<?php echo $label_for; ?>"
+                name="etransactions_options[<?php echo $label_for; ?>]"
+                type="checkbox"
+                <?php if ($options['test_id']) { ?>checked="<?php $options['test_id'] ?>" <?php } ?> />
+
+        <div class="description">
+            <?php echo $args['help']; ?>
+        </div>
+        <?php
+    }
+
+    function etransaction_test_mode_page($args)
+    {
+        ?>
+        <p id="<?php echo esc_attr($args['id']); ?>">
+            <?
+            echo __('Switching in test mode (using preprod servers)', 'etransactions');
+            ?>
+        </p>
         <?php
     }
 
