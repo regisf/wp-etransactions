@@ -23,6 +23,19 @@ add_action('admin_init', function () {
         ]
     );
 
+    add_settings_field(
+        'etransactions_hmac_preprod_key',
+        __('HMAC Preprod Key', 'etransactions'),
+        'etransactions_field_cb',
+        'etransactions',
+        'etransactions_section_debug',
+        [
+            'label_for' => 'preprod_key',
+            'type' => 'text',
+            'help' => __('The secret key generated into the preprod-guest.etransaction.fr/Vision backoffice', 'etransactions')
+        ]
+    );
+
     add_settings_section(
         'etransactions_section_settings',               // ID
         __('Credentials', 'etransactions'), // Title
@@ -80,7 +93,7 @@ add_action('admin_init', function () {
         'etransactions_section_settings',
         [
             'label_for' => 'secret_key',
-            'type' => 'password',
+            'type' => 'text',
             'help' => __('The secret key generated into the etransaction.fr backoffice', 'etransactions')
         ]
     );
@@ -94,6 +107,20 @@ add_action('admin_init', function () {
 
     add_settings_field(
         'etransactions_validation_page',
+        __('Confirmation page', 'etransactions'),
+        'etransactions_field_cb',
+        'etransactions',
+        'etransactions_section_validate',
+        [
+            'label_for' => 'confirmation_page',
+            'type' => 'text',
+            'placeholder' => __('Confirmation page url', 'etransactions'),
+            'help' => __('The URL of the confirmation page.', 'etransactions')
+        ]
+    );
+
+    add_settings_field(
+        'etransactions_confirmation_page',
         __('Validation page', 'etransactions'),
         'etransactions_field_cb',
         'etransactions',
@@ -105,7 +132,6 @@ add_action('admin_init', function () {
             'help' => __('The URL of the validation page.', 'etransactions')
         ]
     );
-
 
     add_settings_section(
         'etransactions_section_callbacks',               // ID
@@ -141,6 +167,7 @@ add_action('admin_init', function () {
             'help' => __('The page where the user lands when the payement is rejected by the bank.', 'etransactions')
         ]
     );
+
     add_settings_field(
         'etransactions_canceled_key',
         __('Canceled page', 'etransactions'),

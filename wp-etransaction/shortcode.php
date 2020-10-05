@@ -9,7 +9,6 @@ add_shortcode('etransactions_products', function ($attrs = [], $content = '') {
     $str = '';
 
     foreach ($actives as $product) {
-
         $str .= '<div class="etransactions-product-wrapper">
             <div class="etransactions-product-name">'
             . $product->name . '
@@ -33,19 +32,36 @@ add_shortcode('etransactions-accepted', function ($attrs = [], $content = '') {
     $error = $_REQUEST['Erreur'];
 });
 
-add_shortcode('etransactions-order-form', function ($attrs = [], $content = '') {
-    if (!isset($_REQUEST['product'])) {
-        return '';
+function etransactions_get_email_form($product, $no_label)
+{
+    $options = get_option('etransactions_options');
+    $preprod = isset($options['test_id']);
+
+    $str = $preprod ? '<div class="etransactions-warning">Caution ! You are in test mode </div>' : '';
+    if ($no_label === false) {
+        $str .= '<p class="etransactions-product-desc">
+        <span class="etransactions-product-name">' . __('Product:', 'etransactions') . ' ' . $product->name . '</span>
+        <span class="etransactions-product-price">' . $product->price . '&nbsp;&euro;</span>
+        </p>';
     }
 
-    $attrs = shortcode_atts([
-        'no-label' => true
-    ], $attrs);
+    $str .= '
+        <form action="' . $options['confirmation_page'] . '" class="etransactions-product-form" method="post">
+            <input type="hidden" name="product" value="'. $product->product_id .'"  />' .
+            HolderValue::emptyForm() .
+            '<p class="etransactions-product-submit">
+                <input type="submit" value="' . __('Confirm payement', 'etransactions') . '" >
+            </p>
+        </form>';
 
+    return $str;
+}
+
+function etransactions_get_confirm_form($product, $holder, $no_label)
+{
     $options = get_option('etransactions_options');
-    $product_id = esc_sql($_REQUEST['product']);
-    $product = ProductsDb::get_instance()->getById($product_id);
-    $etransaction = new ETransaction(true);
+    $preprod = isset($options['test_id']);
+    $etransaction = new ETransaction($preprod);
     $data = TransactionData::fromData([
         'site' => $options['site_id'],
         'rang' => $options['rang_id'],
@@ -53,6 +69,7 @@ add_shortcode('etransactions-order-form', function ($attrs = [], $content = '') 
         'secret' => $options['secret_key'],
         'command' => $product->name,
         'total' => (float)$product->price,
+        'holder' => $holder,
         'callbacks' => [
             'done' => $options['accepted_key'],
             'denied' => $options['rejected_key'],
@@ -61,26 +78,58 @@ add_shortcode('etransactions-order-form', function ($attrs = [], $content = '') 
     ]);
 
     $etransaction->setTransactionData($data);
-    $str = '<form action="' . $etransaction->getServerAddress() . '" class="etransactions-product-form">';
 
-    if ($attrs['no-label'] === false)  {
+    $str = $preprod === true ? '<div class="etransactions-warning">Caution ! You are in test mode </div>' : '';
+    $str .= '<form action="' . $etransaction->getServerAddress() . '" class="etransactions-product-form" method="post">';
+
+    if ($no_label === false) {
         $str .= '<p class="etransactions-product-desc"> 
         <span class="etransactions-product-name">' . __('Product:', 'etransactions') . ' ' . $product->name . '</span> 
         <span class="etransactions-product-price">' . $product->price . '&nbsp;&euro;</span>
         </p>';
     }
 
-    $str .= HolderValue::emptyForm() .
-        $etransaction->getTransactionForm() .
+    $str .= $etransaction->getTransactionForm() .
         '<p class="etransactions-product-submit">
             <input type="submit" value="' . __('Proceed to payement', 'etransactions') . '" >
         </p>
     </form>';
 
     return $str;
+}
+
+add_shortcode('etransactions-order-form', function ($attrs = [], $content = '') {
+    if (!isset($_REQUEST['product'])) {
+        return '<p>Error: No product id set</p>';
+    }
+
+    $attrs = shortcode_atts([
+        'no-label' => true,
+        'step' => 'email',
+    ], $attrs);
+
+    $product_id = esc_sql($_REQUEST['product']);
+    $product = ProductsDb::get_instance()->getById($product_id);
+    $str = '';
+
+    switch ($attrs['step']) {
+        case 'email':
+            $str = etransactions_get_email_form($product, $attrs['no-label']);
+            break;
+
+        case 'confirm':
+            $holder = esc_sql($_REQUEST['PBX_PORTEUR']);
+            $str = etransactions_get_confirm_form($product, $holder, $attrs['no-label']);
+            break;
+
+        default:
+            $str = '<!-- etransactions-order-form : Wrong step attribute -->';
+    }
+
+    return $str;
 });
 
-add_shortcode('etransactions-product-name', function($attrs = [], $content = '') {
+add_shortcode('etransactions-product-name', function ($attrs = [], $content = '') {
     if (!isset($_REQUEST['product'])) {
         return '';
     }
@@ -91,7 +140,7 @@ add_shortcode('etransactions-product-name', function($attrs = [], $content = '')
     return $product->name;
 });
 
-add_shortcode('etransactions-product-price', function($attrs = [], $content = '') {
+add_shortcode('etransactions-product-price', function ($attrs = [], $content = '') {
     if (!isset($_REQUEST['product'])) {
         return '';
     }
