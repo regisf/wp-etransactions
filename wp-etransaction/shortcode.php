@@ -70,11 +70,11 @@ function etransactions_get_confirm_form($product, $holder, $no_label)
         'command' => $product->name,
         'total' => (float)$product->price,
         'holder' => $holder,
-        'callbacks' => [
-            'done' => $options['accepted_key'],
-            'denied' => $options['rejected_key'],
-            'canceled' => $options['canceled_key']
-        ]
+//        'callbacks' => [
+//            'done' => $options['accepted_key'],
+//            'denied' => $options['rejected_key'],
+//            'canceled' => $options['canceled_key']
+//        ]
     ]);
 
     $etransaction->setTransactionData($data);
