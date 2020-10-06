@@ -7,7 +7,9 @@ add_shortcode('etransactions_products', function ($attrs = [], $content = '') {
     $producDb = ProductsDb::get_instance();
     $actives = $producDb->get_actives();
     $str = '';
-
+    if (strlen($content) === 0) {
+        $content = __('Missing link name in content', 'etransactions');
+    }
     foreach ($actives as $product) {
         $str .= '<div class="etransactions-product-wrapper">
             <div class="etransactions-product-name">'
@@ -17,7 +19,7 @@ add_shortcode('etransactions_products', function ($attrs = [], $content = '') {
             . $product->price . '&nbsp;&euro;
             </div>
             <div class="etransactions-product-apply">
-                <a href="' . apply_filters('etransaction_get_order_address', $product->product_id) . ' ">' . __($content, 'etransactions') . '</a>
+                <a href="' . apply_filters('etransaction_get_confirmation_address', $product->product_id) . ' ">' . $content . '</a>
             </div>
         </div>';
     }
@@ -46,10 +48,10 @@ function etransactions_get_email_form($product, $no_label)
     }
 
     $str .= '
-        <form action="' . $options['confirmation_page'] . '" class="etransactions-product-form" method="post">
-            <input type="hidden" name="product" value="'. $product->product_id .'"  />' .
-            HolderValue::emptyForm() .
-            '<p class="etransactions-product-submit">
+        <form action="' . apply_filters('etransaction_get_validation_address', $product->product_id) . '" class="etransactions-product-form" method="post">
+            <input type="hidden" name="product" value="' . $product->product_id . '"  />' .
+        HolderValue::emptyForm() .
+        '<p class="etransactions-product-submit">
                 <input type="submit" value="' . __('Confirm payement', 'etransactions') . '" >
             </p>
         </form>';
@@ -67,19 +69,28 @@ function etransactions_get_confirm_form($product, $holder, $no_label)
         'rang' => $options['rang_id'],
         'id' => $options['customer_id'],
         'secret' => $options['secret_key'],
-        'command' => $product->name,
+        'command' => $holder . '-' . $product->name,
         'total' => (float)$product->price,
         'holder' => $holder,
-//        'callbacks' => [
-//            'done' => $options['accepted_key'],
-//            'denied' => $options['rejected_key'],
-//            'canceled' => $options['canceled_key']
-//        ]
+        'callbacks' => []
     ]);
+
+    if (isset($options['accepted_key']) && $options['accepted_key'] !== '') {
+        $data->getCallbacks()->setDoneCallback($options['accepted_key']);
+    }
+
+    if (isset($options['rejected_key']) && $options['rejected_key'] !== '') {
+        $data->getCallbacks()->setDeniedCallback($options['rejected_key']);
+    }
+
+    if (isset($options['canceled_key']) && $options['canceled_key'] !== '') {
+        $data->getCallbacks()->setCanceledCallback($options['canceled_key']);
+
+    }
 
     $etransaction->setTransactionData($data);
 
-    $str = $preprod === true ? '<div class="etransactions-warning">Caution ! You are in test mode </div>' : '';
+    $str = $preprod === true ? '<div class="etransactions-warning">! Caution ! You are in test mode </div>' : '';
     $str .= '<form action="' . $etransaction->getServerAddress() . '" class="etransactions-product-form" method="post">';
 
     if ($no_label === false) {
@@ -110,7 +121,6 @@ add_shortcode('etransactions-order-form', function ($attrs = [], $content = '') 
 
     $product_id = esc_sql($_REQUEST['product']);
     $product = ProductsDb::get_instance()->getById($product_id);
-    $str = '';
 
     switch ($attrs['step']) {
         case 'email':

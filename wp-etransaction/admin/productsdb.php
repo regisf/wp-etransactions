@@ -45,6 +45,7 @@ if (!class_exists('ProductsDb')) {
 
         public function install()
         {
+            echo "Pour moi c'est bon";
             return $this->db->query("
                 CREATE TABLE IF NOT EXISTS  `{$this->db_name}` (
                     `product_id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,

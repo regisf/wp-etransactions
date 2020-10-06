@@ -9,7 +9,18 @@ add_filter('nonce_input', function () {
     return '<input type="hidden" name="_wpnonce" value="' . wp_create_nonce(NonceName) . '" />';
 });
 
-add_filter('etransaction_get_order_address', function ($id) {
+add_filter('etransaction_get_validation_address', function ($id) {
     $options = get_option('etransactions_options');
-    return $options['validation_page'] . '?product=' . $id;
+    $validation_page = $options['validation_page'];
+
+    $sep = strchr($validation_page, '?') !== false ? '&' : '?';
+    return $validation_page . $sep . 'product=' . $id;
+});
+
+add_filter('etransaction_get_confirmation_address', function ($id) {
+    $options = get_option('etransactions_options');
+    $validation_page = $options['confirmation_page'];
+
+    $sep = strchr($validation_page, '?') !== false ? '&' : '?';
+    return $validation_page . $sep . 'product=' . $id;
 });

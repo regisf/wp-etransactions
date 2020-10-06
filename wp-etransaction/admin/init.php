@@ -106,7 +106,7 @@ add_action('admin_init', function () {
     );
 
     add_settings_field(
-        'etransactions_validation_page',
+        'etransactions_confirmation_page',
         __('Confirmation page', 'etransactions'),
         'etransactions_field_cb',
         'etransactions',
@@ -120,7 +120,7 @@ add_action('admin_init', function () {
     );
 
     add_settings_field(
-        'etransactions_confirmation_page',
+        'etransactions_validation_page',
         __('Validation page', 'etransactions'),
         'etransactions_field_cb',
         'etransactions',
