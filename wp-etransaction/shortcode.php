@@ -5,13 +5,15 @@ require_once __DIR__ . '/admin/orderdb.php';
 require_once plugin_dir_path(__FILE__) . 'etransactions/ETransactions/ETransaction.php';
 require_once plugin_dir_path(__FILE__) . 'etransactions/ETransactions/TransactionResult.php';
 
-add_shortcode('etransactions_products', function ($attrs = [], $content = '') {
+add_shortcode('etransactions-products', function ($attrs = [], $content = '') {
     $producDb = ProductsDb::get_instance();
     $actives = $producDb->get_actives();
     $str = '';
+
     if (strlen($content) === 0) {
         $content = __('Missing link name in content', 'etransactions');
     }
+
     foreach ($actives as $product) {
         $str .= '<div class="etransactions-product-wrapper">
             <div class="etransactions-product-name">'
