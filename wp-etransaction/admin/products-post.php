@@ -9,7 +9,8 @@ function redirect()
 add_action('admin_post_add_product', function () {
     $name = $_REQUEST['name'];
     $price = $_REQUEST['price'];
-    $active = $_REQUEST['active'];
+    $active = isset($_REQUEST['active']);
+
     $productDb = ProductsDb::get_instance();
     $productDb->insert($name, $price, $active);
 
@@ -33,7 +34,7 @@ add_action('admin_post_delete_product', function () {
     redirect();
 });
 
-add_action('admin_post_edit_product', function() {
+add_action('admin_post_edit_product', function () {
     $valid = apply_filters('is_nonce_exists', $_REQUEST['_wpnonce']);
     if (!$valid) {
         die('Integrity error');
