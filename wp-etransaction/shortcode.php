@@ -158,21 +158,27 @@ add_shortcode('etransactions-product-price', function ($attrs = [], $content = '
 });
 
 add_shortcode('etransactions-accepted', function ($attrs = [], $content = '') {
-    $result = TransactionResult::fromRequest($_REQUEST);
-    OrderDb::get_instance()->set_transaction_succeed($result->getReference()->getValue());
+    if (!isset($_REQUEST['post'])) {
+        $result = TransactionResult::fromRequest($_REQUEST);
+        OrderDb::get_instance()->set_transaction_succeed($result->getReference()->getValue());
+    }
     return '';
 });
 
 add_shortcode('etransactions-canceled', function ($attrs = [], $content = '') {
-    $result = TransactionResult::fromRequest($_REQUEST);
-    OrderDb::get_instance()->set_transaction_canceled($result->getReference()->getValue());
+    if (!isset($_REQUEST['post'])) {
+        $result = TransactionResult::fromRequest($_REQUEST);
+        OrderDb::get_instance()->set_transaction_canceled($result->getReference()->getValue());
+    }
     return '';
 });
 
 
 add_shortcode('etransactions-rejected', function ($attrs = [], $content = '') {
-    $result = TransactionResult::fromRequest($_REQUEST);
-    OrderDb::get_instance()->set_transaction_rejected($result->getReference()->getValue());
+    if (!isset($_REQUEST['post'])) {
+        $result = TransactionResult::fromRequest($_REQUEST);
+        OrderDb::get_instance()->set_transaction_rejected($result->getReference()->getValue());
+    }
     return '';
 });
 
