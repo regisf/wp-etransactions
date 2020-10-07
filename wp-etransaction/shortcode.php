@@ -183,7 +183,3 @@ add_shortcode('etransactions-rejected', function ($attrs = [], $content = '') {
     }
     return '';
 });
-
-/**
-?M=122500&R=regisfloret@protonmail.com-Tube qui fait pouet&T=57545378&A=XXXXXX&B=0&C=CB&D=2101&E=00004&I=CHE&N=&P=CARTE&Q=09%3A48%3A16&S=33140754&W=07102020&K=obB6EtMKZoy9XvDn5Ot2BCd%2FQS5Ex3%2BvZsG6tAZvIpSWYjsz00IYYFWxx0AyNcZT6Kd1Mpsk6MtAxez9xNsTvf7d5to%2B1dJPRwzmj5gE4EV%2FAxO1vEJ0meAkK0zIL5Yi7MxPSuoeb6O5jm4JepevoIi0F%2BB%2BkLMQswV1DLXSJAI%3D
- */
