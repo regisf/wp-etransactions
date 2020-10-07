@@ -1,7 +1,9 @@
 <?php
 
 require_once __DIR__ . '/admin/productsdb.php';
+require_once __DIR__ . '/admin/orderdb.php';
 require_once plugin_dir_path(__FILE__) . 'etransactions/ETransactions/ETransaction.php';
+require_once plugin_dir_path(__FILE__) . 'etransactions/ETransactions/TransactionResult.php';
 
 add_shortcode('etransactions_products', function ($attrs = [], $content = '') {
     $producDb = ProductsDb::get_instance();
@@ -25,13 +27,6 @@ add_shortcode('etransactions_products', function ($attrs = [], $content = '') {
     }
 
     return $str;
-});
-
-add_shortcode('etransactions-accepted', function ($attrs = [], $content = '') {
-    $amount = $_REQUEST['Mt'];
-    $reference = $_REQUEST['Ref'];
-    $authorization = $_REQUEST['Auto'];
-    $error = $_REQUEST['Erreur'];
 });
 
 function etransactions_get_email_form($product, $no_label)
@@ -59,7 +54,7 @@ function etransactions_get_email_form($product, $no_label)
     return $str;
 }
 
-function etransactions_get_confirm_form($product, $holder, $no_label)
+function etransactions_get_confirm_form($product, $result, $no_label)
 {
     $options = get_option('etransactions_options');
     $preprod = isset($options['test_id']);
@@ -69,9 +64,9 @@ function etransactions_get_confirm_form($product, $holder, $no_label)
         'rang' => $options['rang_id'],
         'id' => $options['customer_id'],
         'secret' => $options['secret_key'],
-        'command' => $holder . '-' . $product->name,
+        'command' => $result->order_ref,
         'total' => (float)$product->price,
-        'holder' => $holder,
+        'holder' => $result->email,
         'callbacks' => []
     ]);
 
@@ -95,8 +90,8 @@ function etransactions_get_confirm_form($product, $holder, $no_label)
 
     if ($no_label === false) {
         $str .= '<p class="etransactions-product-desc"> 
-        <span class="etransactions-product-name">' . __('Product:', 'etransactions') . ' ' . $product->name . '</span> 
-        <span class="etransactions-product-price">' . $product->price . '&nbsp;&euro;</span>
+            <span class="etransactions-product-name">' . __('Product:', 'etransactions') . ' ' . $product->name . '</span> 
+            <span class="etransactions-product-price">' . $product->price . '&nbsp;&euro;</span>
         </p>';
     }
 
@@ -129,7 +124,9 @@ add_shortcode('etransactions-order-form', function ($attrs = [], $content = '') 
 
         case 'confirm':
             $holder = esc_sql($_REQUEST['PBX_PORTEUR']);
-            $str = etransactions_get_confirm_form($product, $holder, $attrs['no-label']);
+            $ref = wp_generate_uuid4();
+            $result = OrderDb::get_instance()->insert_order($product_id, $holder, $ref, $product->price);
+            $str = etransactions_get_confirm_form($product, $result, $attrs['no-label']);
             break;
 
         default:
@@ -159,3 +156,26 @@ add_shortcode('etransactions-product-price', function ($attrs = [], $content = '
     $product = ProductsDb::get_instance()->getById($product_id);
     return $product->price;
 });
+
+add_shortcode('etransactions-accepted', function ($attrs = [], $content = '') {
+    $result = TransactionResult::fromRequest($_REQUEST);
+    OrderDb::get_instance()->set_transaction_succeed($result->getReference()->getValue());
+    return '';
+});
+
+add_shortcode('etransactions-canceled', function ($attrs = [], $content = '') {
+    $result = TransactionResult::fromRequest($_REQUEST);
+    OrderDb::get_instance()->set_transaction_canceled($result->getReference()->getValue());
+    return '';
+});
+
+
+add_shortcode('etransactions-rejected', function ($attrs = [], $content = '') {
+    $result = TransactionResult::fromRequest($_REQUEST);
+    OrderDb::get_instance()->set_transaction_rejected($result->getReference()->getValue());
+    return '';
+});
+
+/**
+?M=122500&R=regisfloret@protonmail.com-Tube qui fait pouet&T=57545378&A=XXXXXX&B=0&C=CB&D=2101&E=00004&I=CHE&N=&P=CARTE&Q=09%3A48%3A16&S=33140754&W=07102020&K=obB6EtMKZoy9XvDn5Ot2BCd%2FQS5Ex3%2BvZsG6tAZvIpSWYjsz00IYYFWxx0AyNcZT6Kd1Mpsk6MtAxez9xNsTvf7d5to%2B1dJPRwzmj5gE4EV%2FAxO1vEJ0meAkK0zIL5Yi7MxPSuoeb6O5jm4JepevoIi0F%2BB%2BkLMQswV1DLXSJAI%3D
+ */

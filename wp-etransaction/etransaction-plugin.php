@@ -12,6 +12,7 @@
  */
 
 define('NonceName', 'etransactions_products');
+define('DbPrefix', 'etransactions_');
 
 require_once __DIR__ . '/admin/init.php';
 require_once __DIR__ . '/admin/menus.php';

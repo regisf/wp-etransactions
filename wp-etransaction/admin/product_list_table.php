@@ -119,7 +119,7 @@ if (!class_exists('Product_List_Table')) {
             $this->process_bulk_action();
 
             $columns = $this->get_columns();
-            $hidden = $this->get_hidden_columns();
+            $hidden = [];
             $sortable = $this->get_sortable_columns();
 
             $status = isset($_REQUEST['product_status']) ? $_REQUEST['product_status'] : 'all';

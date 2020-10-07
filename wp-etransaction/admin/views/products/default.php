@@ -3,7 +3,7 @@ if (!current_user_can('manage_options')) {
     return;
 }
 
-$product_list_table = new Product_List_Table($product_db);
+$product_list_table = new Product_List_Table(ProductsDb::get_instance());
 $status = isset($_REQUEST['product_status']) ? $_REQUEST['product_status'] : 'all';
 ?>
 
