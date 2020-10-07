@@ -24,7 +24,7 @@ if (!class_exists('ProductsDb')) {
             return self::$instance;
         }
 
-        public function getProducts($per_page = 5, $page_number = 1, $status = 'all')
+        public function getProducts($per_page, $page_number, $status = 'all')
         {
             $query = "SELECT * FROM `{$this->db_product_name}`";
 
@@ -90,12 +90,19 @@ if (!class_exists('ProductsDb')) {
 
         public function insert($name, $price, $active)
         {
-            return $this->db->insert($this->db_product_name, ['name' => $name, 'price' => $price, 'active' => $active]);
+            return $this->db->insert(
+                $this->db_product_name,
+                ['name' => $name, 'price' => $price, 'active' => $active]
+            );
         }
 
         public function deleteById($product_id)
         {
-            return $this->db->delete($this->db_product_name, ['product_id' => $product_id], ['product_id' => $product_id]);
+            return $this->db->delete(
+                $this->db_product_name,
+                ['product_id' => $product_id],
+                ['product_id' => $product_id]
+            );
         }
 
         public function pkoi()
