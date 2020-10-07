@@ -123,7 +123,7 @@ if (!class_exists('Product_List_Table')) {
             $sortable = $this->get_sortable_columns();
 
             $status = isset($_REQUEST['product_status']) ? $_REQUEST['product_status'] : 'all';
-            $perPage = 5;
+            $perPage = 7;
             $currentPage = $this->get_pagenum();
             $data = $this->productDB->getProducts($perPage, $currentPage, $status);
 
