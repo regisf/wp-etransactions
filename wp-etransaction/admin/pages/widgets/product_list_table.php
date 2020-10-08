@@ -50,8 +50,10 @@ if (!class_exists('Product_List_Table')) {
                     return $this->column_cb($item);
 
                 case 'name':
-                case 'active':
                     return $item[$column_name];
+
+                case 'active':
+                    return $item[$column_name] === '1' ? __('Yes') : __('No');
 
                 case 'price':
                     return $item[$column_name] . '&nbsp;&euro;';
@@ -77,9 +79,8 @@ if (!class_exists('Product_List_Table')) {
                 ),
 
                 'inactive' => sprintf(
-                    '<a href="?page=%s&action=%s&product=%s&_wpnonce=%s">Set %s</a>',
+                    '<a href="?page=%s&product_action=toggle_active&product=%s&_wpnonce=%s">Set %s</a>',
                     esc_attr($_REQUEST['page']),
-                    $action,
                     absint($item['product_id']),
                     $nonce,
                     $action
@@ -110,7 +111,7 @@ if (!class_exists('Product_List_Table')) {
         {
             return [
                 'bulk-delete' => __('Delete', 'etransactions'),
-                'bulk-toggleactive' => __('Toggle Active', 'etransactions')
+                'bulk-toggle-active' => __('Toggle Active', 'etransactions')
             ];
         }
 
@@ -123,7 +124,7 @@ if (!class_exists('Product_List_Table')) {
             $sortable = $this->get_sortable_columns();
 
             $status = isset($_REQUEST['product_status']) ? $_REQUEST['product_status'] : 'all';
-            $perPage = 7;
+            $perPage = $this->get_items_per_page('records_per_page', 10);
             $currentPage = $this->get_pagenum();
             $data = $this->productDB->getProducts($perPage, $currentPage, $status);
 
@@ -143,41 +144,23 @@ if (!class_exists('Product_List_Table')) {
         {
             $action = $this->current_action();
             if ($action) {
-                $product = $_REQUEST['product'];
-                switch ($action) {
-                    case 'active':
-                        $valid = apply_filters('is_nonce_valid', $_REQUEST['_wpnonce']);
-                        if (!$valid) {
-                            die('Denied');
-                        }
+                $valid = apply_filters('is_nonce_valid', $_REQUEST['_wpnonce']);
+                if (!$valid) {
+                    return;
+                }
 
-                        $this->productDB->setActive($product);
-                        break;
-
-                    case 'inactive';
-                        $valid = apply_filters('is_nonce_valid', $_REQUEST['_wpnonce']);
-                        if (!$valid) {
-                            die('Denied');
+                if (isset($_REQUEST['bulk-action'])) {
+                    $products = $_REQUEST['bulk-action'];
+                    if ('bulk-delete' === $action) {
+                        $this->productDB->deleteByIds($products);
+                    } else if ('bulk-toggle-active' === $action) {
+                        $result = $this->productDB->toggleIds($products);
+                        if ($result === false) {
+                            echo "NO";
                         }
-                        $this->productDB->setActive($product, false);
-                        break;
+                    }
                 }
             }
-        }
-
-        public function get_active_count()
-        {
-            return $this->productDB->get_actives_count();
-        }
-
-        public function get_inactive_count()
-        {
-            return $this->productDB->get_inactives_count();
-        }
-
-        public function get_all_count()
-        {
-            return $this->productDB->get_all_count();
         }
     }
 }

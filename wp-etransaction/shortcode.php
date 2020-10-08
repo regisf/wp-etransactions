@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . '/admin/productsdb.php';
-require_once __DIR__ . '/admin/orderdb.php';
+require_once __DIR__ . '/admin/db/productsdb.php';
+require_once __DIR__ . '/admin/db/orderdb.php';
 require_once plugin_dir_path(__FILE__) . 'etransactions/ETransactions/ETransaction.php';
 require_once plugin_dir_path(__FILE__) . 'etransactions/ETransactions/TransactionResult.php';
 

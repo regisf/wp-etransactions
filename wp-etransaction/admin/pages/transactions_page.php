@@ -3,8 +3,8 @@ if (!current_user_can('manage_options')) {
     return;
 }
 
-require_once 'orderdb.php';
-require_once 'order_list_table.php';
+require_once __DIR__ . '/../db/orderdb.php';
+require_once __DIR__ . '/widgets/order_list_table.php';
 
 $order_db = OrderDb::get_instance();
 $order_list_table = new Order_List_Table($order_db);
@@ -18,28 +18,28 @@ $order_list_table = new Order_List_Table($order_db);
 
     <ul class="subsubsub">
         <li class="all">
-            <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_payements">
+            <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_transactions">
                 <?php echo __("All", "etransactions"); ?>
                 (<?php echo $order_db->get_all_count(); ?>)
             </a>
         </li>
         |
         <li class="successful">
-            <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_payements&product_status=success">
+            <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_transactions&order_status=accepted">
                 <?php echo __("Successful", "etransactions"); ?>
                 (<?php echo $order_db->get_success_count(); ?>)
             </a>
         </li>
         |
         <li class="reject">
-            <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_payements&product_status=reject">
+            <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_transactions&order_status=rejected">
                 <?php echo __("Rejected", "etransactions"); ?>
                 (<?php echo $order_db->get_reject_count(); ?>)
             </a>
         </li>
         |
         <li class="cancel">
-            <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_payements&product_status=cancel">
+            <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_transactions&order_status=canceled">
                 <?php echo __("Canceled", "etransactions"); ?>
                 (<?php echo $order_db->get_cancel_count(); ?>)
             </a>

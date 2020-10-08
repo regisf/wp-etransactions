@@ -11,7 +11,7 @@ add_action('admin_menu', function () {
         'manage_options',
         'etransactions',
         function () {
-            require_once __DIR__ . '/settings_page.php';
+            require_once __DIR__ . '/pages/settings_page.php';
         },
         plugin_dir_url(__FILE__) . '../assets/images/ca_icon.png',
         200
@@ -24,7 +24,7 @@ add_action('admin_menu', function () {
         'manage_options',
         'etransactions_products',
         function () {
-            require_once __DIR__ . '/products_page.php';
+            require_once __DIR__ . '/pages/products_page.php';
         }
     );
 
@@ -33,9 +33,9 @@ add_action('admin_menu', function () {
         'CA e-Transactions Payements ',
         'Payements',
         'manage_options',
-        'etransactions_payements',
+        'etransactions_transactions',
         function () {
-            require_once __DIR__ . '/payements_page.php';
+            require_once __DIR__ . '/pages/transactions_page.php';
         }
     );
 });

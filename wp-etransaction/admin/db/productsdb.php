@@ -105,6 +105,12 @@ if (!class_exists('ProductsDb')) {
             );
         }
 
+        public function deleteByIds(array $products)
+        {
+            $query = "DELETE FROM {$this->db_product_name} WHERE `product_id` in (" . implode(',', $products) . ')';
+            return $this->db->query($query);
+        }
+
         public function pkoi()
         {
             return $this->db->last_error;
@@ -120,6 +126,19 @@ if (!class_exists('ProductsDb')) {
         public function get_actives()
         {
             return $this->db->get_results('SELECT * FROM ' . $this->db_product_name . ' WHERE `active`=true');
+        }
+
+        public function toggle($product_id)
+        {
+            $query = "UPDATE `{$this->db_product_name}` SET `active`=NOT `active` WHERE `product_id` = $product_id";
+            return $this->db->query($query);
+        }
+
+        public function toggleIds($products)
+        {
+            $products = esc_sql($products);
+            $query = "UPDATE `{$this->db_product_name}` SET `active`=NOT `active` WHERE `product_id` IN (" . implode(',', $products) . ')';
+            return $this->db->query($query);
         }
     }
 }

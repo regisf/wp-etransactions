@@ -23,6 +23,10 @@ if (!class_exists('Order_List_Table')) {
                 'plural' => __('Orders', 'etransactions'),
             ]);
 
+            $columns = $this->get_columns();
+            $sortable = $this->get_sortable_columns();
+            $this->_column_headers = array($columns, [], $sortable);
+
             $this->prepare_items();
         }
 
@@ -43,7 +47,7 @@ if (!class_exists('Order_List_Table')) {
 
         public function column_cb($item)
         {
-            return sprintf('<input type="checkbox" name="bulk-action[]" value="%s" />', $item['product']);
+            return sprintf('<input type="checkbox" name="bulk-action[]" value="%d" />', $item['transaction_id']);
         }
 
         public function column_default($item, $column_name)
@@ -68,32 +72,23 @@ if (!class_exists('Order_List_Table')) {
             }
         }
 
-        public function column_name($item)
-        {
+//        public function column_name($item)
+//        {
 //            $nonce = wp_create_nonce(NonceName);
+//            $title = '<strong>' . $item['product'] . '</strong>';
 //
-//            print_r($item);
-//            $title = '<strong>Hello</strong>'; // . $item['name'] . '</strong>';
 //            $actions = [
-//                'edit' => sprintf(
-//                    '<a href="?page=%s&product_action=%s&product=%s&_wpnonce=%s">Edit</a>',
-//                    esc_attr($_REQUEST['page']),
-//                    'edit',
-//                    absint($item['product_id']),
-//                    $nonce
-//                ),
-//
 //                'delete' => sprintf(
-//                    '<a href="?page=%s&product_action=%s&product=%s&_wpnonce=%s">Delete</a>',
+//                    '<a href="?page=%s&order_action=%s&order=%s&_wpnonce=%s">Delete</a>',
 //                    esc_attr($_REQUEST['page']),
 //                    'delete_confirm',
-//                    absint($item['product_id']),
+//                    absint($item['order_id']),
 //                    $nonce
 //                )
 //            ];
 //
-//            return $title; // . $this->row_actions($actions);
-        }
+//            return $title . $actions;
+//        }
 
         public function get_sortable_columns()
         {
@@ -112,35 +107,44 @@ if (!class_exists('Order_List_Table')) {
             ];
         }
 
-        public function prepare_items()
-        {
-            $this->process_bulk_action();
-
-            $columns = $this->get_columns();
-            $hidden = []; //$this->get_hidden_columns();
-            $sortable = $this->get_sortable_columns();
-
-            $perPage = 5;
-            $currentPage = $this->get_pagenum();
-            $data = $this->orderDb->get_orders($perPage, $currentPage);
-
-            $totalItems = count($data);
-
-            $this->set_pagination_args(array(
-                'total_items' => $totalItems,
-                'per_page' => $perPage
-            ));
-
-            $data = array_slice($data, (($currentPage - 1) * $perPage), $perPage);
-            $this->_column_headers = array($columns, $hidden, $sortable);
-            $this->items = $data;
-        }
-
         public function process_bulk_action()
         {
             $action = $this->current_action();
             if ($action) {
+                $valid = apply_filters('is_nonce_valid', $_REQUEST['_wpnonce']);
+                if (!$valid) {
+                    return;
+                }
+
+                if (isset($_REQUEST['bulk-action'])) {
+                    $orders = $_REQUEST['bulk-action'];
+                    if ('bulk-delete' === $action) {
+                        $this->orderDb->deleteByIds($orders);
+                    }
+                }
             }
+
+        }
+
+
+        public function prepare_items()
+        {
+            $this->process_bulk_action();
+
+            $perPage = $this->get_items_per_page('records_per_page', 10);
+            $currentPage = $this->get_pagenum();
+
+            $status = isset($_REQUEST['order_status']) ? $_REQUEST['order_status'] : 'all';
+            $data = $this->orderDb->get_orders($perPage, $currentPage, $status);
+
+            $totalItems = count($data);
+
+            $this->set_pagination_args([
+                'total_items' => $totalItems,
+                'per_page' => $perPage
+            ]);
+
+            $this->items = $data;
         }
     }
 }

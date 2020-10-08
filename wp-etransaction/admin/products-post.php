@@ -43,7 +43,7 @@ add_action('admin_post_edit_product', function () {
     $product_id = $_REQUEST['product_ID'];
     $name = $_REQUEST['name'];
     $price = $_REQUEST['price'];
-    $active = $_REQUEST['active'] === 'on';
+    $active = isset($_REQUEST['active']);
 
     $productDb = ProductsDb::get_instance();
     $result = $productDb->update($product_id, $name, $price, $active);

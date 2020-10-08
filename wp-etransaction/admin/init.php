@@ -40,7 +40,7 @@ add_action('admin_init', function () {
         'etransactions_section_settings',               // ID
         __('Credentials', 'etransactions'), // Title
         'etransactions_settings_callback',         // Callback
-        'etransactions'                              // page
+        'etransactions'                              // pages
     );
 
     add_settings_field(
@@ -100,36 +100,36 @@ add_action('admin_init', function () {
 
     add_settings_section(
         'etransactions_section_validate',
-        __('Payement validation page', 'etransactions'),
+        __('Payement validation pages', 'etransactions'),
         'etransactions_validate_page',
         'etransactions'
     );
 
     add_settings_field(
         'etransactions_confirmation_page',
-        __('Confirmation page', 'etransactions'),
+        __('Confirmation pages', 'etransactions'),
         'etransactions_field_cb',
         'etransactions',
         'etransactions_section_validate',
         [
             'label_for' => 'confirmation_page',
             'type' => 'text',
-            'placeholder' => __('Confirmation page url', 'etransactions'),
-            'help' => __('The URL of the confirmation page.', 'etransactions')
+            'placeholder' => __('Confirmation pages url', 'etransactions'),
+            'help' => __('The URL of the confirmation pages.', 'etransactions')
         ]
     );
 
     add_settings_field(
         'etransactions_validation_page',
-        __('Validation page', 'etransactions'),
+        __('Validation pages', 'etransactions'),
         'etransactions_field_cb',
         'etransactions',
         'etransactions_section_validate',
         [
             'label_for' => 'validation_page',
             'type' => 'text',
-            'placeholder' => __('Validation page url', 'etransactions'),
-            'help' => __('The URL of the validation page.', 'etransactions')
+            'placeholder' => __('Validation pages url', 'etransactions'),
+            'help' => __('The URL of the validation pages.', 'etransactions')
         ]
     );
 
@@ -137,48 +137,48 @@ add_action('admin_init', function () {
         'etransactions_section_callbacks',               // ID
         __('Callbacks pages', 'etransactions'), // Title
         'etransactions_callback_pages',         // Callback
-        'etransactions'                              // page
+        'etransactions'                              // pages
     );
 
     add_settings_field(
         'etransactions_accepted_key',
-        __('Accepted page', 'etransactions'),
+        __('Accepted pages', 'etransactions'),
         'etransactions_field_cb',
         'etransactions',
         'etransactions_section_callbacks',
         [
             'label_for' => 'accepted_key',
             'type' => 'text',
-            'placeholder' => __('URL for the accepted page'),
-            'help' => __('The page where the user lands when the payement is accepted.', 'etransactions')
+            'placeholder' => __('URL for the accepted pages'),
+            'help' => __('The pages where the user lands when the payement is accepted.', 'etransactions')
         ]
     );
 
     add_settings_field(
         'etransactions_rejected_key',
-        __('Rejected page', 'etransactions'),
+        __('Rejected pages', 'etransactions'),
         'etransactions_field_cb',
         'etransactions',
         'etransactions_section_callbacks',
         [
             'label_for' => 'rejected_key',
             'type' => 'text',
-            'placeholder' => __('URL for the rejected page'),
-            'help' => __('The page where the user lands when the payement is rejected by the bank.', 'etransactions')
+            'placeholder' => __('URL for the rejected pages'),
+            'help' => __('The pages where the user lands when the payement is rejected by the bank.', 'etransactions')
         ]
     );
 
     add_settings_field(
         'etransactions_canceled_key',
-        __('Canceled page', 'etransactions'),
+        __('Canceled pages', 'etransactions'),
         'etransactions_field_cb',
         'etransactions',
         'etransactions_section_callbacks',
         [
             'label_for' => 'canceled_key',
             'type' => 'text',
-            'placeholder' => __('URL for the canceled page'),
-            'help' => __('The page where the user lands when the payement is canceled.', 'etransactions')
+            'placeholder' => __('URL for the canceled pages'),
+            'help' => __('The pages where the user lands when the payement is canceled.', 'etransactions')
         ]
     );
 
@@ -253,7 +253,7 @@ add_action('admin_init', function () {
         ?>
         <p id="<?php echo esc_attr($args['id']); ?>">
             <?
-            echo __('The etransaction needs three pages for managing the CA e-Transaction service. The user lands on this page in these cases.', 'etransactions');
+            echo __('The etransaction needs three pages for managing the CA e-Transaction service. The user lands on this pages in these cases.', 'etransactions');
             ?>
         </p>
         <?php
@@ -264,7 +264,7 @@ add_action('admin_init', function () {
         ?>
         <p id="<?php echo esc_attr($args['id']); ?>">
             <?
-            echo __('The etransaction plugin need a validation page. The user enter here its email address and give it consenting for the transaction', 'etransactions');
+            echo __('The etransaction plugin need a validation pages. The user enter here its email address and give it consenting for the transaction', 'etransactions');
             ?>
         </p>
         <?php

@@ -48,10 +48,11 @@ if (!class_exists('OrderDb')) {
                     ON `{$this->db_order_name}` (`order_ref`)");
         }
 
-        public function get_orders($per_page = 5, $page_number = 1, $status = 'all')
+        public function get_orders($per_page, $page_number, $status)
         {
             $query = "
-                SELECT 
+                SELECT
+                    o.transaction_id as transaction_id,
                     o.order_ref as order_ref, 
                     o.amount as amount, 
                     o.email as email, 
@@ -63,7 +64,12 @@ if (!class_exists('OrderDb')) {
                  INNER JOIN 
                      `{$this->db_product_name}` as p 
                  ON 
-                     o.product_id = p.product_id";
+                     o.product_id = p.product_id
+            ";
+
+            if ($status !== 'all') {
+                $query .= "WHERE o.state = '$status'";
+            }
 
             if (!empty($_REQUEST['orderby'])) {
                 $query .= ' ORDER BY ' . esc_sql($_REQUEST['orderby']);
@@ -153,5 +159,16 @@ if (!class_exists('OrderDb')) {
             return $this->get_count(self::Rejected);
         }
 
+        /**
+         * Delete all rows where the id are into the array
+         *
+         * @param array $orders The primary keys
+         * @return bool|int False on error, the number of rows deleted otherwise
+         */
+        public function deleteByIds(array $orders)
+        {
+            $query = "DELETE FROM {$this->db_order_name} WHERE `transaction_id` in (" . implode(',', $orders) . ')';
+            return $this->db->query($query);
+        }
     }
 }

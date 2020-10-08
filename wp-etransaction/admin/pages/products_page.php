@@ -2,9 +2,8 @@
 if (!current_user_can('manage_options')) {
     return;
 }
-
-require_once 'productsdb.php';
-require_once 'product_list_table.php';
+require_once __DIR__ . '/../db/productsdb.php';
+require_once __DIR__ . '/widgets/product_list_table.php';
 
 $product_db = ProductsDb::get_instance();
 $product_list_table = new Product_List_Table($product_db);
@@ -33,6 +32,12 @@ $product_action = isset($_REQUEST['product_action']) ? $_REQUEST['product_action
         $id = esc_sql($_REQUEST['product']);
         $item = $product_db->getById($id);
         include_once __DIR__ . '/views/products/delete_confirm.php';
+    } else if ($product_action === 'toggle_active') {
+        $id = esc_sql($_REQUEST['product']);
+        $product_db->toggle($id);
+
+        include_once __DIR__ . '/views/products/default.php';
+
     } else {
         include_once __DIR__ . '/views/products/default.php';
     }

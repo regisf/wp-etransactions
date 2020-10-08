@@ -17,8 +17,8 @@ $validation = isset($options['validation_page']) ? $options['validation_page'] :
 if (!$accepted) {
     add_settings_error(
         'etransactions',
-        'missing-page',
-        'The payement accepted landing page is not created. You should create it.',
+        'missing-pages',
+        'The payement accepted landing pages is not created. You should create it.',
         'error'
     );
 }
@@ -26,8 +26,8 @@ if (!$accepted) {
 if (!$rejected) {
     add_settings_error(
         'etransactions',
-        'missing-page',
-        'The payement rejected landing page is not created. You should create it.',
+        'missing-pages',
+        'The payement rejected landing pages is not created. You should create it.',
         'error'
     );
 }
@@ -35,8 +35,8 @@ if (!$rejected) {
 if (!$canceled) {
     add_settings_error(
         'etransactions',
-        'missing-page',
-        'The payement canceled landing page is not created. You should create it.',
+        'missing-pages',
+        'The payement canceled landing pages is not created. You should create it.',
         'error'
     );
 }
@@ -44,8 +44,8 @@ if (!$canceled) {
 if (!$validation) {
     add_settings_error(
         'etransactions',
-        'missing-page',
-        'The payement validation page is not created. You should create it.',
+        'missing-pages',
+        'The payement validation pages is not created. You should create it.',
         'error'
     );
 }

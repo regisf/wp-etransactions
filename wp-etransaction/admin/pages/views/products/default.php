@@ -15,11 +15,11 @@ $status = isset($_REQUEST['product_status']) ? $_REQUEST['product_status'] : 'al
         <?php if ($status): ?>
             <a href="/wp-admin/admin.php?page=etransactions_products">
                 <?php echo __("All", "etransactions"); ?>
-                (<?php echo $product_list_table->get_all_count(); ?>)
+                (<?php echo ProductsDb::get_instance()->get_all_count(); ?>)
             </a>
         <?php else: ?>
             <strong><?php echo __("All", "etransactions"); ?></strong>
-            (<?php echo $product_list_table->get_all_count(); ?>)
+            (<?php echo ProductsDb::get_instance()->get_all_count(); ?>)
         <?php endif; ?>
     </li>
     |
@@ -27,12 +27,12 @@ $status = isset($_REQUEST['product_status']) ? $_REQUEST['product_status'] : 'al
         <?php if ('active' !== $status): ?>
             <a href="/wp-admin/admin.php?page=etransactions_products&product_status=active">
                 <?php echo __("Active", "etransactions"); ?>
-                (<?php echo $product_list_table->get_active_count(); ?>
+                (<?php echo ProductsDb::get_instance()->get_actives_count(); ?>
                 )
             </a>
         <?php else: ?>
             <strong><?php echo __("Active", "etransactions"); ?></strong>
-            (<?php echo $product_list_table->get_active_count(); ?>)
+            (<?php echo ProductsDb::get_instance()->get_actives_count(); ?>)
         <?php endif; ?>
     </li>
     |
@@ -40,11 +40,11 @@ $status = isset($_REQUEST['product_status']) ? $_REQUEST['product_status'] : 'al
         <?php if ('inactive' !== $status): ?>
             <a href="/wp-admin/admin.php?page=etransactions_products&product_status=inactive">
                 <?php echo __("Inactive", "etransactions"); ?>
-                (<?php echo $product_list_table->get_inactive_count(); ?>)
+                (<?php echo ProductsDb::get_instance()->get_inactives_count(); ?>)
             </a>
         <?php else: ?>
             <strong><?php echo __("Inactive", "etransactions"); ?></strong>
-            (<?php echo $product_list_table->get_inactive_count(); ?>)
+            (<?php echo ProductsDb::get_instance()->get_inactive_count(); ?>)
             </a>
         <?php endif; ?>
 
