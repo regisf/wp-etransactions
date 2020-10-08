@@ -7,13 +7,13 @@ $product_list_table = new Product_List_Table(ProductDb::get_instance());
 $status = isset($_REQUEST['product_status']) ? $_REQUEST['product_status'] : 'all';
 ?>
 
-<a class="page-title-action" href="admin.php?page=etransactions_products&product_action=new">Add</a>
+<a class="page-title-action" href="<?php echo admin_url('admin.php'); ?>?page=etransactions_products&product_action=new">Add</a>
 <hr class="wp-header-end">
 
 <ul class="subsubsub">
     <li class="all">
         <?php if ($status): ?>
-            <a href="/wp-admin/admin.php?page=etransactions_products">
+            <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_products">
                 <?php echo __("All", "etransactions"); ?>
                 (<?php echo ProductDb::get_instance()->get_all_count(); ?>)
             </a>
@@ -25,7 +25,7 @@ $status = isset($_REQUEST['product_status']) ? $_REQUEST['product_status'] : 'al
     |
     <li class="active">
         <?php if ('active' !== $status): ?>
-            <a href="/wp-admin/admin.php?page=etransactions_products&product_status=active">
+            <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_products&product_status=active">
                 <?php echo __("Active", "etransactions"); ?>
                 (<?php echo ProductDb::get_instance()->get_actives_count(); ?>
                 )
@@ -38,7 +38,7 @@ $status = isset($_REQUEST['product_status']) ? $_REQUEST['product_status'] : 'al
     |
     <li class="inactive">
         <?php if ('inactive' !== $status): ?>
-            <a href="/wp-admin/admin.php?page=etransactions_products&product_status=inactive">
+            <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_products&product_status=inactive">
                 <?php echo __("Inactive", "etransactions"); ?>
                 (<?php echo ProductDb::get_instance()->get_inactives_count(); ?>)
             </a>

@@ -65,7 +65,7 @@ $active = isset($item) ? $item->active : '';
     </table>
 
     <div>
-        <a class="button" href="/wp-admin/admin.php?page=etransactions_products">Cancel</a>
+        <a class="button" href="<?php echo admin_url('admin.php'); ?>?page=etransactions_products">Cancel</a>
         <input type="submit" name="submit" id="submit" class="button button-primary" value="Save">
     </div>
 </form>
