@@ -18,6 +18,7 @@ $product_action = isset($_REQUEST['product_action']) ? $_REQUEST['product_action
     <?php
     if ($product_action === 'new') {
         include_once __DIR__ . '/views/products/new.php';
+
     } else if ($product_action === 'edit') {
         $valid = apply_filters('is_nonce_valid', $_REQUEST['_wpnonce']);
         if (!$valid) {
@@ -28,10 +29,12 @@ $product_action = isset($_REQUEST['product_action']) ? $_REQUEST['product_action
         $item = $product_db->getById($id);
 
         include_once __DIR__ . '/views/products/edit.php';
+
     } else if ($product_action === 'delete_confirm') {
         $id = esc_sql($_REQUEST['product']);
         $item = $product_db->getById($id);
         include_once __DIR__ . '/views/products/delete_confirm.php';
+
     } else if ($product_action === 'toggle_active') {
         $id = esc_sql($_REQUEST['product']);
         $product_db->toggle($id);

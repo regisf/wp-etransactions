@@ -18,3 +18,7 @@ PHP 5.5
 #### Payement rejected page
 
 #### Payement canceled page
+
+
+## Theming
+

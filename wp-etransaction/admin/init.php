@@ -1,184 +1,174 @@
 <?php
 
 add_action('admin_init', function () {
-    register_setting('etransactions', 'etransactions_options');
+    register_setting('etransactions', Constants::OptionName);
 
     add_settings_section(
         'etransactions_section_debug',
-        _('Test mode', 'etransactions'),
+        __('Test mode', Constants::EtransactionsTr),
         'etransaction_test_mode_page',
-        'etransactions'
+        Constants::PageName
     );
 
     add_settings_field(
         'etransactions_test_mode_id',
-        __('Test mode', 'extransactions'),
+        __('Test mode', Constants::EtransactionsTr),
         'etransactions_checkbox_cb',
-        'etransactions',
+        Constants::PageName,
         'etransactions_section_debug',
         [
             'label_for' => 'test_id',
-            'help'=> __('<span style="color: red">By checking this option, you will switch you payement system into ' .
-                        'to test mode and you will not be able to receive real payement.</span>'),
+            'help' => __('<span style="color: red">By checking this option, you will switch you payement system into ' .
+                'to test mode and you will not be able to receive real payement.</span>', Constants::EtransactionsTr),
         ]
     );
 
     add_settings_field(
         'etransactions_hmac_preprod_key',
-        __('HMAC Preprod Key', 'etransactions'),
+        __('HMAC Preprod Key', Constants::EtransactionsTr),
         'etransactions_field_cb',
-        'etransactions',
+        Constants::PageName,
         'etransactions_section_debug',
         [
             'label_for' => 'preprod_key',
-            'type' => 'text',
-            'help' => __('The secret key generated into the preprod-guest.etransaction.fr/Vision backoffice', 'etransactions')
+            'help' => __('The secret key generated into the preprod-guest.etransaction.fr/Vision backoffice', Constants::EtransactionsTr)
         ]
     );
 
     add_settings_section(
         'etransactions_section_settings',               // ID
-        __('Credentials', 'etransactions'), // Title
+        __('Credentials', Constants::EtransactionsTr), // Title
         'etransactions_settings_callback',         // Callback
-        'etransactions'                              // pages
+        Constants::PageName
     );
 
     add_settings_field(
         'etransactions_site_id',
-        __('Site Number', 'etransactions'),
+        __('Site Number', Constants::EtransactionsTr),
         'etransactions_field_cb',
-        'etransactions',
+        Constants::PageName,
         'etransactions_section_settings',
         [
             'label_for' => 'site_id',
-            'type' => 'text',
             'maxlength' => '7',
-            'help' => __('The Site ID given by the e-Transaction support (7 digits max)', 'etransactions')
+            'help' => __('The Site ID given by the e-Transaction support (7 digits max)', Constants::EtransactionsTr)
         ]
     );
 
     add_settings_field(
         'etransactions_rang_id',
-        __('Rang', 'etransactions'),
+        __('Rang', Constants::EtransactionsTr),
         'etransactions_field_cb',
-        'etransactions',
+        Constants::PageName,
         'etransactions_section_settings',
         [
             'label_for' => 'rang_id',
-            'type' => 'text',
             'maxlength' => '3',
-            'help' => __('The Rang ID given by the e-Transaction support (3 digits max)', 'etransactions')
+            'help' => __('The Rang ID given by the e-Transaction support (3 digits max)', Constants::EtransactionsTr)
         ]
     );
 
     add_settings_field(
         'etransactions_customer_id',
-        __('Customer', 'etransactions'),
+        __('Customer', Constants::EtransactionsTr),
         'etransactions_field_cb',
-        'etransactions',
+        Constants::PageName,
         'etransactions_section_settings',
         [
             'label_for' => 'customer_id',
-            'type' => 'text',
             'maxlength' => '9',
-            'help' => __('Your customer ID given by the e-Transaction support (from 1 to 9 digitis)', 'etransactions')
+            'help' => __('Your customer ID given by the e-Transaction support (from 1 to 9 digitis)', Constants::EtransactionsTr)
         ]
     );
 
     add_settings_field(
         'etransactions_secret_key',
-        __('Secret Key', 'etransactions'),
+        __('Secret Key', Constants::EtransactionsTr),
         'etransactions_field_cb',
-        'etransactions',
+        Constants::PageName,
         'etransactions_section_settings',
         [
             'label_for' => 'secret_key',
-            'type' => 'text',
-            'help' => __('The secret key generated into the etransaction.fr backoffice', 'etransactions')
+            'help' => __('The secret key generated into the etransaction.fr backoffice', Constants::EtransactionsTr)
         ]
     );
 
     add_settings_section(
         'etransactions_section_validate',
-        __('Payement validation pages', 'etransactions'),
+        __('Payement validation pages', Constants::EtransactionsTr),
         'etransactions_validate_page',
-        'etransactions'
+        Constants::PageName
     );
 
     add_settings_field(
         'etransactions_confirmation_page',
-        __('Confirmation pages', 'etransactions'),
+        __('Confirmation pages', Constants::EtransactionsTr),
         'etransactions_field_cb',
-        'etransactions',
+        Constants::PageName,
         'etransactions_section_validate',
         [
-            'label_for' => 'confirmation_page',
-            'type' => 'text',
-            'placeholder' => __('Confirmation pages url', 'etransactions'),
-            'help' => __('The URL of the confirmation pages.', 'etransactions')
+            'label_for' => Constants::OptionConfirmationPage,
+            'placeholder' => __('Confirmation pages url', Constants::EtransactionsTr),
+            'help' => __('The URL of the confirmation pages.', Constants::EtransactionsTr)
         ]
     );
 
     add_settings_field(
         'etransactions_validation_page',
-        __('Validation pages', 'etransactions'),
+        __('Validation pages', Constants::EtransactionsTr),
         'etransactions_field_cb',
-        'etransactions',
+        Constants::PageName,
         'etransactions_section_validate',
         [
             'label_for' => 'validation_page',
-            'type' => 'text',
-            'placeholder' => __('Validation pages url', 'etransactions'),
-            'help' => __('The URL of the validation pages.', 'etransactions')
+            'placeholder' => __('Validation pages url', Constants::EtransactionsTr),
+            'help' => __('The URL of the validation pages.', Constants::EtransactionsTr)
         ]
     );
 
     add_settings_section(
         'etransactions_section_callbacks',               // ID
-        __('Callbacks pages', 'etransactions'), // Title
+        __('Callbacks pages', Constants::EtransactionsTr), // Title
         'etransactions_callback_pages',         // Callback
-        'etransactions'                              // pages
+        Constants::PageName
     );
 
     add_settings_field(
         'etransactions_accepted_key',
-        __('Accepted pages', 'etransactions'),
+        __('Accepted pages', Constants::EtransactionsTr),
         'etransactions_field_cb',
-        'etransactions',
+        Constants::PageName,
         'etransactions_section_callbacks',
         [
-            'label_for' => 'accepted_key',
-            'type' => 'text',
-            'placeholder' => __('URL for the accepted pages'),
-            'help' => __('The pages where the user lands when the payement is accepted.', 'etransactions')
+            'label_for' => Constants::OptionAcceptedLandingPage,
+            'placeholder' => __('URL for the accepted pages', Constants::EtransactionsTr),
+            'help' => __('The pages where the user lands when the payement is accepted.', Constants::EtransactionsTr)
         ]
     );
 
     add_settings_field(
-        'etransactions_rejected_key',
-        __('Rejected pages', 'etransactions'),
+        Constants::PluginPrefix . Constants::OptionRejectedLandingPage,
+        __('Rejected pages', Constants::EtransactionsTr),
         'etransactions_field_cb',
-        'etransactions',
+        Constants::PageName,
         'etransactions_section_callbacks',
         [
-            'label_for' => 'rejected_key',
-            'type' => 'text',
-            'placeholder' => __('URL for the rejected pages'),
-            'help' => __('The pages where the user lands when the payement is rejected by the bank.', 'etransactions')
+            'label_for' => Constants::OptionRejectedLandingPage,
+            'placeholder' => __('URL for the rejected pages', Constants::EtransactionsTr),
+            'help' => __('The pages where the user lands when the payement is rejected by the bank.', Constants::EtransactionsTr)
         ]
     );
 
     add_settings_field(
         'etransactions_canceled_key',
-        __('Canceled pages', 'etransactions'),
+        __('Canceled pages', Constants::EtransactionsTr),
         'etransactions_field_cb',
-        'etransactions',
+        Constants::PageName,
         'etransactions_section_callbacks',
         [
-            'label_for' => 'canceled_key',
-            'type' => 'text',
-            'placeholder' => __('URL for the canceled pages'),
-            'help' => __('The pages where the user lands when the payement is canceled.', 'etransactions')
+            'label_for' => Constants::OptionCanceledLandingPage,
+            'placeholder' => __('URL for the canceled pages', Constants::EtransactionsTr),
+            'help' => __('The pages where the user lands when the payement is canceled.', Constants::EtransactionsTr)
         ]
     );
 
@@ -189,7 +179,7 @@ add_action('admin_init', function () {
     {
         ?>
         <p id="<?php echo esc_attr($args['id']); ?>">
-            <?php esc_html_e('Fill the IDs you received from the e-Transaction support. ', 'etransactions'); ?>
+            <?php esc_html_e('Fill the IDs you received from the e-Transaction support. ', Constants::EtransactionsTr); ?>
         </p>
         <?php
     }
@@ -200,19 +190,20 @@ add_action('admin_init', function () {
      */
     function etransactions_field_cb($args)
     {
-        $options = get_option('etransactions_options');
+        $options = get_option(Constants::OptionName);
         $label_for = esc_attr($args['label_for']);
         ?>
 
         <input
                 id="<?php echo $label_for; ?>"
                 name="etransactions_options[<?php echo $label_for; ?>]"
-                type="<?php echo $args['type']; ?>"
+                <?php if (isset($args['type'])) { ?>type="<?php echo $args['type']; ?>"<?php } ?>
                 <?php if (isset($args['maxlength'])) { ?>maxlength="<?php echo $args['maxlength']; ?>"<?php } ?>
                 <?php if (isset($args['placeholder'])) { ?>placeholder="<?php echo $args['placeholder']; ?>"<?php } ?>
                 value="<?php if (isset($options[$args['label_for']])) {
                     echo $options[$args['label_for']];
-                } ?>"/>
+                } ?>"
+        />
 
         <div class="description">
             <?php echo $args['help']; ?>
@@ -222,7 +213,7 @@ add_action('admin_init', function () {
 
     function etransactions_checkbox_cb($args)
     {
-        $options = get_option('etransactions_options');
+        $options = get_option(Constants::OptionName);
         $label_for = esc_attr($args['label_for']);
         ?>
         <input
@@ -242,7 +233,7 @@ add_action('admin_init', function () {
         ?>
         <p id="<?php echo esc_attr($args['id']); ?>">
             <?
-            echo __('Switching in test mode (using preprod servers)', 'etransactions');
+            echo __('Switching in test mode (using preprod servers). No transaction will be effective.', Constants::EtransactionsTr);
             ?>
         </p>
         <?php
@@ -253,7 +244,7 @@ add_action('admin_init', function () {
         ?>
         <p id="<?php echo esc_attr($args['id']); ?>">
             <?
-            echo __('The etransaction needs three pages for managing the CA e-Transaction service. The user lands on this pages in these cases.', 'etransactions');
+            echo __('The etransaction needs three pages for managing the CA e-Transaction service. The user lands on this pages in these cases.', Constants::EtransactionsTr);
             ?>
         </p>
         <?php
@@ -264,7 +255,7 @@ add_action('admin_init', function () {
         ?>
         <p id="<?php echo esc_attr($args['id']); ?>">
             <?
-            echo __('The etransaction plugin need a validation pages. The user enter here its email address and give it consenting for the transaction', 'etransactions');
+            echo __('The etransaction plugin need a validation pages. The user enter here its email address and give it consenting for the transaction', Constants::EtransactionsTr);
             ?>
         </p>
         <?php

@@ -10,17 +10,21 @@ add_filter('nonce_input', function () {
 });
 
 add_filter('etransaction_get_validation_address', function ($id) {
-    $options = get_option('etransactions_options');
-    $validation_page = $options['validation_page'];
+    $options = get_option(Constants::OptionName);
+    $validation_page = $options[Constants::OptionValidationPage];
 
     $sep = strchr($validation_page, '?') !== false ? '&' : '?';
     return $validation_page . $sep . 'product=' . $id;
 });
 
 add_filter('etransaction_get_confirmation_address', function ($id) {
-    $options = get_option('etransactions_options');
-    $validation_page = $options['confirmation_page'];
+    $options = get_option(Constants::OptionName);
+    if (isset($options[Constants::OptionConfirmationPage])) {
+        $validation_page = $options[Constants::OptionConfirmationPage];
 
-    $sep = strchr($validation_page, '?') !== false ? '&' : '?';
-    return $validation_page . $sep . 'product=' . $id;
+        $sep = strchr($validation_page, '?') !== false ? '&' : '?';
+        return $validation_page . $sep . 'product=' . $id;
+    }
+
+    return __('Warning: Confirmation page is not set', Constants::EtransactionsTr);
 });

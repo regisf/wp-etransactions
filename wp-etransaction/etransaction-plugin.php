@@ -28,3 +28,24 @@ function etransactions_install_hook()
 }
 
 register_activation_hook(__FILE__, 'etransactions_install_hook');
+
+abstract class Constants
+{
+    const PluginPrefix = 'etransactions_';
+
+    // Translation key
+    const EtransactionsTr = 'etransactions';
+
+    // Options
+    const PageName = 'etransactions';
+    const OptionName = 'etransactions_options';
+    const OptionConfirmationPage = 'confirmation_page';
+    const OptionValidationPage = 'validation_page';
+    const OptionSiteID = 'site_id';
+    const OptionRangID = 'rang_id';
+    const OptionCustomerID = 'customer_id';
+    const OptionSecretKey = 'secret_key';
+    const OptionAcceptedLandingPage = 'accepted_page';
+    const OptionRejectedLandingPage = 'rejected_page';
+    const OptionCanceledLandingPage = 'canceled_page';
+}

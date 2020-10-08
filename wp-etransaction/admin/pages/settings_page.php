@@ -4,21 +4,20 @@ if (!current_user_can('manage_options')) {
 }
 
 if (isset($_GET['settings-updated'])) {
-    add_settings_error('etransactions_messages', 'etransactions_message', __('Settings Saved', 'etransactions'), 'updated');
+    add_settings_error('etransactions_messages', 'etransactions_message', __('Settings Saved', Constants::EtransactionsTr), 'updated');
 }
 
-$options = get_option('etransactions_options');
-
-$accepted = isset($options['accepted_key']) ? $options['accepted_key'] : null;
-$rejected = isset($options['rejected_key']) ? $options['rejected_key'] : null;
-$canceled = isset($options['canceled_key']) ? $options['canceled_key'] : null;
-$validation = isset($options['validation_page']) ? $options['validation_page'] : null;
+$options = get_option(Constants::OptionName);
+$accepted = isset($options[Constants::OptionAcceptedLandingPage]) ? $options[Constants::OptionAcceptedLandingPage] : null;
+$rejected = isset($options[Constants::OptionRejectedLandingPage]) ? $options[Constants::OptionRejectedLandingPage] : null;
+$canceled = isset($options[Constants::OptionCanceledLandingPage]) ? $options[Constants::OptionCanceledLandingPage] : null;
+$validation = isset($options[Constants::OptionValidationPage]) ? $options[Constants::OptionValidationPage] : null;
 
 if (!$accepted) {
     add_settings_error(
         'etransactions',
         'missing-pages',
-        'The payement accepted landing pages is not created. You should create it.',
+        __('The payement accepted landing pages is not created. You should create it.', Constants::EtransactionsTr),
         'error'
     );
 }
@@ -27,7 +26,7 @@ if (!$rejected) {
     add_settings_error(
         'etransactions',
         'missing-pages',
-        'The payement rejected landing pages is not created. You should create it.',
+        __('The payement rejected landing pages is not created. You should create it.', Constants::EtransactionsTr),
         'error'
     );
 }
@@ -36,7 +35,7 @@ if (!$canceled) {
     add_settings_error(
         'etransactions',
         'missing-pages',
-        'The payement canceled landing pages is not created. You should create it.',
+        __('The payement canceled landing pages is not created. You should create it.', Constants::EtransactionsTr),
         'error'
     );
 }
@@ -45,7 +44,7 @@ if (!$validation) {
     add_settings_error(
         'etransactions',
         'missing-pages',
-        'The payement validation pages is not created. You should create it.',
+        __('The payement validation pages is not created. You should create it.', Constants::EtransactionsTr),
         'error'
     );
 }
@@ -58,8 +57,8 @@ if (!$validation) {
     <form action="<?php echo admin_url('options.php'); ?>" method="post">
         <?php
         settings_fields('etransactions');
-        do_settings_sections('etransactions');
-        submit_button(__('Save', 'etransactions'));
+        do_settings_sections(Constants::PageName);
+        submit_button(__('Save', Constants::EtransactionsTr));
         ?>
     </form>
 
