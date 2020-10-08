@@ -23,8 +23,8 @@ require_once __DIR__ . '/shortcode.php';
 // Install database
 function etransactions_install_hook()
 {
-    $productDb = ProductsDb::get_instance();
-    $productDb->install();
+    ProductDb::get_instance()->install();
+    TransactionDb::get_instance()->install();
 }
 
 register_activation_hook(__FILE__, 'etransactions_install_hook');
