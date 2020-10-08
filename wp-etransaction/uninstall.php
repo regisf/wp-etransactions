@@ -12,3 +12,4 @@ delete_options('etransaction_options');
 
 global $wpdb;
 $wpdb->query('DROP TABLE `etransactions_product`');
+$wpdb->query('DROP TABLE `etransactions_transaction`');

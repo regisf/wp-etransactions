@@ -6,7 +6,7 @@ if (!current_user_can('manage_options')) {
 require_once __DIR__ . '/../db/orderdb.php';
 require_once __DIR__ . '/widgets/order_list_table.php';
 
-$order_db = OrderDb::get_instance();
+$order_db = TransactionDb::get_instance();
 $order_list_table = new Order_List_Table($order_db);
 
 ?>

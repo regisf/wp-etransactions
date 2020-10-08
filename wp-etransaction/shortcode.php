@@ -6,7 +6,7 @@ require_once plugin_dir_path(__FILE__) . 'etransactions/ETransactions/ETransacti
 require_once plugin_dir_path(__FILE__) . 'etransactions/ETransactions/TransactionResult.php';
 
 add_shortcode('etransactions-products', function ($attrs = [], $content = '') {
-    $producDb = ProductsDb::get_instance();
+    $producDb = ProductDb::get_instance();
     $actives = $producDb->get_actives();
     $str = '';
 
@@ -117,7 +117,7 @@ add_shortcode('etransactions-order-form', function ($attrs = [], $content = '') 
     ], $attrs);
 
     $product_id = esc_sql($_REQUEST['product']);
-    $product = ProductsDb::get_instance()->getById($product_id);
+    $product = ProductDb::get_instance()->getById($product_id);
 
     switch ($attrs['step']) {
         case 'email':
@@ -127,7 +127,7 @@ add_shortcode('etransactions-order-form', function ($attrs = [], $content = '') 
         case 'confirm':
             $holder = esc_sql($_REQUEST['PBX_PORTEUR']);
             $ref = wp_generate_uuid4();
-            $result = OrderDb::get_instance()->insert_order($product_id, $holder, $ref, $product->price);
+            $result = TransactionDb::get_instance()->insert_order($product_id, $holder, $ref, $product->price);
             $str = etransactions_get_confirm_form($product, $result, $attrs['no-label']);
             break;
 
@@ -144,7 +144,7 @@ add_shortcode('etransactions-product-name', function ($attrs = [], $content = ''
     }
 
     $product_id = esc_sql($_REQUEST['product']);
-    $product = ProductsDb::get_instance()->getById($product_id);
+    $product = ProductDb::get_instance()->getById($product_id);
 
     return $product->name;
 });
@@ -155,14 +155,14 @@ add_shortcode('etransactions-product-price', function ($attrs = [], $content = '
     }
 
     $product_id = esc_sql($_REQUEST['product']);
-    $product = ProductsDb::get_instance()->getById($product_id);
+    $product = ProductDb::get_instance()->getById($product_id);
     return $product->price;
 });
 
 add_shortcode('etransactions-accepted', function ($attrs = [], $content = '') {
     if (!isset($_REQUEST['post'])) {
         $result = TransactionResult::fromRequest($_REQUEST);
-        OrderDb::get_instance()->set_transaction_succeed($result->getReference()->getValue());
+        TransactionDb::get_instance()->set_transaction_succeed($result->getReference()->getValue());
     }
     return '';
 });
@@ -170,7 +170,7 @@ add_shortcode('etransactions-accepted', function ($attrs = [], $content = '') {
 add_shortcode('etransactions-canceled', function ($attrs = [], $content = '') {
     if (!isset($_REQUEST['post'])) {
         $result = TransactionResult::fromRequest($_REQUEST);
-        OrderDb::get_instance()->set_transaction_canceled($result->getReference()->getValue());
+        TransactionDb::get_instance()->set_transaction_canceled($result->getReference()->getValue());
     }
     return '';
 });
@@ -179,7 +179,7 @@ add_shortcode('etransactions-canceled', function ($attrs = [], $content = '') {
 add_shortcode('etransactions-rejected', function ($attrs = [], $content = '') {
     if (!isset($_REQUEST['post'])) {
         $result = TransactionResult::fromRequest($_REQUEST);
-        OrderDb::get_instance()->set_transaction_rejected($result->getReference()->getValue());
+        TransactionDb::get_instance()->set_transaction_rejected($result->getReference()->getValue());
     }
     return '';
 });

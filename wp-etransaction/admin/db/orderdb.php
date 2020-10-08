@@ -1,11 +1,12 @@
 <?php
-if (!class_exists('OrderDb')) {
-    class OrderDb
+if (!class_exists('TransactionDb')) {
+    class TransactionDb
     {
         const Initiated = 'initiated';
         const Accepted = 'accepted';
         const Canceled = 'canceled';
         const Rejected = 'rejected';
+        const DbName = 'transaction';
 
         private static $instance = null;
 
@@ -13,15 +14,16 @@ if (!class_exists('OrderDb')) {
         {
             global $wpdb;
             $this->db = $wpdb;
-            $this->db_order_name = $this->db->prefix . DbPrefix . 'order';
-            $this->db_product_name = $this->db->prefix . DbPrefix . 'product';
+
+            $this->db_order_name = $this->db->prefix . DbPrefix . self::DbName;
+            $this->db_product_name = $this->db->prefix . DbPrefix . ProductDb::DbName;
         }
 
 
         public static function get_instance()
         {
             if (self::$instance === null) {
-                self::$instance = new OrderDb();
+                self::$instance = new TransactionDb();
             }
 
             return self::$instance;

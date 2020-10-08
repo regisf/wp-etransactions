@@ -1,8 +1,10 @@
 <?php
 
-if (!class_exists('ProductsDb')) {
-    class ProductsDb
+if (!class_exists('ProductDb')) {
+    class ProductDb
     {
+        const DbName = 'product';
+
         private static $instance = null;
         private $db_product_name;
         private $db;
@@ -11,14 +13,13 @@ if (!class_exists('ProductsDb')) {
         {
             global $wpdb;
             $this->db = $wpdb;
-            $this->db_product_name = $this->db->prefix . DbPrefix . 'product';
-            $this->db_order_name = $this->db->prefix . DbPrefix . 'order';
+            $this->db_product_name = $this->db->prefix . DbPrefix . self::DbName;
         }
 
         public static function get_instance()
         {
             if (self::$instance === null) {
-                self::$instance = new ProductsDb();
+                self::$instance = new ProductDb();
             }
 
             return self::$instance;
