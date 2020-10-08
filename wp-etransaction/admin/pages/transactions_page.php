@@ -3,11 +3,11 @@ if (!current_user_can('manage_options')) {
     return;
 }
 
-require_once __DIR__ . '/../db/orderdb.php';
-require_once __DIR__ . '/widgets/order_list_table.php';
+require_once __DIR__ . '/../db/TransactionDB.php';
+require_once __DIR__ . '/widgets/transaction_list_table.php';
 
-$order_db = TransactionDb::get_instance();
-$order_list_table = new Order_List_Table($order_db);
+$transaction_db = TransactionDB::get_instance();
+$order_list_table = new Transaction_List_Table($transaction_db);
 
 ?>
 
@@ -20,28 +20,28 @@ $order_list_table = new Order_List_Table($order_db);
         <li class="all">
             <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_transactions">
                 <?php echo __("All", "etransactions"); ?>
-                (<?php echo $order_db->get_all_count(); ?>)
+                (<?php echo $transaction_db->get_all_count(); ?>)
             </a>
         </li>
         |
         <li class="successful">
             <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_transactions&order_status=accepted">
                 <?php echo __("Successful", "etransactions"); ?>
-                (<?php echo $order_db->get_success_count(); ?>)
+                (<?php echo $transaction_db->get_success_count(); ?>)
             </a>
         </li>
         |
         <li class="reject">
             <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_transactions&order_status=rejected">
                 <?php echo __("Rejected", "etransactions"); ?>
-                (<?php echo $order_db->get_reject_count(); ?>)
+                (<?php echo $transaction_db->get_reject_count(); ?>)
             </a>
         </li>
         |
         <li class="cancel">
             <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_transactions&order_status=canceled">
                 <?php echo __("Canceled", "etransactions"); ?>
-                (<?php echo $order_db->get_cancel_count(); ?>)
+                (<?php echo $transaction_db->get_cancel_count(); ?>)
             </a>
         </li>
 

@@ -6,11 +6,11 @@ if (!class_exists('WP_List_Table')) {
 }
 
 
-if (!class_exists('Order_List_Table')) {
-    class Order_List_Table extends WP_List_Table
+if (!class_exists('Transaction_List_Table')) {
+    class Transaction_List_Table extends WP_List_Table
     {
         /**
-         * @var TransactionDb
+         * @var TransactionDB
          */
         private $orderDb;
 
@@ -72,23 +72,23 @@ if (!class_exists('Order_List_Table')) {
             }
         }
 
-//        public function column_name($item)
-//        {
-//            $nonce = wp_create_nonce(NonceName);
-//            $title = '<strong>' . $item['product'] . '</strong>';
-//
-//            $actions = [
-//                'delete' => sprintf(
-//                    '<a href="?page=%s&order_action=%s&order=%s&_wpnonce=%s">Delete</a>',
-//                    esc_attr($_REQUEST['page']),
-//                    'delete_confirm',
-//                    absint($item['order_id']),
-//                    $nonce
-//                )
-//            ];
-//
-//            return $title . $actions;
-//        }
+        public function column_name($item)
+        {
+            $nonce = wp_create_nonce(NonceName);
+            $title = '<strong>' . $item['product'] . '</strong>';
+
+            $actions = [
+                'delete' => sprintf(
+                    '<a href="?page=%s&order_action=%s&order=%s&_wpnonce=%s">Delete</a>',
+                    esc_attr($_REQUEST['page']),
+                    'delete_confirm',
+                    absint($item['order_id']),
+                    $nonce
+                )
+            ];
+
+            return $title . $actions;
+        }
 
         public function get_sortable_columns()
         {
@@ -125,7 +125,6 @@ if (!class_exists('Order_List_Table')) {
             }
 
         }
-
 
         public function prepare_items()
         {

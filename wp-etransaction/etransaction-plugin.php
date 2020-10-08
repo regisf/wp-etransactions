@@ -24,7 +24,7 @@ require_once __DIR__ . '/shortcode.php';
 function etransactions_install_hook()
 {
     ProductDb::get_instance()->install();
-    TransactionDb::get_instance()->install();
+    TransactionDB::get_instance()->install();
 }
 
 register_activation_hook(__FILE__, 'etransactions_install_hook');

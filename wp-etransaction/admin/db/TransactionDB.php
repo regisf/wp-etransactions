@@ -1,6 +1,6 @@
 <?php
-if (!class_exists('TransactionDb')) {
-    class TransactionDb
+if (!class_exists('TransactionDB')) {
+    class TransactionDB
     {
         const Initiated = 'initiated';
         const Accepted = 'accepted';
@@ -19,11 +19,10 @@ if (!class_exists('TransactionDb')) {
             $this->db_product_name = $this->db->prefix . DbPrefix . ProductDb::DbName;
         }
 
-
         public static function get_instance()
         {
             if (self::$instance === null) {
-                self::$instance = new TransactionDb();
+                self::$instance = new TransactionDB();
             }
 
             return self::$instance;
@@ -31,6 +30,9 @@ if (!class_exists('TransactionDb')) {
 
         public function install()
         {
+            $enum_list = implode("','", [self::Initiated, self::Accepted, self::Canceled, self::Rejected]);
+            $initiated = self::Initiated;
+
             $this->db->query("
                 CREATE TABLE IF NOT EXISTS `{$this->db_order_name}` (
                     `transaction_id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -38,7 +40,7 @@ if (!class_exists('TransactionDb')) {
                     `order_ref` VARCHAR(100) NOT NULL,
                     `amount` FLOAT,
                     `email` VARCHAR(100) NOT NULL,
-                    `state` ENUM('{self::Initiated}', '{self::Accepted}', '{self::Canceled}', '{self::Rejected}') DEFAULT 'initiated',
+                    `state` ENUM('$enum_list') DEFAULT '$initiated',
                     `creation_date` TIMESTAMP DEFAULT NOW(),
                     
                     FOREIGN KEY (`product_id`) REFERENCES `{$this->db_product_name}`(`product_id`) 
@@ -54,19 +56,19 @@ if (!class_exists('TransactionDb')) {
         {
             $query = "
                 SELECT
-                    o.transaction_id as transaction_id,
-                    o.order_ref as order_ref, 
-                    o.amount as amount, 
-                    o.email as email, 
-                    o.state as state,
-                    o.creation_date as creation_date, 
-                    p.name as product 
+                    `o`.`transaction_id` as `transaction_id`,
+                    `o`.`order_ref` as `order_ref`, 
+                    `o`.`amount` as `amount`, 
+                    `o`.`email` as `email`, 
+                    `o`.`state` as `state`,
+                    `o`.`creation_date` as `creation_date`, 
+                    `p`.`name` as `product` 
                 FROM 
-                     `{$this->db_order_name}` AS o 
+                     `{$this->db_order_name}` AS `o` 
                  INNER JOIN 
-                     `{$this->db_product_name}` as p 
+                     `{$this->db_product_name}` as `p` 
                  ON 
-                     o.product_id = p.product_id
+                     `o`.`product_id` = `p`.`product_id`
             ";
 
             if ($status !== 'all') {

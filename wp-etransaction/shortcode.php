@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/admin/db/productsdb.php';
-require_once __DIR__ . '/admin/db/orderdb.php';
+require_once __DIR__ . '/admin/db/TransactionDB.php';
 require_once plugin_dir_path(__FILE__) . 'etransactions/ETransactions/ETransaction.php';
 require_once plugin_dir_path(__FILE__) . 'etransactions/ETransactions/TransactionResult.php';
 
@@ -127,7 +127,7 @@ add_shortcode('etransactions-order-form', function ($attrs = [], $content = '') 
         case 'confirm':
             $holder = esc_sql($_REQUEST['PBX_PORTEUR']);
             $ref = wp_generate_uuid4();
-            $result = TransactionDb::get_instance()->insert_order($product_id, $holder, $ref, $product->price);
+            $result = TransactionDB::get_instance()->insert_order($product_id, $holder, $ref, $product->price);
             $str = etransactions_get_confirm_form($product, $result, $attrs['no-label']);
             break;
 
@@ -162,7 +162,7 @@ add_shortcode('etransactions-product-price', function ($attrs = [], $content = '
 add_shortcode('etransactions-accepted', function ($attrs = [], $content = '') {
     if (!isset($_REQUEST['post'])) {
         $result = TransactionResult::fromRequest($_REQUEST);
-        TransactionDb::get_instance()->set_transaction_succeed($result->getReference()->getValue());
+        TransactionDB::get_instance()->set_transaction_succeed($result->getReference()->getValue());
     }
     return '';
 });
@@ -170,7 +170,7 @@ add_shortcode('etransactions-accepted', function ($attrs = [], $content = '') {
 add_shortcode('etransactions-canceled', function ($attrs = [], $content = '') {
     if (!isset($_REQUEST['post'])) {
         $result = TransactionResult::fromRequest($_REQUEST);
-        TransactionDb::get_instance()->set_transaction_canceled($result->getReference()->getValue());
+        TransactionDB::get_instance()->set_transaction_canceled($result->getReference()->getValue());
     }
     return '';
 });
@@ -179,7 +179,7 @@ add_shortcode('etransactions-canceled', function ($attrs = [], $content = '') {
 add_shortcode('etransactions-rejected', function ($attrs = [], $content = '') {
     if (!isset($_REQUEST['post'])) {
         $result = TransactionResult::fromRequest($_REQUEST);
-        TransactionDb::get_instance()->set_transaction_rejected($result->getReference()->getValue());
+        TransactionDB::get_instance()->set_transaction_rejected($result->getReference()->getValue());
     }
     return '';
 });
