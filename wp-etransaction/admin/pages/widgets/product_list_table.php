@@ -10,7 +10,7 @@ if (!class_exists('Product_List_Table')) {
     class Product_List_Table extends WP_List_Table
     {
         /**
-         * @var ProductDb
+         * @var ProductDB
          */
         private $productDB;
 

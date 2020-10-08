@@ -2,10 +2,10 @@
 if (!current_user_can('manage_options')) {
     return;
 }
-require_once __DIR__ . '/../db/productsdb.php';
+require_once __DIR__ . '/../db/ProductsDB.php';
 require_once __DIR__ . '/widgets/product_list_table.php';
 
-$product_db = ProductDb::get_instance();
+$product_db = ProductDB::get_instance();
 $product_list_table = new Product_List_Table($product_db);
 $status = isset($_REQUEST['product_status']) ? $_REQUEST['product_status'] : 'all';
 $product_action = isset($_REQUEST['product_action']) ? $_REQUEST['product_action'] : '';

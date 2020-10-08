@@ -16,7 +16,7 @@ if (!class_exists('TransactionDB')) {
             $this->db = $wpdb;
 
             $this->db_order_name = $this->db->prefix . DbPrefix . self::DbName;
-            $this->db_product_name = $this->db->prefix . DbPrefix . ProductDb::DbName;
+            $this->db_product_name = $this->db->prefix . DbPrefix . ProductDB::DbName;
         }
 
         public static function get_instance()

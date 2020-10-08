@@ -31,6 +31,7 @@ $active = isset($item) ? $item->active : '';
             </th>
             <td>
                 <input type="text" name="name" id="id_name" value="<?php echo $name; ?>" required
+                       style="padding: 0.25rem; width: 25%"
                        placeholder="Enter here the product name"/>
                 <div class="description">
                     <?php echo esc_html__('The product name as displayed on the web site', 'etransactions'); ?>
@@ -44,7 +45,9 @@ $active = isset($item) ? $item->active : '';
             </th>
             <td>
                 <input type="number" name="price" id="id_price" value="<?php echo $price; ?>" required step="0.01"
-                       placeholder="Enter the product price"/>
+                       placeholder="Enter the product price"
+                       style="padding: 0.25rem"
+                />
                 <div class="description">
                     <?php echo __('The product price.', 'etransactions'); ?>
                 </div>

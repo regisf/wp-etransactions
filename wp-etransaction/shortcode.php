@@ -1,12 +1,12 @@
 <?php
 
-require_once __DIR__ . '/admin/db/productsdb.php';
+require_once __DIR__ . '/admin/db/ProductsDB.php';
 require_once __DIR__ . '/admin/db/TransactionDB.php';
 require_once plugin_dir_path(__FILE__) . 'etransactions/ETransactions/ETransaction.php';
 require_once plugin_dir_path(__FILE__) . 'etransactions/ETransactions/TransactionResult.php';
 
 add_shortcode('etransactions-products', function ($attrs = [], $content = '') {
-    $producDb = ProductDb::get_instance();
+    $producDb = ProductDB::get_instance();
     $actives = $producDb->get_actives();
     $str = '';
 
@@ -117,7 +117,7 @@ add_shortcode('etransactions-order-form', function ($attrs = [], $content = '') 
     ], $attrs);
 
     $product_id = esc_sql($_REQUEST['product']);
-    $product = ProductDb::get_instance()->getById($product_id);
+    $product = ProductDB::get_instance()->getById($product_id);
 
     switch ($attrs['step']) {
         case 'email':
@@ -144,7 +144,7 @@ add_shortcode('etransactions-product-name', function ($attrs = [], $content = ''
     }
 
     $product_id = esc_sql($_REQUEST['product']);
-    $product = ProductDb::get_instance()->getById($product_id);
+    $product = ProductDB::get_instance()->getById($product_id);
 
     return $product->name;
 });
@@ -155,7 +155,7 @@ add_shortcode('etransactions-product-price', function ($attrs = [], $content = '
     }
 
     $product_id = esc_sql($_REQUEST['product']);
-    $product = ProductDb::get_instance()->getById($product_id);
+    $product = ProductDB::get_instance()->getById($product_id);
     return $product->price;
 });
 

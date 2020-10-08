@@ -11,7 +11,7 @@ add_action('admin_post_add_product', function () {
     $price = $_REQUEST['price'];
     $active = isset($_REQUEST['active']);
 
-    $productDb = ProductDb::get_instance();
+    $productDb = ProductDB::get_instance();
     $productDb->insert($name, $price, $active);
 
     redirect();
@@ -24,7 +24,7 @@ add_action('admin_post_delete_product', function () {
     }
 
     $id = $_REQUEST['product_ID'];
-    $productDb = ProductDb::get_instance();
+    $productDb = ProductDB::get_instance();
     $result = $productDb->deleteById($id);
     if ($result === false) {
         echo "Pas marche: " . $productDb->pkoi();
@@ -45,7 +45,7 @@ add_action('admin_post_edit_product', function () {
     $price = $_REQUEST['price'];
     $active = isset($_REQUEST['active']);
 
-    $productDb = ProductDb::get_instance();
+    $productDb = ProductDB::get_instance();
     $result = $productDb->update($product_id, $name, $price, $active);
     if ($result === false) {
         echo "Pas marche: " . $productDb->pkoi();
