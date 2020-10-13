@@ -23,7 +23,7 @@ add_shortcode('etransactions-products-list', function ($attrs = [], $content = '
     foreach ($actives as $product) {
         $str .= '<div class="etransactions-product-wrapper">
             <div class="etransactions-product-name">'
-            . $product->name . '
+            .  stripcslashes($product->name) . '
             </div>
             <div class="etransactions-product-price">'
             . $product->price . '&nbsp;&euro;
@@ -55,7 +55,7 @@ add_shortcode('etransactions-confirmation-page', function ($attrs = [], $content
     $str = $preprod ? '<div class="etransactions-warning">Caution ! You are in test mode </div>' : '';
     if ($attrs['no-label'] === false) {
         $str .= '<p class="etransactions-product-desc">
-        <span class="etransactions-product-name">' . __('Product:', Constants::EtransactionsTr) . ' ' . $product->name . '</span>
+        <span class="etransactions-product-name">' . __('Product:', Constants::EtransactionsTr) . ' ' . stripcslashes($product->name) . '</span>
         <span class="etransactions-product-price">' . $product->price . '&nbsp;&euro;</span>
         </p>';
     }
@@ -133,7 +133,7 @@ add_shortcode('etransactions-validation-page', function ($attrs = [], $content =
 
     if ($attrs['no-label'] === false) {
         $str .= '<p class="etransactions-product-desc"> 
-            <span class="etransactions-product-name">' . __('Product:', Constants::EtransactionsTr) . ' ' . $product->name . '</span> 
+            <span class="etransactions-product-name">' . __('Product:', Constants::EtransactionsTr) . ' ' . stripcslashes($product->name) . '</span> 
             <span class="etransactions-product-price">' . $product->price . '&nbsp;&euro;</span>
         </p>';
     }
@@ -155,7 +155,7 @@ add_shortcode('etransactions-product-name', function ($attrs = [], $content = ''
     $product_id = esc_sql($_REQUEST['product']);
     $product = ProductDB::get_instance()->getById($product_id);
 
-    return $product->name;
+    return stripcslashes($product->name);
 });
 
 add_shortcode('etransactions-product-price', function ($attrs = [], $content = '') {
