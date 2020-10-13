@@ -52,7 +52,7 @@ if (!class_exists('ProductDB')) {
                     `product_id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
                     `name` VARCHAR(100),
                     `active` BOOLEAN,
-                    `free_price` BOOLEAN DEFAULT FALSE,
+                    `free_amount` BOOLEAN DEFAULT FALSE,
                     `price` DOUBLE
                 )"
             );
@@ -60,7 +60,7 @@ if (!class_exists('ProductDB')) {
             if (CurrentVersion === '1.0.1') {
                 $this->db->query("
                     ALTER TABLE `{$this->db_product_name}`
-                        ADD `free_price` BOOLEAN DEFAULT FALSE AFTER `active`
+                        ADD `free_amount` BOOLEAN DEFAULT FALSE AFTER `active`
                     ");
             }
         }
@@ -90,11 +90,16 @@ if (!class_exists('ProductDB')) {
             die('This should not append');
         }
 
-        public function insert($name, $price, $active)
+        public function insert($name, $price, $active, $free_amount)
         {
             return $this->db->insert(
                 $this->db_product_name,
-                ['name' => $name, 'price' => $price, 'active' => $active]
+                [
+                    'name' => $name,
+                    'price' => $price,
+                    'active' => $active,
+                    'free_amount' => $free_amount
+                ]
             );
         }
 
@@ -118,10 +123,15 @@ if (!class_exists('ProductDB')) {
             return $this->db->last_error;
         }
 
-        public function update($product_id, $name, $price, $active)
+        public function update($product_id, $name, $price, $active, $free_amount)
         {
             return $this->db->update($this->db_product_name,
-                ['name' => $name, 'price' => $price, 'active' => $active],
+                [
+                    'name' => $name,
+                    'price' => $price,
+                    'active' => $active,
+                    'free_amount' => $free_amount
+                ],
                 ['product_id' => $product_id]);
         }
 

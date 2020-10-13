@@ -10,9 +10,10 @@ add_action('admin_post_add_product', function () {
     $name = $_REQUEST['name'];
     $price = $_REQUEST['price'];
     $active = isset($_REQUEST['active']);
+    $free_amount = isset($_REQUEST['free_amount']);
 
     $productDb = ProductDB::get_instance();
-    $productDb->insert($name, $price, $active);
+    $productDb->insert($name, $price, $active, $free_amount);
 
     redirect();
 });
@@ -44,9 +45,10 @@ add_action('admin_post_edit_product', function () {
     $name = $_REQUEST['name'];
     $price = $_REQUEST['price'];
     $active = isset($_REQUEST['active']);
+    $free_amount = isset($_REQUEST['free_amount']);
 
     $productDb = ProductDB::get_instance();
-    $result = $productDb->update($product_id, $name, $price, $active);
+    $result = $productDb->update($product_id, $name, $price, $active, $free_amount);
     if ($result === false) {
         echo "Pas marche: " . $productDb->pkoi();
         die();

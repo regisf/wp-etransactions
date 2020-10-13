@@ -36,6 +36,11 @@ the purpose of this page. Just put the shortcode
 `[etransactions-confirmation-page]` somewhere into the page and it will display 
 a form that collect the mail address.
 
+The attribute `free_amount_label` allow you to set the appearing text in place 
+of the price if the product flag `free_amount` is set to `true`.
+
+The content of the shortcode is the label of the text. By default it's "Order".
+
 #### The validation page
 
 Because of the system technology, the plugin needs to generate an invisible
@@ -75,3 +80,4 @@ could override.
 * Confirmation page:
 * Validation page:
 * Landing pages: 
+* Free amount field

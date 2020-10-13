@@ -4,7 +4,7 @@
  * Plugin URI: https://github.com/regisf/wp-etransactions
  * Description: Simple e-Transaction wrapper for non eCommerce website that need a payment system.
  * Version: 1.0.1
- * Requires at least: 5.6
+ * Requires at least: 5.5
  * Requires PHP: 7.2
  * Author: Régis FLORET
  * License: GPL v2 or later

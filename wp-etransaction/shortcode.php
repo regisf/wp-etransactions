@@ -10,6 +10,10 @@ add_shortcode('etransactions-products-list', function ($attrs = [], $content = '
     $actives = $products->get_actives();
     $str = '';
 
+    $attrs = shortcode_atts([
+        'free_amount_label' => __('Free amount', Constants::EtransactionsTr)
+    ], $attrs);
+
     if (count($actives) === 0) {
         return '<div class="etransactions-product-empty">' .
             __('No products active to display', Constants::EtransactionsTr) .
@@ -23,11 +27,16 @@ add_shortcode('etransactions-products-list', function ($attrs = [], $content = '
     foreach ($actives as $product) {
         $str .= '<div class="etransactions-product-wrapper">
             <div class="etransactions-product-name">'
-            .  stripcslashes($product->name) . '
+            . stripcslashes($product->name) . '
             </div>
-            <div class="etransactions-product-price">'
-            . $product->price . '&nbsp;&euro;
-            </div>
+            <div class="etransactions-product-price"> ';
+
+        if ($product->free_amount === '1') {
+            $str .= $attrs['free_amount_label'];
+        } else {
+            $str .= $product->price . '&nbsp;&euro;';
+        }
+        $str .= '</div>
             <div class="etransactions-product-apply">
                 <a href="' . apply_filters('etransaction_get_confirmation_address', $product->product_id) . ' ">' . $content . '</a>
             </div>
@@ -62,8 +71,17 @@ add_shortcode('etransactions-confirmation-page', function ($attrs = [], $content
 
     $str .= '
         <form action="' . apply_filters('etransaction_get_validation_address', $product->product_id) . '" class="etransactions-product-form" method="post">
-            <input type="hidden" name="product" value="' . $product->product_id . '"  />' .
-        HolderValue::emptyForm() .
+            <input type="hidden" name="product" value="' . $product->product_id . '"  />';
+
+    if ($product->free_amount === '1') {
+        $str .=
+            '<span class="etransactions-free-amount">
+                <label for="id_free_amount">' . __("Amount you want to give to the product", Constants::EtransactionsTr) . '</label>
+                <input type="number" id="id_free_amount" step="0.01" name="free_amount" value="' . $product->price . '"/>
+            </span>';
+    }
+
+    $str .= HolderValue::emptyForm() .
         '<p class="etransactions-product-submit">
                 <input type="submit" value="' . __('Confirm payement', Constants::EtransactionsTr) . '" >
             </p>
@@ -107,7 +125,7 @@ add_shortcode('etransactions-validation-page', function ($attrs = [], $content =
         'secret' => $options[Constants::OptionSecretKey],
 
         'command' => $result->order_ref,
-        'total' => (float)$product->price,
+        'total' => $product->free_amount !== '1' ? (float)$product->price : (float)esc_sql($_REQUEST['free_amount']),
         'holder' => $result->email,
         'callbacks' => []
     ]);
@@ -132,10 +150,16 @@ add_shortcode('etransactions-validation-page', function ($attrs = [], $content =
     $str .= '<form action="' . $etransaction->getServerAddress() . '" class="etransactions-product-form" method="post">';
 
     if ($attrs['no-label'] === false) {
-        $str .= '<p class="etransactions-product-desc"> 
-            <span class="etransactions-product-name">' . __('Product:', Constants::EtransactionsTr) . ' ' . stripcslashes($product->name) . '</span> 
-            <span class="etransactions-product-price">' . $product->price . '&nbsp;&euro;</span>
-        </p>';
+        $str .= '<p class="etransactions-product-desc">
+            <span class="etransactions-product-name">' . __('Product:', Constants::EtransactionsTr) . ' ' . stripcslashes($product->name) . '</span>
+        <span class="etransactions-product-price">';
+
+        if ($product->free_amount === true) {
+            $str .= '<input type="number" step="0.01" name="free_amount" value="' . $product->price . '"/>';
+        } else {
+            $str .= $product->price . '&nbsp;&euro;';
+        }
+        $str .= '</span></p>';
     }
 
     $str .= $etransaction->getTransactionForm() .

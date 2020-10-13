@@ -17,6 +17,8 @@ $product_action = isset($_REQUEST['product_action']) ? $_REQUEST['product_action
 
     <?php
     if ($product_action === 'new') {
+        $active = true;
+
         include_once __DIR__ . '/views/products/new.php';
 
     } else if ($product_action === 'edit') {
@@ -28,6 +30,10 @@ $product_action = isset($_REQUEST['product_action']) ? $_REQUEST['product_action
         $id = esc_sql($_REQUEST['product']);
         $item = $product_db->getById($id);
 
+        $name = $item->name;
+        $price = $item->price;
+        $active = $item->active;
+        $use_free_amount = $item->free_amount;
         include_once __DIR__ . '/views/products/edit.php';
 
     } else if ($product_action === 'delete_confirm') {
