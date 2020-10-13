@@ -25,7 +25,7 @@ if (!class_exists('ProductDB')) {
             return self::$instance;
         }
 
-        public function getProducts($per_page, $page_number, $status = 'all')
+        public function get_products($per_page, $page_number, $status = 'all')
         {
             $query = "SELECT * FROM `{$this->db_product_name}`";
 
@@ -55,13 +55,6 @@ if (!class_exists('ProductDB')) {
                     `price` DOUBLE 
                 )"
             );
-        }
-
-        public function setActive($product_id, $active = true)
-        {
-            return $this->db->update($this->db_product_name,
-                ['active' => $active],
-                ['product_id' => $product_id]);
         }
 
         public function get_actives_count()
@@ -106,7 +99,7 @@ if (!class_exists('ProductDB')) {
             );
         }
 
-        public function deleteByIds(array $products)
+        public function delete_by_ids(array $products)
         {
             $query = "DELETE FROM {$this->db_product_name} WHERE `product_id` in (" . implode(',', $products) . ')';
             return $this->db->query($query);
@@ -135,7 +128,7 @@ if (!class_exists('ProductDB')) {
             return $this->db->query($query);
         }
 
-        public function toggleIds($products)
+        public function toggle_ids($products)
         {
             $products = esc_sql($products);
             $query = "UPDATE `{$this->db_product_name}` SET `active`=NOT `active` WHERE `product_id` IN (" . implode(',', $products) . ')';

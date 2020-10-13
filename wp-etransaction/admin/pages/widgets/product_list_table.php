@@ -126,7 +126,7 @@ if (!class_exists('Product_List_Table')) {
             $status = isset($_REQUEST['product_status']) ? $_REQUEST['product_status'] : 'all';
             $perPage = $this->get_items_per_page('records_per_page', 10);
             $currentPage = $this->get_pagenum();
-            $data = $this->productDB->getProducts($perPage, $currentPage, $status);
+            $data = $this->productDB->get_products($perPage, $currentPage, $status);
 
             $totalItems = count($data);
 
@@ -152,9 +152,9 @@ if (!class_exists('Product_List_Table')) {
                 if (isset($_REQUEST['bulk-action'])) {
                     $products = $_REQUEST['bulk-action'];
                     if ('bulk-delete' === $action) {
-                        $this->productDB->deleteByIds($products);
+                        $this->productDB->delete_by_ids($products);
                     } else if ('bulk-toggle-active' === $action) {
-                        $result = $this->productDB->toggleIds($products);
+                        $result = $this->productDB->toggle_ids($products);
                         if ($result === false) {
                             echo "NO";
                         }
