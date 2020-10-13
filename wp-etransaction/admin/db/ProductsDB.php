@@ -52,9 +52,17 @@ if (!class_exists('ProductDB')) {
                     `product_id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
                     `name` VARCHAR(100),
                     `active` BOOLEAN,
-                    `price` DOUBLE 
+                    `free_price` BOOLEAN DEFAULT FALSE,
+                    `price` DOUBLE
                 )"
             );
+
+            if (CurrentVersion === '1.0.1') {
+                $this->db->query("
+                    ALTER TABLE `{$this->db_product_name}`
+                        ADD `free_price` BOOLEAN DEFAULT FALSE AFTER `active`
+                    ");
+            }
         }
 
         public function get_actives_count()
