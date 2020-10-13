@@ -43,7 +43,9 @@ if (!class_exists('TransactionDB')) {
                     `state` ENUM('$enum_list') DEFAULT '$initiated',
                     `creation_date` TIMESTAMP DEFAULT NOW(),
                     
-                    FOREIGN KEY (`product_id`) REFERENCES `{$this->db_product_name}`(`product_id`) 
+                    FOREIGN KEY (`product_id`) 
+                        REFERENCES `{$this->db_product_name}`(`product_id`) 
+                        ON DELETE CASCADE
                 )"
             );
 
