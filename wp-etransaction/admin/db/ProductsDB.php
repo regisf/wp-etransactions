@@ -51,17 +51,25 @@ if (!class_exists('ProductDB')) {
                 CREATE TABLE IF NOT EXISTS  `{$this->db_product_name}` (
                     `product_id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
                     `name` VARCHAR(100),
+                    `category` VARCHAR(100) NULL,
                     `active` BOOLEAN,
                     `free_amount` BOOLEAN DEFAULT FALSE,
                     `price` DOUBLE
                 )"
             );
+        }
 
-            if (CurrentVersion === '1.0.1') {
+        public function upgrade() {
+            if (CurrentVersion <= 101) {
                 $this->db->query("
                     ALTER TABLE `{$this->db_product_name}`
                         ADD `free_amount` BOOLEAN DEFAULT FALSE AFTER `active`
                     ");
+
+                $this->db->query("
+                    ALTER TABLE `{$this->db_product_name}` 
+                        ADD `category` VARCHAR(100) NULL AFTER `name`
+                ");
             }
         }
 

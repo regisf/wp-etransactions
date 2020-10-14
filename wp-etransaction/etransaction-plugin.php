@@ -13,7 +13,7 @@
  * Domain Path: /locales
  */
 
-define('CurrentVersion', '1.0.1');
+define('CurrentVersion', 101);
 
 define('NonceName', 'etransactions_products');
 define('DbPrefix', 'etransactions_');
@@ -49,9 +49,29 @@ abstract class Constants
     const OptionAcceptedLandingPage = 'accepted_page';
     const OptionRejectedLandingPage = 'rejected_page';
     const OptionCanceledLandingPage = 'canceled_page';
+    const OptionCurrentVersion = self::PluginPrefix . 'current_version';
 }
 
-
+/**
+ * Load all translations. Update the database regarding the current version
+ */
 add_action('plugins_loaded', function() {
     load_plugin_textdomain('etransactions', false, __DIR__ . '/locales');
+    update_database();
 });
+
+/**
+ * Update the database on plugin loaded
+ *
+ * A problem occure when the database version is greater than the current
+ * version
+ */
+function update_database() {
+    $options = get_option(Constants::OptionCurrentVersion, 0);
+    if ($options < CurrentVersion) {
+        ProductDB::get_instance()->upgrade();
+        update_option(Constants::OptionCurrentVersion, CurrentVersion);
+    } else {
+        add_option(Constants::OptionCurrentVersion, CurrentVersion);
+    }
+}
