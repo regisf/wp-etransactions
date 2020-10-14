@@ -1,4 +1,12 @@
 # Etransactions Wordpress Plugin
+* Contributors: 
+* Stable Tag: v1.0.2
+* Tags: etransactions, crédit agricole, paybox
+* Requires at least: 5.5
+* Requires PHP: 7.0
+* Tested up to: 5.5
+* License: GPLv2 or later
+* License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Wordpress front-end for the [etransaction PHP library](https://github.com/regisf/php-etransactions).
 
@@ -7,6 +15,11 @@ This plugin was written initialy for the organisation that collect donation for 
 This Wordpress plugin allow you to install a simple payment system with the [Crédit Agricole - Mon Commerce](https://http://www.ca-moncommerce.com/) system.
 
 The plugin allow to switch into testing mode. 
+
+## License
+
+This software is under GPLv2 or later license. Please see [LICENSE](./LICENSE) file or go
+to [the GPL2 text](https://www.gnu.org/licenses/gpl-2.0.htm)  online.
 
 ## Features
 

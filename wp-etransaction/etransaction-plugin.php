@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: CA e-Transactions for Wordpress
+ * Plugin Name: CA e-Transactions plugin
  * Plugin URI: https://github.com/regisf/wp-etransactions
  * Description: Simple e-Transaction wrapper for non eCommerce website that need a payment system.
  * Version: 1.0.2
