@@ -34,6 +34,7 @@ $product_action = isset($_REQUEST['product_action']) ? $_REQUEST['product_action
         $price = $item->price;
         $active = $item->active;
         $use_free_amount = $item->free_amount;
+        $category = $item->category;
         include_once __DIR__ . '/views/products/edit.php';
 
     } else if ($product_action === 'delete_confirm') {

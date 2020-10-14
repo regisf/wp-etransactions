@@ -30,10 +30,11 @@ if (!class_exists('Product_List_Table')) {
         {
             $columns = array(
                 'cb' => '<input type="checkbox" />',
-                'name' => 'Name',
-                'active' => 'Active',
+                'name' => __('Name', 'etransaction'),
+                'active' => __('Active', 'etransaction'),
+                'category' => __('Category', 'etransaction'),
                 'free_amount' => __('Free Amount', 'etransactions'),
-                'price' => 'Price',
+                'price' => __('Price', 'etransaction'),
             );
 
             return $columns;
@@ -49,6 +50,11 @@ if (!class_exists('Product_List_Table')) {
             switch ($column_name) {
                 case 'id':
                     return $this->column_cb($item);
+
+                case 'category':
+                    if (!isset($item[$column_name])) {
+                        return '--';
+                    }
 
                 case 'name':
                     return $item[$column_name];
@@ -103,9 +109,10 @@ if (!class_exists('Product_List_Table')) {
         public function get_sortable_columns()
         {
             return array(
-                'name' => array('name', false),
-                'price' => array('price', false),
-                'active' => array('active', false)
+                'name' => ['name', false],
+                'price' => ['price', false],
+                'active' => ['active', false],
+                'category' => ['category', false],
             );
         }
 

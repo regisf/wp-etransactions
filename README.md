@@ -20,14 +20,25 @@ PHP 5.5 / Tested with Wordpress 5.5.1
 
 Use the wordpress plugin management or the ZIP file into the [release](https://github.com/regisf/wp-etransactions/releases/tag/v1.0.0) page.
 
-### Callback pages
 
-The plugin needs five pages to be effective:
-
-#### The product list
+### Display products - The product list page
 
 Where the products list is displayed. Just add the short code `[etransactions-products-list]` somewhere into 
 the page.
+
+The shortcode content is the sentence you want to display for the order link 
+instead the default one ("Order"). This is usefull for translation.
+
+The product list short code have two parameters:
+
+* `free_amount_label` (string, optional): which allow you to override the default label 
+"Free amount"
+* `category` (string, optional): ask to display only the product with a 
+category. If the category doesn't exist, nothing is displayed. 
+
+### Callback pages
+
+The plugin needs five pages to be effective:
 
 #### The confirmation page
 

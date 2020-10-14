@@ -6,13 +6,14 @@ require_once plugin_dir_path(__FILE__) . 'etransactions/ETransactions/ETransacti
 require_once plugin_dir_path(__FILE__) . 'etransactions/ETransactions/TransactionResult.php';
 
 add_shortcode('etransactions-products-list', function ($attrs = [], $content = '') {
-    $products = ProductDB::get_instance();
-    $actives = $products->get_actives();
-    $str = '';
-
     $attrs = shortcode_atts([
-        'free_amount_label' => __('Free amount', 'etransactions')
+        'free_amount_label' => __('Free amount', 'etransactions'),
+        'category' => '',
     ], $attrs);
+
+    $products = ProductDB::get_instance();
+    $actives = $products->get_actives_for_category($attrs['category']);
+    $str = '';
 
     if (count($actives) === 0) {
         return '<div class="etransactions-product-empty">' .

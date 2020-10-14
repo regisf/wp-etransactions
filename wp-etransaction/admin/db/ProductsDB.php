@@ -59,7 +59,8 @@ if (!class_exists('ProductDB')) {
             );
         }
 
-        public function upgrade() {
+        public function upgrade()
+        {
             if (CurrentVersion <= 101) {
                 $this->db->query("
                     ALTER TABLE `{$this->db_product_name}`
@@ -98,7 +99,7 @@ if (!class_exists('ProductDB')) {
             die('This should not append');
         }
 
-        public function insert($name, $price, $active, $free_amount)
+        public function insert($name, $price, $active, $free_amount, $category)
         {
             return $this->db->insert(
                 $this->db_product_name,
@@ -106,7 +107,8 @@ if (!class_exists('ProductDB')) {
                     'name' => $name,
                     'price' => $price,
                     'active' => $active,
-                    'free_amount' => $free_amount
+                    'free_amount' => $free_amount,
+                    'category' => $category
                 ]
             );
         }
@@ -131,21 +133,28 @@ if (!class_exists('ProductDB')) {
             return $this->db->last_error;
         }
 
-        public function update($product_id, $name, $price, $active, $free_amount)
+        public function update($product_id, $name, $price, $active, $free_amount, $category)
         {
             return $this->db->update($this->db_product_name,
                 [
                     'name' => $name,
                     'price' => $price,
                     'active' => $active,
-                    'free_amount' => $free_amount
+                    'free_amount' => $free_amount,
+                    'category' => $category
                 ],
                 ['product_id' => $product_id]);
         }
 
-        public function get_actives()
+        public function get_actives_for_category($category)
         {
-            return $this->db->get_results('SELECT * FROM ' . $this->db_product_name . ' WHERE `active`=true');
+            $query = 'SELECT * FROM ' . $this->db_product_name . ' WHERE `active`=true';
+
+            if ($category !== '') {
+                $query .= " AND `category` = '$category'";
+            }
+
+            return $this->db->get_results($query);
         }
 
         public function toggle($product_id)

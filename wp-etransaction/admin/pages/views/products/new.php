@@ -15,6 +15,9 @@ if (!isset($active)) {
 if (!isset($use_free_amount)) {
     $use_free_amount = '';
 }
+if (!isset($category)) {
+    $category = '';
+}
 
 ?>
 
@@ -65,6 +68,22 @@ if (!isset($use_free_amount)) {
                 />
                 <div class="description">
                     <?php _e('The product price.', 'etransactions'); ?>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                <label for="id_category">Category:</label>
+            </th>
+            <td>
+                <input type="text" name="category" id="id_category"
+                       value="<?php echo $category; ?>"
+                       placeholder="Enter the product price"
+                       style="padding: 0.25rem"
+                />
+                <div class="description">
+                    <?php _e('The product category.', 'etransactions'); ?>
                 </div>
             </td>
         </tr>
