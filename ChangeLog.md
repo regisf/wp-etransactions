@@ -5,6 +5,7 @@
     * Fix non escaped description text
     * Add free amount for product. e.g. for donation.
     * Remove hard coded string for translation key
+    * Change translation functions call due to a misunderstood how it works.
     
 * v1.0.0: 
     * Initial Release
