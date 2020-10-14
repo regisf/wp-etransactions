@@ -13,6 +13,11 @@
  * Domain Path: /locales
  */
 
+define('CurrentDbVersion', 101);
+
+define('NonceName', 'etransactions_products');
+define('DbPrefix', 'etransactions_');
+
 include_once __DIR__ . '/constants.php';
 require_once __DIR__ . '/admin/init.php';
 require_once __DIR__ . '/admin/menus.php';
@@ -31,6 +36,24 @@ function etransactions_install_hook()
 }
 register_activation_hook(__FILE__, 'etransactions_install_hook');
 
+abstract class Constants
+{
+    const PluginPrefix = 'etransactions_';
+
+    // Options
+    const PageName = 'etransactions';
+    const OptionName = self::PluginPrefix . 'options';
+    const OptionConfirmationPage = 'confirmation_page';
+    const OptionValidationPage = 'validation_page';
+    const OptionSiteID = 'site_id';
+    const OptionRangID = 'rang_id';
+    const OptionCustomerID = 'customer_id';
+    const OptionSecretKey = 'secret_key';
+    const OptionAcceptedLandingPage = 'accepted_page';
+    const OptionRejectedLandingPage = 'rejected_page';
+    const OptionCanceledLandingPage = 'canceled_page';
+    const OptionCurrentVersion = self::PluginPrefix . 'current_version';
+}
 
 /**
  * Load all translations. Update the database regarding the current version
@@ -48,10 +71,10 @@ add_action('plugins_loaded', function() {
  */
 function update_database() {
     $options = get_option(Constants::OptionCurrentVersion, 0);
-    if ($options < CurrentVersion) {
+    if ($options < CurrentDbVersion) {
         ProductDB::get_instance()->upgrade();
-        update_option(Constants::OptionCurrentVersion, CurrentVersion);
+        update_option(Constants::OptionCurrentVersion, CurrentDbVersion);
     } else {
-        add_option(Constants::OptionCurrentVersion, CurrentVersion);
+        add_option(Constants::OptionCurrentVersion, CurrentDbVersion);
     }
 }
