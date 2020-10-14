@@ -1,5 +1,11 @@
 # Changes for e-Transaction WordPress plugin
 
+* v1.0.2:
+    * Fix plugin uninstallation
+    * Fix database upgrade for the same version. The database was altered each 
+    time the plugin was loaded.
+    * Create a dist release script
+    
 * v1.0.1:
     * Fix cascade deletion on `_etransactions_transaction` table
     * Fix non escaped description text

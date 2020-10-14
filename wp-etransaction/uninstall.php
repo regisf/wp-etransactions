@@ -8,8 +8,11 @@ if (!current_user_can('manage_options')) {
     return;
 }
 
-delete_options('etransaction_options');
+include_once __DIR__ . '/constants.php';
+
+delete_option(Constants::OptionName);
+delete_option(Constants::OptionCurrentVersion);
 
 global $wpdb;
-$wpdb->query('DROP TABLE `etransactions_product`');
-$wpdb->query('DROP TABLE `etransactions_transaction`');
+$wpdb->query('DROP TABLE IF EXISTS `' . $wpdb->prefix . Constants::PluginPrefix . 'transaction`');
+$wpdb->query('DROP TABLE IF EXISTS `' . $wpdb->prefix . Constants::PluginPrefix . 'product`');

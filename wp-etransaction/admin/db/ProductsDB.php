@@ -61,7 +61,7 @@ if (!class_exists('ProductDB')) {
 
         public function upgrade()
         {
-            if (CurrentVersion <= 101) {
+            if (CurrentVersion < 101) {
                 $this->db->query("
                     ALTER TABLE `{$this->db_product_name}`
                         ADD `free_amount` BOOLEAN DEFAULT FALSE AFTER `active`
