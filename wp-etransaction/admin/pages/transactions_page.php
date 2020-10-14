@@ -19,28 +19,28 @@ $order_list_table = new Transaction_List_Table($transaction_db);
     <ul class="subsubsub">
         <li class="all">
             <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_transactions">
-                <?php echo __("All", "etransactions"); ?>
+                <?php _e("All", 'etransactions'); ?>
                 (<?php echo $transaction_db->get_all_count(); ?>)
             </a>
         </li>
         |
         <li class="successful">
             <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_transactions&order_status=accepted">
-                <?php echo __("Successful", "etransactions"); ?>
+                <?php _e("Successful", 'etransactions'); ?>
                 (<?php echo $transaction_db->get_success_count(); ?>)
             </a>
         </li>
         |
         <li class="reject">
             <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_transactions&order_status=rejected">
-                <?php echo __("Rejected", "etransactions"); ?>
+                <?php _e("Rejected", 'etransactions'); ?>
                 (<?php echo $transaction_db->get_reject_count(); ?>)
             </a>
         </li>
         |
         <li class="cancel">
             <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_transactions&order_status=canceled">
-                <?php echo __("Canceled", "etransactions"); ?>
+                <?php _e("Canceled", 'etransactions'); ?>
                 (<?php echo $transaction_db->get_cancel_count(); ?>)
             </a>
         </li>

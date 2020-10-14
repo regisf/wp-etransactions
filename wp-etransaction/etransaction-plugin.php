@@ -9,6 +9,8 @@
  * Author: Régis FLORET
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain: etransactions
+ * Domain Path: /locales
  */
 
 define('CurrentVersion', '1.0.1');
@@ -35,9 +37,6 @@ abstract class Constants
 {
     const PluginPrefix = 'etransactions_';
 
-    // Translation key
-    const EtransactionsTr = 'etransactions';
-
     // Options
     const PageName = 'etransactions';
     const OptionName = 'etransactions_options';
@@ -51,3 +50,8 @@ abstract class Constants
     const OptionRejectedLandingPage = 'rejected_page';
     const OptionCanceledLandingPage = 'canceled_page';
 }
+
+
+add_action('plugins_loaded', function() {
+    load_plugin_textdomain('etransactions', false, __DIR__ . '/locales');
+});

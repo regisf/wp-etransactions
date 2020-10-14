@@ -4,7 +4,7 @@ if (!current_user_can('manage_options')) {
 }
 
 if (isset($_GET['settings-updated'])) {
-    add_settings_error('etransactions_messages', 'etransactions_message', __('Settings Saved', Constants::EtransactionsTr), 'updated');
+    add_settings_error('etransactions_messages', 'etransactions_message', __('Settings Saved', 'etransactions'), 'updated');
 }
 
 $options = get_option(Constants::OptionName);
@@ -17,7 +17,7 @@ if (!$accepted) {
     add_settings_error(
         'etransactions',
         'missing-pages',
-        __('The payement accepted landing pages is not created. You should create it.', Constants::EtransactionsTr),
+        __('The payement accepted landing pages is not created. You should create it.', 'etransactions'),
         'error'
     );
 }
@@ -26,7 +26,7 @@ if (!$rejected) {
     add_settings_error(
         'etransactions',
         'missing-pages',
-        __('The payement rejected landing pages is not created. You should create it.', Constants::EtransactionsTr),
+        __('The payement rejected landing pages is not created. You should create it.', 'etransactions'),
         'error'
     );
 }
@@ -35,7 +35,7 @@ if (!$canceled) {
     add_settings_error(
         'etransactions',
         'missing-pages',
-        __('The payement canceled landing pages is not created. You should create it.', Constants::EtransactionsTr),
+        __('The payement canceled landing pages is not created. You should create it.', 'etransactions'),
         'error'
     );
 }
@@ -44,7 +44,7 @@ if (!$validation) {
     add_settings_error(
         'etransactions',
         'missing-pages',
-        __('The payement validation pages is not created. You should create it.', Constants::EtransactionsTr),
+        __('The payement validation pages is not created. You should create it.', 'etransactions'),
         'error'
     );
 }
@@ -58,7 +58,7 @@ if (!$validation) {
         <?php
         settings_fields('etransactions');
         do_settings_sections(Constants::PageName);
-        submit_button(__('Save', Constants::EtransactionsTr));
+        submit_button(__('Save', 'etransactions'));
         ?>
     </form>
 

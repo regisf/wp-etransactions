@@ -32,7 +32,7 @@ if (!class_exists('Product_List_Table')) {
                 'cb' => '<input type="checkbox" />',
                 'name' => 'Name',
                 'active' => 'Active',
-                'free_amount' => __('Free Amount', Constants::EtransactionsTr),
+                'free_amount' => __('Free Amount', 'etransactions'),
                 'price' => 'Price',
             );
 
@@ -55,7 +55,7 @@ if (!class_exists('Product_List_Table')) {
 
                 case 'active':
                 case 'free_amount':
-                    return $item[$column_name] === '1' ? __('Yes') : __('No');
+                    return $item[$column_name] === '1' ? __('Yes', 'etransactions') : __('No', 'etransactions');
 
                 case 'price':
                     return $item[$column_name] . '&nbsp;&euro;';

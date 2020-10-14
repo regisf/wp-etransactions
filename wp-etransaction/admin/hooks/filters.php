@@ -26,5 +26,5 @@ add_filter('etransaction_get_confirmation_address', function ($id) {
         return $validation_page . $sep . 'product=' . $id;
     }
 
-    return __('Warning: Confirmation page is not set', Constants::EtransactionsTr);
+    return __('Warning: Confirmation page is not set', 'etransactions');
 });

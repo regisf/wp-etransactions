@@ -19,8 +19,8 @@ if (!class_exists('Transaction_List_Table')) {
             $this->orderDb = $db;
 
             parent::__construct([
-                'singular' => __('Order', Constants::EtransactionsTr),
-                'plural' => __('Orders', Constants::EtransactionsTr),
+                'singular' => __('Order', 'etransactions'),
+                'plural' => __('Orders', 'etransactions'),
             ]);
 
             $columns = $this->get_columns();
@@ -103,7 +103,7 @@ if (!class_exists('Transaction_List_Table')) {
         public function get_bulk_actions()
         {
             return [
-                'bulk-delete' => __('Delete', Constants::EtransactionsTr),
+                'bulk-delete' => __('Delete', 'etransactions'),
             ];
         }
 

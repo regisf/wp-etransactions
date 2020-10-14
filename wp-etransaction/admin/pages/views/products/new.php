@@ -48,7 +48,7 @@ if (!isset($use_free_amount)) {
                        style="padding: 0.25rem; width: 25%"
                        placeholder="Enter here the product name"/>
                 <div class="description">
-                    <?php echo esc_html__('The product name as displayed on the web site', Constants::EtransactionsTr); ?>
+                    <?php echo esc_html__('The product name as displayed on the web site', 'etransactions'); ?>
                 </div>
             </td>
         </tr>
@@ -64,14 +64,14 @@ if (!isset($use_free_amount)) {
                        style="padding: 0.25rem"
                 />
                 <div class="description">
-                    <?php echo __('The product price.', Constants::EtransactionsTr); ?>
+                    <?php _e('The product price.', 'etransactions'); ?>
                 </div>
             </td>
         </tr>
 
         <tr>
             <th>
-                <label for="id_free_amount"><?php echo __('Free amount', Constants::EtransactionsTr); ?>:</label>
+                <label for="id_free_amount"><?php _e('Free amount', 'etransactions'); ?>:</label>
             </th>
             <td>
                 <input type="checkbox" name="free_amount" <?php if ($use_free_amount) {
