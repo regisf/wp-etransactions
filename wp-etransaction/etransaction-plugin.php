@@ -24,13 +24,14 @@ require_once __DIR__ . '/admin/products-post.php';
 require_once __DIR__ . '/admin/hooks/filters.php';
 require_once __DIR__ . '/shortcode.php';
 
-// Install database
+/**
+ * Install database on plugin activation
+ */
 function etransactions_install_hook()
 {
     ProductDB::get_instance()->install();
     TransactionDB::get_instance()->install();
 }
-
 register_activation_hook(__FILE__, 'etransactions_install_hook');
 
 abstract class Constants
