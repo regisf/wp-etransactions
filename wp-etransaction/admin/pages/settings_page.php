@@ -7,11 +7,11 @@ if (isset($_GET['settings-updated'])) {
     add_settings_error('etransactions_messages', 'etransactions_message', __('Settings Saved', 'etransactions'), 'updated');
 }
 
-$options = get_option(Constants::OptionName);
-$accepted = isset($options[Constants::OptionAcceptedLandingPage]) ? $options[Constants::OptionAcceptedLandingPage] : null;
-$rejected = isset($options[Constants::OptionRejectedLandingPage]) ? $options[Constants::OptionRejectedLandingPage] : null;
-$canceled = isset($options[Constants::OptionCanceledLandingPage]) ? $options[Constants::OptionCanceledLandingPage] : null;
-$validation = isset($options[Constants::OptionValidationPage]) ? $options[Constants::OptionValidationPage] : null;
+$options = get_option(CA_Etransactions_Constants::OptionName);
+$accepted = isset($options[CA_Etransactions_Constants::OptionAcceptedLandingPage]) ? $options[CA_Etransactions_Constants::OptionAcceptedLandingPage] : null;
+$rejected = isset($options[CA_Etransactions_Constants::OptionRejectedLandingPage]) ? $options[CA_Etransactions_Constants::OptionRejectedLandingPage] : null;
+$canceled = isset($options[CA_Etransactions_Constants::OptionCanceledLandingPage]) ? $options[CA_Etransactions_Constants::OptionCanceledLandingPage] : null;
+$validation = isset($options[CA_Etransactions_Constants::OptionValidationPage]) ? $options[CA_Etransactions_Constants::OptionValidationPage] : null;
 
 if (!$accepted) {
     add_settings_error(
@@ -57,7 +57,7 @@ if (!$validation) {
     <form action="<?php echo admin_url('options.php'); ?>" method="post">
         <?php
         settings_fields('etransactions');
-        do_settings_sections(Constants::PageName);
+        do_settings_sections(CA_Etransactions_Constants::PageName);
         submit_button(__('Save', 'etransactions'));
         ?>
     </form>

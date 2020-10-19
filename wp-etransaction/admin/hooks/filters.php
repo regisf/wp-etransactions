@@ -10,17 +10,17 @@ add_filter('nonce_input', function () {
 });
 
 add_filter('etransaction_get_validation_address', function ($id) {
-    $options = get_option(Constants::OptionName);
-    $validation_page = $options[Constants::OptionValidationPage];
+    $options = get_option(CA_Etransactions_Constants::OptionName);
+    $validation_page = $options[CA_Etransactions_Constants::OptionValidationPage];
 
     $sep = strchr($validation_page, '?') !== false ? '&' : '?';
     return $validation_page . $sep . 'product=' . $id;
 });
 
 add_filter('etransaction_get_confirmation_address', function ($id) {
-    $options = get_option(Constants::OptionName);
-    if (isset($options[Constants::OptionConfirmationPage])) {
-        $validation_page = $options[Constants::OptionConfirmationPage];
+    $options = get_option(CA_Etransactions_Constants::OptionName);
+    if (isset($options[CA_Etransactions_Constants::OptionConfirmationPage])) {
+        $validation_page = $options[CA_Etransactions_Constants::OptionConfirmationPage];
 
         $sep = strchr($validation_page, '?') !== false ? '&' : '?';
         return $validation_page . $sep . 'product=' . $id;

@@ -6,11 +6,11 @@ if (!class_exists('WP_List_Table')) {
 }
 
 
-if (!class_exists('Product_List_Table')) {
-    class Product_List_Table extends WP_List_Table
+if (!class_exists('CA_Etransactions_Product_List_Table')) {
+    class CA_Etransactions_Product_List_Table extends WP_List_Table
     {
         /**
-         * @var ProductDB
+         * @var CA_Etransactions_ProductDB
          */
         private $productDB;
 

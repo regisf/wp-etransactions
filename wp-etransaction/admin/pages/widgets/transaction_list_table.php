@@ -6,8 +6,8 @@ if (!class_exists('WP_List_Table')) {
 }
 
 
-if (!class_exists('Transaction_List_Table')) {
-    class Transaction_List_Table extends WP_List_Table
+if (!class_exists('CA_Etransactions_Transaction_List_Table')) {
+    class CA_Etransactions_Transaction_List_Table extends WP_List_Table
     {
         /**
          * @var TransactionDB

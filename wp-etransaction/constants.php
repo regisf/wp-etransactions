@@ -4,8 +4,8 @@ define('CurrentVersion', 101);
 define('NonceName', 'etransactions_products');
 define('DbPrefix', 'etransactions_');
 
-if (!class_exists('Constants')) {
-    abstract class Constants
+if (!class_exists('CA_Etransactions_')) {
+    abstract class CA_Etransactions_Constants
     {
         const PluginPrefix = 'etransactions_';
 

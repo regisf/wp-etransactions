@@ -1,7 +1,7 @@
 <?php
 
-if (!class_exists('ProductDB')) {
-    class ProductDB
+if (!class_exists('CA_Etransactions_ProductDB')) {
+    class CA_Etransactions_ProductDB
     {
         const DbName = 'product';
 
@@ -19,7 +19,7 @@ if (!class_exists('ProductDB')) {
         public static function get_instance()
         {
             if (self::$instance === null) {
-                self::$instance = new ProductDB();
+                self::$instance = new CA_Etransactions_ProductDB();
             }
 
             return self::$instance;

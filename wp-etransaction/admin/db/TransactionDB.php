@@ -1,6 +1,6 @@
 <?php
-if (!class_exists('TransactionDB')) {
-    class TransactionDB
+if (!class_exists('CA_Etransactions_TransactionDB')) {
+    class CA_Etransactions_TransactionDB
     {
         const Initiated = 'initiated';
         const Accepted = 'accepted';
@@ -16,13 +16,13 @@ if (!class_exists('TransactionDB')) {
             $this->db = $wpdb;
 
             $this->db_order_name = $this->db->prefix . DbPrefix . self::DbName;
-            $this->db_product_name = $this->db->prefix . DbPrefix . ProductDB::DbName;
+            $this->db_product_name = $this->db->prefix . DbPrefix . CA_Etransactions_ProductDB::DbName;
         }
 
         public static function get_instance()
         {
             if (self::$instance === null) {
-                self::$instance = new TransactionDB();
+                self::$instance = new CA_Etransactions_TransactionDB();
             }
 
             return self::$instance;

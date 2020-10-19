@@ -13,7 +13,7 @@ add_action('admin_post_add_product', function () {
     $free_amount = isset($_REQUEST['free_amount']);
     $category = $_REQUEST['category'];
 
-    $productDb = ProductDB::get_instance();
+    $productDb = CA_Etransactions_ProductDB::get_instance();
     $productDb->insert($name, $price, $active, $free_amount, $category);
 
     redirect();
@@ -26,7 +26,7 @@ add_action('admin_post_delete_product', function () {
     }
 
     $id = $_REQUEST['product_ID'];
-    $productDb = ProductDB::get_instance();
+    $productDb = CA_Etransactions_ProductDB::get_instance();
     $result = $productDb->deleteById($id);
     if ($result === false) {
         echo "Pas marche: " . $productDb->pkoi();
@@ -49,7 +49,7 @@ add_action('admin_post_edit_product', function () {
     $free_amount = isset($_REQUEST['free_amount']);
     $category = $_REQUEST['category'];
 
-    $productDb = ProductDB::get_instance();
+    $productDb = CA_Etransactions_ProductDB::get_instance();
     $result = $productDb->update($product_id, $name, $price, $active, $free_amount, $category);
     if ($result === false) {
         echo "Pas marche: " . $productDb->pkoi();
