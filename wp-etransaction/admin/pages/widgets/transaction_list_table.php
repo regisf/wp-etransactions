@@ -1,13 +1,7 @@
 <?php
 
-
-if (!class_exists('WP_List_Table')) {
-    require_once(ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
-}
-
-
-if (!class_exists('CA_Etransactions_Transaction_List_Table')) {
-    class CA_Etransactions_Transaction_List_Table extends WP_List_Table
+if (!class_exists('ETransactions_Transaction_List_Table')) {
+    class ETransactions_Transaction_List_Table extends WP_List_Table
     {
         /**
          * @var TransactionDB
@@ -19,8 +13,8 @@ if (!class_exists('CA_Etransactions_Transaction_List_Table')) {
             $this->orderDb = $db;
 
             parent::__construct([
-                'singular' => __('Order', 'etransactions'),
-                'plural' => __('Orders', 'etransactions'),
+                'singular' => __('Order', ETransactions_Constants::EtransactionsTr),
+                'plural' => __('Orders', ETransactions_Constants::EtransactionsTr),
             ]);
 
             $columns = $this->get_columns();
@@ -74,7 +68,7 @@ if (!class_exists('CA_Etransactions_Transaction_List_Table')) {
 
         public function column_name($item)
         {
-            $nonce = wp_create_nonce(NonceName);
+            $nonce = wp_create_nonce(ETransactions_NonceName);
             $title = '<strong>' . $item['product'] . '</strong>';
 
             $actions = [
@@ -103,7 +97,7 @@ if (!class_exists('CA_Etransactions_Transaction_List_Table')) {
         public function get_bulk_actions()
         {
             return [
-                'bulk-delete' => __('Delete', 'etransactions'),
+                'bulk-delete' => __('Delete', ETransactions_Constants::EtransactionsTr),
             ];
         }
 
@@ -134,16 +128,14 @@ if (!class_exists('CA_Etransactions_Transaction_List_Table')) {
             $currentPage = $this->get_pagenum();
 
             $status = isset($_REQUEST['order_status']) ? $_REQUEST['order_status'] : 'all';
-            $data = $this->orderDb->get_orders($perPage, $currentPage, $status);
+            $this->items = $this->orderDb->get_orders($perPage, $currentPage, $status);
 
-            $totalItems = count($data);
+            $totalItems = $this->orderDb->get_all_count();
 
             $this->set_pagination_args([
                 'total_items' => $totalItems,
                 'per_page' => $perPage
             ]);
-
-            $this->items = $data;
         }
     }
 }

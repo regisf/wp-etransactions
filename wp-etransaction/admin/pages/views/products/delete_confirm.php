@@ -7,7 +7,7 @@ if (!current_user_can('manage_options')) {
     <form method="post" action="<?php echo admin_url('admin-post.php') ;?>">
         <input type="hidden" name="action" value="delete_product">
         <input type="hidden" name="product_ID" value="<?php echo $item->product_id; ?>">
-        <?php echo apply_filters('nonce_input', NonceName); ?>
+        <?php echo apply_filters('etransactions_nonce_input', ETransactions_NonceName); ?>
 
         Are you shoure you want to delete this product:
         <strong>&laquo;<?php echo $item->name; ?>&raquo;</strong>

@@ -13,20 +13,20 @@ add_action('admin_post_add_product', function () {
     $free_amount = isset($_REQUEST['free_amount']);
     $category = $_REQUEST['category'];
 
-    $productDb = CA_Etransactions_ProductDB::get_instance();
-    $productDb->insert($name, $price, $active, $free_amount, $category);
+    $productDb = ETransactions_ProductDB::get_instance();
+    $productDb->insert($name, $price, $active);
 
     redirect();
 });
 
 add_action('admin_post_delete_product', function () {
-    $valid = apply_filters('is_nonce_exists', $_REQUEST['_wpnonce']);
+    $valid = apply_filters('etransactions_is_nonce_exists', $_REQUEST['_wpnonce']);
     if (!$valid) {
         die('Integrity error');
     }
 
     $id = $_REQUEST['product_ID'];
-    $productDb = CA_Etransactions_ProductDB::get_instance();
+    $productDb = ETransactions_ProductDB::get_instance();
     $result = $productDb->deleteById($id);
     if ($result === false) {
         echo "Pas marche: " . $productDb->pkoi();
@@ -37,7 +37,7 @@ add_action('admin_post_delete_product', function () {
 });
 
 add_action('admin_post_edit_product', function () {
-    $valid = apply_filters('is_nonce_exists', $_REQUEST['_wpnonce']);
+    $valid = apply_filters('etransactions_is_nonce_exists', $_REQUEST['_wpnonce']);
     if (!$valid) {
         die('Integrity error');
     }
@@ -49,8 +49,8 @@ add_action('admin_post_edit_product', function () {
     $free_amount = isset($_REQUEST['free_amount']);
     $category = $_REQUEST['category'];
 
-    $productDb = CA_Etransactions_ProductDB::get_instance();
-    $result = $productDb->update($product_id, $name, $price, $active, $free_amount, $category);
+    $productDb = ETransactions_ProductDB::get_instance();
+    $result = $productDb->update($product_id, $name, $price, $active);
     if ($result === false) {
         echo "Pas marche: " . $productDb->pkoi();
         die();

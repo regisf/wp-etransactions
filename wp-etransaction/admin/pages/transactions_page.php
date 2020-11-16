@@ -3,11 +3,11 @@ if (!current_user_can('manage_options')) {
     return;
 }
 
-require_once __DIR__ . '/../db/TransactionDB.php';
+require_once __DIR__ . '/../db/ETransactions_TransactionDB.php';
 require_once __DIR__ . '/widgets/transaction_list_table.php';
 
-$transaction_db = CA_Etransactions_TransactionDB::get_instance();
-$order_list_table = new CA_Etransactions_Transaction_List_Table($transaction_db);
+$transaction_db = ETransactions_TransactionDB::get_instance();
+$order_list_table = new ETransactions_Transaction_List_Table($transaction_db);
 
 ?>
 

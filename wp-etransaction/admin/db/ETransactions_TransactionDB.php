@@ -1,6 +1,6 @@
 <?php
-if (!class_exists('CA_Etransactions_TransactionDB')) {
-    class CA_Etransactions_TransactionDB
+if (!class_exists('ETransactions_TransactionDB')) {
+    class ETransactions_TransactionDB
     {
         const Initiated = 'initiated';
         const Accepted = 'accepted';
@@ -15,14 +15,14 @@ if (!class_exists('CA_Etransactions_TransactionDB')) {
             global $wpdb;
             $this->db = $wpdb;
 
-            $this->db_order_name = $this->db->prefix . DbPrefix . self::DbName;
-            $this->db_product_name = $this->db->prefix . DbPrefix . CA_Etransactions_ProductDB::DbName;
+            $this->db_order_name = $this->db->prefix . ETransactions_DbPrefix . self::DbName;
+            $this->db_product_name = $this->db->prefix . ETransactions_DbPrefix . ETransactions_ProductDB::DbName;
         }
 
         public static function get_instance()
         {
             if (self::$instance === null) {
-                self::$instance = new CA_Etransactions_TransactionDB();
+                self::$instance = new ETransactions_TransactionDB();
             }
 
             return self::$instance;
@@ -135,6 +135,11 @@ if (!class_exists('CA_Etransactions_TransactionDB')) {
             return $this->set_transaction_state($ref, self::Accepted);
         }
 
+        /**
+         * Get the number of items
+         * 
+         * @return int The number of items 
+         */
         public function get_all_count()
         {
             return $this->db->get_var("SELECT COUNT(*) FROM {$this->db_order_name}");
@@ -160,6 +165,11 @@ if (!class_exists('CA_Etransactions_TransactionDB')) {
             return $this->get_count(self::Canceled);
         }
 
+        /**
+         * Get all canceled transaction
+         * 
+         * @return int The number of canceled transactions
+         */
         public function get_cancel_count()
         {
             return $this->get_count(self::Rejected);

@@ -6,11 +6,11 @@ if (!class_exists('WP_List_Table')) {
 }
 
 
-if (!class_exists('CA_Etransactions_Product_List_Table')) {
-    class CA_Etransactions_Product_List_Table extends WP_List_Table
+if (!class_exists('ETransactions_Product_List_Table')) {
+    class ETransactions_Product_List_Table extends WP_List_Table
     {
         /**
-         * @var CA_Etransactions_ProductDB
+         * @var ETransactions_ProductDB
          */
         private $productDB;
 
@@ -73,7 +73,7 @@ if (!class_exists('CA_Etransactions_Product_List_Table')) {
 
         public function column_name($item)
         {
-            $nonce = wp_create_nonce(NonceName);
+            $nonce = wp_create_nonce(ETransactions_NonceName);
 
             $title = '<strong>' . $item['name'] . '</strong>';
             $action = $item['active'] === '1' ? 'inactive' : 'active';
@@ -135,18 +135,17 @@ if (!class_exists('CA_Etransactions_Product_List_Table')) {
             $status = isset($_REQUEST['product_status']) ? $_REQUEST['product_status'] : 'all';
             $perPage = $this->get_items_per_page('records_per_page', 10);
             $currentPage = $this->get_pagenum();
-            $data = $this->productDB->get_products($perPage, $currentPage, $status);
 
-            $totalItems = count($data);
+            $this->items = $this->productDB->get_products($perPage, $currentPage, $status);
+            $totalItems = $this->productDB->get_count($status);
+
 
             $this->set_pagination_args(array(
                 'total_items' => $totalItems,
                 'per_page' => $perPage
             ));
 
-            $data = array_slice($data, (($currentPage - 1) * $perPage), $perPage);
             $this->_column_headers = array($columns, $hidden, $sortable);
-            $this->items = $data;
         }
 
         public function process_bulk_action()

@@ -37,7 +37,7 @@ if (!isset($category)) {
         <input type="hidden" name="product_ID"
                value="<?php echo $_REQUEST['product']; ?>"/>
     <?php endif; ?>
-    <?php echo apply_filters('nonce_input', NonceName); ?>
+    <?php echo apply_filters('etransactions_nonce_input', ETransactions_NonceName); ?>
 
     <table class="form-table" role="presentation">
         <tbody>

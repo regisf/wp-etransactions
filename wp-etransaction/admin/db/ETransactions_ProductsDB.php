@@ -1,7 +1,7 @@
 <?php
 
-if (!class_exists('CA_Etransactions_ProductDB')) {
-    class CA_Etransactions_ProductDB
+if (!class_exists('ETransactions_ProductDB')) {
+    class ETransactions_ProductDB
     {
         const DbName = 'product';
 
@@ -13,18 +13,22 @@ if (!class_exists('CA_Etransactions_ProductDB')) {
         {
             global $wpdb;
             $this->db = $wpdb;
-            $this->db_product_name = $this->db->prefix . DbPrefix . self::DbName;
+            $this->db_product_name = $this->db->prefix . ETransactions_DbPrefix . self::DbName;
         }
 
         public static function get_instance()
         {
             if (self::$instance === null) {
-                self::$instance = new CA_Etransactions_ProductDB();
+                self::$instance = new ETransactions_ProductDB();
             }
 
             return self::$instance;
         }
 
+        /**
+         * Get all product from the database regarding the page number and the 
+         * 
+         */
         public function get_products($per_page, $page_number, $status = 'all')
         {
             $query = "SELECT * FROM `{$this->db_product_name}`";
@@ -43,6 +47,27 @@ if (!class_exists('CA_Etransactions_ProductDB')) {
             $query .= " LIMIT $per_page" . ' OFFSET ' . ($page_number - 1) * $per_page;
 
             return $this->db->get_results($query, 'ARRAY_A');
+        }
+
+        public function get_actives() {
+            return $this->db->get_results("SELECT * FROM `{$this->db_product_name}` where active=true");
+        }
+
+        public function get_count($status)
+        {
+            switch ($status) {
+                case 'all':
+                    return $this->get_all_count();
+
+                case 'active':
+                    return $this->get_actives_count();
+
+                case 'inactive':
+                    return $this->get_inactives_count();
+
+                default:
+                    return 0;
+            }
         }
 
         public function install()
@@ -84,6 +109,10 @@ if (!class_exists('CA_Etransactions_ProductDB')) {
             return $this->db->get_var('SELECT COUNT(*) FROM `' . $this->db_product_name . '` WHERE `active`=false');
         }
 
+        /**
+         * Get all products count from database
+         * @returns The number of products
+         */
         public function get_all_count()
         {
             return $this->db->get_var('SELECT COUNT(*) FROM `' . $this->db_product_name . '`');

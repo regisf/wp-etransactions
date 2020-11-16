@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name: CA e-Transactions plugin
- * Plugin URI: https://github.com/regisf/wp-etransactions
- * Description: Simple e-Transaction wrapper for non eCommerce website that need a payment system.
- * Version: 1.0.2
- * Requires at least: 5.5
+ * Plugin Name: CA e-Transactions for Wordpress
+ * Plugin URI: https://github.com/regisf/wp-etransaction
+ * Description: Handle the basics with this plugin.
+ * Version: 1.0.3
+ * Requires at least: 5.2
  * Requires PHP: 7.2
  * Author: Régis FLORET
  * License: GPL v2 or later
@@ -13,10 +13,8 @@
  * Domain Path: /locales
  */
 
-define('CA_Etransactions_CurrentDbVersion', 101);
-
-define('CA_Etransactions_NonceName', 'etransactions_products');
-define('CA_Etransactions_DbPrefix', 'etransactions_');
+define('ETransactions_NonceName', 'etransactions_products');
+define('ETransactions_DbPrefix', 'etransactions_');
 
 include_once __DIR__ . '/constants.php';
 require_once __DIR__ . '/admin/init.php';
@@ -31,31 +29,30 @@ require_once __DIR__ . '/shortcode.php';
  */
 function etransactions_install_hook()
 {
-    CA_Etransactions_ProductDB::get_instance()->install();
-    TransactionDB::get_instance()->install();
+
+    ETransactions_ProductDB::get_instance()->install();
+    ETransactions_TransactionDB::get_instance()->install();
 }
 register_activation_hook(__FILE__, 'etransactions_install_hook');
 
-/**
- * Load all translations. Update the database regarding the current version
- */
-add_action('plugins_loaded', function() {
-    load_plugin_textdomain('etransactions', false, __DIR__ . '/locales');
-    ca_etransactions_update_database();
-});
 
-/**
- * Update the database on plugin loaded
- *
- * A problem occure when the database version is greater than the current
- * version
- */
-function ca_etransactions_update_database() {
-    $options = get_option(CA_Etransactions_Constants::OptionCurrentVersion, 0);
-    if ($options < CA_Etransactions_CurrentDbVersion) {
-        CA_Etransactions_ProductDB::get_instance()->upgrade();
-        update_option(CA_Etransactions_Constants::OptionCurrentVersion, CA_Etransactions_CurrentDbVersion);
-    } else {
-        add_option(CA_Etransactions_Constants::OptionCurrentVersion, CA_Etransactions_CurrentDbVersion);
-    }
+abstract class ETransactions_Constants
+{
+    const PluginPrefix = 'etransactions_';
+
+    // Translation key
+    const EtransactionsTr = 'etransactions';
+
+    // Options
+    const PageName = 'etransactions';
+    const OptionName = 'etransactions_options';
+    const OptionConfirmationPage = 'confirmation_page';
+    const OptionValidationPage = 'validation_page';
+    const OptionSiteID = 'site_id';
+    const OptionRangID = 'rang_id';
+    const OptionCustomerID = 'customer_id';
+    const OptionSecretKey = 'secret_key';
+    const OptionAcceptedLandingPage = 'accepted_page';
+    const OptionRejectedLandingPage = 'rejected_page';
+    const OptionCanceledLandingPage = 'canceled_page';
 }

@@ -2,11 +2,10 @@
 if (!current_user_can('manage_options')) {
     return;
 }
-require_once __DIR__ . '/../db/ProductsDB.php';
+require_once __DIR__ . '/../db/ETransactions_ProductsDB.php';
 require_once __DIR__ . '/widgets/product_list_table.php';
 
-$product_db = CA_Etransactions_ProductDB::get_instance();
-$product_list_table = new CA_Etransactions_Product_List_Table($product_db);
+$product_db = ETransactions_ProductDB::get_instance();
 $status = isset($_REQUEST['product_status']) ? $_REQUEST['product_status'] : 'all';
 $product_action = isset($_REQUEST['product_action']) ? $_REQUEST['product_action'] : '';
 
