@@ -19,8 +19,8 @@ if (!class_exists('ETransactions_Product_List_Table')) {
             $this->productDB = $db;
 
             parent::__construct([
-                'singular' => __('Product', 'etransactions'),
-                'plural' => __('Products', 'etransactions'),
+                'singular' => __('Product', 'etransaction-plugin'),
+                'plural' => __('Products', 'etransaction-plugin'),
             ]);
 
             $this->prepare_items();
@@ -33,7 +33,7 @@ if (!class_exists('ETransactions_Product_List_Table')) {
                 'name' => __('Name', 'etransaction'),
                 'active' => __('Active', 'etransaction'),
                 'category' => __('Category', 'etransaction'),
-                'free_amount' => __('Free Amount', 'etransactions'),
+                'free_amount' => __('Free Amount', 'etransaction-plugin'),
                 'price' => __('Price', 'etransaction'),
             );
 
@@ -61,7 +61,7 @@ if (!class_exists('ETransactions_Product_List_Table')) {
 
                 case 'active':
                 case 'free_amount':
-                    return $item[$column_name] === '1' ? __('Yes', 'etransactions') : __('No', 'etransactions');
+                    return $item[$column_name] === '1' ? __('Yes', 'etransaction-plugin') : __('No', 'etransaction-plugin');
 
                 case 'price':
                     return $item[$column_name] . '&nbsp;&euro;';
@@ -119,8 +119,8 @@ if (!class_exists('ETransactions_Product_List_Table')) {
         public function get_bulk_actions()
         {
             return [
-                'bulk-delete' => __('Delete', 'etransactions'),
-                'bulk-toggle-active' => __('Toggle Active', 'etransactions')
+                'bulk-delete' => __('Delete', 'etransaction-plugin'),
+                'bulk-toggle-active' => __('Toggle Active', 'etransaction-plugin')
             ];
         }
 

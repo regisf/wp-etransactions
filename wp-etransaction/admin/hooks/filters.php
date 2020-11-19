@@ -10,21 +10,21 @@ add_filter('etransactions_nonce_input', function () {
 });
 
 add_filter('etransaction_get_validation_address', function ($id) {
-    $options = get_option(ETransactions_Constants::OptionName);
-    $validation_page = $options[ETransactions_Constants::OptionValidationPage];
+    $options = get_option(ETransactions_OptionName);
+    $validation_page = $options[ETransactions_OptionValidationPage];
 
     $sep = strchr($validation_page, '?') !== false ? '&' : '?';
     return $validation_page . $sep . 'product=' . $id;
 });
 
 add_filter('etransaction_get_confirmation_address', function ($id) {
-    $options = get_option(ETransactions_Constants::OptionName);
-    if (isset($options[ETransactions_Constants::OptionConfirmationPage])) {
-        $validation_page = $options[ETransactions_Constants::OptionConfirmationPage];
+    $options = get_option(ETransactions_OptionName);
+    if (isset($options[ETransactions_OptionConfirmationPage])) {
+        $validation_page = $options[ETransactions_OptionConfirmationPage];
 
         $sep = strchr($validation_page, '?') !== false ? '&' : '?';
         return $validation_page . $sep . 'product=' . $id;
     }
 
-    return __('Warning: Confirmation page is not set', ETransactions_Constants::EtransactionsTr);
+    return __('Warning: Confirmation page is not set', 'etransaction-plugin');
 });

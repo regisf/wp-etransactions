@@ -12,12 +12,12 @@ add_shortcode('etransactions-products-list', function ($attrs = [], $content = '
 
     if (count($actives) === 0) {
         return '<div class="etransactions-product-empty">' .
-            __('No products active to display', ETransactions_Constants::EtransactionsTr) .
+            __('No products active to display', 'etransaction-plugin') .
             '</div>';
     }
 
     if (strlen($content) === 0) {
-        $content = __('Order', ETransactions_Constants::EtransactionsTr);
+        $content = __('Order', 'etransaction-plugin');
     }
 
     foreach ($actives as $product) {
@@ -60,7 +60,7 @@ add_shortcode('etransactions-confirmation-page', function ($attrs = [], $content
     $str = $preprod ? '<div class="etransactions-warning">Caution ! You are in test mode </div>' : '';
     if ($attrs['no-label'] === false) {
         $str .= '<p class="etransactions-product-desc">
-        <span class="etransactions-product-name">' . __('Product:', ETransactions_Constants::EtransactionsTr) . ' ' . $product->name . '</span>
+        <span class="etransactions-product-name">' . __('Product:', 'etransaction-plugin') . ' ' . $product->name . '</span>
         <span class="etransactions-product-price">' . $product->price . '&nbsp;&euro;</span>
         </p>';
     }
@@ -72,14 +72,14 @@ add_shortcode('etransactions-confirmation-page', function ($attrs = [], $content
     if ($product->free_amount === '1') {
         $str .=
             '<span class="etransactions-free-amount">
-                <label for="id_free_amount">' . __("Amount you want to give to the product", 'etransactions') . '</label>
+                <label for="id_free_amount">' . __("Amount you want to give to the product", 'etransaction-plugin') . '</label>
                 <input type="number" id="id_free_amount" step="0.01" name="free_amount" value="' . $product->price . '"/>
             </span>';
     }
 
     $str .= HolderValue::emptyForm() .
         '<p class="etransactions-product-submit">
-                <input type="submit" value="' . __('Confirm payement', ETransactions_Constants::EtransactionsTr) . '" >
+                <input type="submit" value="' . __('Confirm payement', 'etransaction-plugin') . '" >
             </p>
         </form>';
 
@@ -91,13 +91,13 @@ add_shortcode('etransactions-validation-page', function ($attrs = [], $content =
         return '<p>Error: No product id set</p>';
     }
 
-    $options = get_option(ETransactions_Constants::OptionName);
-    if (!(isset($options[ETransactions_Constants::OptionSiteID])
-        && isset($options[ETransactions_Constants::OptionRangID])
-        && isset($options[ETransactions_Constants::OptionCustomerID])
-        && isset($options[ETransactions_Constants::OptionSecretKey]))) {
+    $options = get_option(ETransactions_OptionName);
+    if (!(isset($options[ETransactions_OptionSiteID])
+        && isset($options[ETransactions_OptionRangID])
+        && isset($options[ETransactions_OptionCustomerID])
+        && isset($options[ETransactions_OptionSecretKey]))) {
         return '<div class="etransactions-warning">' .
-            __('Warning: One or more option is not set. No transaction could be executed.', ETransactions_Constants::EtransactionsTr) .
+            __('Warning: One or more option is not set. No transaction could be executed.', 'etransaction-plugin') .
             '</div>';
     }
 
@@ -115,10 +115,10 @@ add_shortcode('etransactions-validation-page', function ($attrs = [], $content =
     $preprod = isset($options['test_id']);
     $etransaction = new ETransaction($preprod);
     $data = TransactionData::fromData([
-        'site' => $options[ETransactions_Constants::OptionSiteID],
-        'rang' => $options[ETransactions_Constants::OptionRangID],
-        'id' => $options[ETransactions_Constants::OptionCustomerID],
-        'secret' => $options[ETransactions_Constants::OptionSecretKey],
+        'site' => $options[ETransactions_OptionSiteID],
+        'rang' => $options[ETransactions_OptionRangID],
+        'id' => $options[ETransactions_OptionCustomerID],
+        'secret' => $options[ETransactions_OptionSecretKey],
 
         'command' => $result->order_ref,
         'total' => $product->free_amount !== '1' ? (float)$product->price : (float)sanitize_text_field($_REQUEST['free_amount']),
@@ -126,17 +126,17 @@ add_shortcode('etransactions-validation-page', function ($attrs = [], $content =
         'callbacks' => []
     ]);
 
-    if (isset($options[ETransactions_Constants::OptionAcceptedLandingPage])
-        && $options[ETransactions_Constants::OptionAcceptedLandingPage] !== '') {
-        $data->getCallbacks()->setDoneCallback($options[ETransactions_Constants::OptionAcceptedLandingPage]);
+    if (isset($options[ETransactions_OptionAcceptedLandingPage])
+        && $options[ETransactions_OptionAcceptedLandingPage] !== '') {
+        $data->getCallbacks()->setDoneCallback($options[ETransactions_OptionAcceptedLandingPage]);
     }
 
-    if (isset($options[ETransactions_Constants::OptionRejectedLandingPage]) && $options[ETransactions_Constants::OptionRejectedLandingPage] !== '') {
-        $data->getCallbacks()->setDeniedCallback($options[ETransactions_Constants::OptionRejectedLandingPage]);
+    if (isset($options[ETransactions_OptionRejectedLandingPage]) && $options[ETransactions_OptionRejectedLandingPage] !== '') {
+        $data->getCallbacks()->setDeniedCallback($options[ETransactions_OptionRejectedLandingPage]);
     }
 
-    if (isset($options[ETransactions_Constants::OptionCanceledLandingPage]) && $options[ETransactions_Constants::OptionCanceledLandingPage] !== '') {
-        $data->getCallbacks()->setCanceledCallback($options[ETransactions_Constants::OptionCanceledLandingPage]);
+    if (isset($options[ETransactions_OptionCanceledLandingPage]) && $options[ETransactions_OptionCanceledLandingPage] !== '') {
+        $data->getCallbacks()->setCanceledCallback($options[ETransactions_OptionCanceledLandingPage]);
 
     }
 
@@ -147,7 +147,7 @@ add_shortcode('etransactions-validation-page', function ($attrs = [], $content =
 
     if ($attrs['no-label'] === false) {
         $str .= '<p class="etransactions-product-desc">
-            <span class="etransactions-product-name">' . __('Product:', 'etransactions') . ' ' . stripcslashes($product->name) . '</span>
+            <span class="etransactions-product-name">' . __('Product:', 'etransaction-plugin') . ' ' . stripcslashes($product->name) . '</span>
         <span class="etransactions-product-price">';
 
         if ($product->free_amount === true) {
@@ -160,7 +160,7 @@ add_shortcode('etransactions-validation-page', function ($attrs = [], $content =
 
     $str .= $etransaction->getTransactionForm() .
         '<p class="etransactions-product-submit">
-            <input type="submit" value="' . __('Proceed to payement', ETransactions_Constants::EtransactionsTr) . '" >
+            <input type="submit" value="' . __('Proceed to payement', 'etransaction-plugin') . '" >
         </p>
     </form>';
 

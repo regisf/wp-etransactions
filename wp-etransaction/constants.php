@@ -1,26 +1,17 @@
 <?php
 
-define('CurrentVersion', 101);
-define('NonceName', 'etransactions_products');
-define('DbPrefix', 'etransactions_');
+define('ETransactions_NonceName', 'etransactions_products');
+define('ETransactions_DbPrefix', 'etransactions_');
+define('ETransactions_PluginPrefix', 'etransaction_');
+define('ETransactions_PageName', 'etransactions');
+define('ETransactions_OptionName', 'etransactions_options');
+define('ETransactions_OptionConfirmationPage', 'confirmation_page');
+define('ETransactions_OptionValidationPage', 'validation_page');
+define('ETransactions_OptionSiteID', 'site_id');
+define('ETransactions_OptionRangID', 'rang_id');
+define('ETransactions_OptionCustomerID', 'customer_id');
+define('ETransactions_OptionSecretKey', 'secret_key');
+define('ETransactions_OptionAcceptedLandingPage', 'accepted_page');
+define('ETransactions_OptionRejectedLandingPage', 'rejected_page');
+define('ETransactions_OptionCanceledLandingPage', 'canceled_page');
 
-if (!class_exists('CA_Etransactions_')) {
-    abstract class CA_Etransactions_Constants
-    {
-        const PluginPrefix = 'etransactions_';
-
-        // Options
-        const PageName = 'etransactions';
-        const OptionName = 'etransactions_options';
-        const OptionConfirmationPage = 'confirmation_page';
-        const OptionValidationPage = 'validation_page';
-        const OptionSiteID = 'site_id';
-        const OptionRangID = 'rang_id';
-        const OptionCustomerID = 'customer_id';
-        const OptionSecretKey = 'secret_key';
-        const OptionAcceptedLandingPage = 'accepted_page';
-        const OptionRejectedLandingPage = 'rejected_page';
-        const OptionCanceledLandingPage = 'canceled_page';
-        const OptionCurrentVersion = self::PluginPrefix . 'current_version';
-    }
-}

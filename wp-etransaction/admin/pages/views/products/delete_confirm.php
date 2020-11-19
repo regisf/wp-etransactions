@@ -14,7 +14,7 @@ if (!current_user_can('manage_options')) {
         <p style="text-align: right">
 
             <a class="button" href="<?php echo admin_url('admin.php') ;?>?page=etransactions_products">No</a>
-            <input type="submit" value="<?php _e('Yes', 'etransactions'); ?>" class="button button-primary"/>
+            <input type="submit" value="<?php _e('Yes', 'etransaction-plugin'); ?>" class="button button-primary"/>
         </p>
     </form>
 </div>

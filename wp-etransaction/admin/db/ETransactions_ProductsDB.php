@@ -27,7 +27,6 @@ if (!class_exists('ETransactions_ProductDB')) {
 
         /**
          * Get all product from the database regarding the page number and the 
-         * 
          */
         public function get_products($per_page, $page_number, $status = 'all')
         {
