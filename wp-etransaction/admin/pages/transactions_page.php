@@ -19,28 +19,28 @@ $order_list_table = new ETransactions_Transaction_List_Table($transaction_db);
     <ul class="subsubsub">
         <li class="all">
             <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_transactions">
-                <?php _e("All", 'etransaction-plugin'); ?>
+                <?php _e("All", ETransactions_Tr); ?>
                 (<?php echo $transaction_db->get_all_count(); ?>)
             </a>
         </li>
         |
         <li class="successful">
             <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_transactions&order_status=accepted">
-                <?php _e("Successful", 'etransaction-plugin'); ?>
+                <?php _e("Successful", ETransactions_Tr); ?>
                 (<?php echo $transaction_db->get_success_count(); ?>)
             </a>
         </li>
         |
         <li class="reject">
             <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_transactions&order_status=rejected">
-                <?php _e("Rejected", 'etransaction-plugin'); ?>
+                <?php _e("Rejected", ETransactions_Tr); ?>
                 (<?php echo $transaction_db->get_reject_count(); ?>)
             </a>
         </li>
         |
         <li class="cancel">
             <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_transactions&order_status=canceled">
-                <?php _e("Canceled", 'etransaction-plugin'); ?>
+                <?php _e("Canceled", ETransactions_Tr); ?>
                 (<?php echo $transaction_db->get_cancel_count(); ?>)
             </a>
         </li>

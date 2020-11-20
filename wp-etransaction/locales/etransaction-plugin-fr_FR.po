@@ -8,14 +8,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-11-19 19:15+0000\n"
-"PO-Revision-Date: 2020-11-19 19:15+0000\n"
-"X-Generator: Loco https://localise.biz/\n"
+"POT-Creation-Date: 2020-11-20 16:24+0000\n"
+"PO-Revision-Date: 2020-11-20 17:55+0100\n"
+"X-Generator: Poedit 2.3\n"
 "X-Domain: etransaction-plugin\n"
 "Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Language: fr_FR\n"
-"X-Loco-Version: 2.4.4; wp-5.5.3"
+"X-Loco-Version: 2.4.4; wp-5.5.3\n"
 
 #: shortcode.php:15
 msgid "No products active to display"
@@ -23,7 +23,7 @@ msgstr "Il n'y a pas de produits actifs à afficher"
 
 #: shortcode.php:20 admin/pages/widgets/transaction_list_table.php:16
 msgid "Order"
-msgstr "Command"
+msgstr "Commande"
 
 #: shortcode.php:63 shortcode.php:150
 msgid "Product:"
@@ -50,151 +50,167 @@ msgstr "Procédez au paiement"
 
 #: admin/init.php:8 admin/init.php:15
 msgid "Test mode"
-msgstr ""
+msgstr "Mode test"
 
 #: admin/init.php:21
 msgid "to test mode and you will not be able to receive real payement.</span>"
 msgstr ""
+"<span style=\"color: red\">En selectionnant cette option, vous allez "
+"basculer votre système de paiement en mode test et vous ne serez plus à même "
+"de recevoir des paiements.</span>"
 
 #: admin/init.php:28
 msgid "HMAC Preprod Key"
-msgstr ""
+msgstr "Clef HMAC de Préprod"
 
 #: admin/init.php:34
 msgid ""
 "The secret key generated into the preprod-guest.etransaction.fr/Vision "
 "backoffice"
 msgstr ""
+"La clef secrète générée sur le  backoffice preprod-guest.etransaction.fr/"
+"Vision"
 
 #. ID
 #: admin/init.php:40
 msgid "Credentials"
-msgstr ""
+msgstr "Identifiants"
 
 #: admin/init.php:47
 msgid "Site Number"
-msgstr ""
+msgstr "Site numéro"
 
 #: admin/init.php:54
 msgid "The Site ID given by the e-Transaction support (7 digits max)"
-msgstr ""
+msgstr "Le Site ID donné par le support e-Transaction (7 chiffres maximum)"
 
 #: admin/init.php:60
 msgid "Rang"
-msgstr ""
+msgstr "Rang"
 
 #: admin/init.php:67
 msgid "The Rang ID given by the e-Transaction support (3 digits max)"
-msgstr ""
+msgstr "Le Rang donné par le support e-Transaction (3 chiffres max)"
 
 #: admin/init.php:73
 msgid "Customer"
-msgstr ""
+msgstr "Client"
 
 #: admin/init.php:80
 msgid ""
 "Your customer ID given by the e-Transaction support (from 1 to 9 digitis)"
 msgstr ""
+"Votre numéro de client tel que donné par le support e-Transaction (de 1 à 9 "
+"chiffres)"
 
 #: admin/init.php:86
 msgid "Secret Key"
-msgstr ""
+msgstr "Clef secrète"
 
 #: admin/init.php:92
 msgid "The secret key generated into the etransaction.fr backoffice"
 msgstr ""
+"La clef secrète générée sur le  backoffice preprod-guest.etransaction.fr/"
+"Vision"
 
 #: admin/init.php:98
-msgid "Payement validation pages"
-msgstr ""
+msgid "Payement validation page"
+msgstr "Pages de validation de paiement"
 
 #: admin/init.php:105
-msgid "Confirmation pages"
-msgstr ""
+msgid "Confirmation page"
+msgstr "Page de confirmation"
 
 #: admin/init.php:111
-msgid "Confirmation pages url"
-msgstr ""
+msgid "Confirmation page url"
+msgstr "Url de la page de confirmation"
 
 #: admin/init.php:112
-msgid "The URL of the confirmation pages."
-msgstr ""
+msgid "The URL of the confirmation page."
+msgstr "L'URL de la page de confirmation."
 
 #: admin/init.php:118
-msgid "Validation pages"
-msgstr ""
+msgid "Validation page"
+msgstr "Page de validation"
 
 #: admin/init.php:124
-msgid "Validation pages url"
-msgstr ""
+msgid "Validation page url"
+msgstr "URL de la page de validation"
 
 #: admin/init.php:125
-msgid "The URL of the validation pages."
-msgstr ""
+msgid "The URL of the validation page."
+msgstr "L'URL de la page de validation."
 
 #. ID
 #: admin/init.php:131
-msgid "Callbacks pages"
-msgstr ""
+msgid "Callbacks page"
+msgstr "Page de retour"
 
 #: admin/init.php:138
-msgid "Accepted pages"
-msgstr ""
+msgid "Accepted page"
+msgstr "Pages d'acception"
 
 #: admin/init.php:144
-msgid "URL for the accepted pages"
-msgstr ""
+msgid "URL for the accepted page"
+msgstr "Url de la page de confirmation"
 
 #: admin/init.php:145
-msgid "The pages where the user lands when the payement is accepted."
-msgstr ""
+msgid "The page where the user lands when the payement is accepted."
+msgstr "La page où l'utilisateur arrive quand le paiement a été accepté."
 
 #: admin/init.php:151
-msgid "Rejected pages"
-msgstr ""
+msgid "Rejected page"
+msgstr "Page de rejet"
 
 #: admin/init.php:157
-msgid "URL for the rejected pages"
-msgstr ""
+msgid "URL for the rejected page"
+msgstr "Url de la page de rejet"
 
 #: admin/init.php:158
 msgid ""
-"The pages where the user lands when the payement is rejected by the bank."
-msgstr ""
+"The page where the user lands when the payement is rejected by the bank."
+msgstr "La page où l'utilisateur arrive quand le paiement a été accepté."
 
 #: admin/init.php:164
-msgid "Canceled pages"
-msgstr ""
+msgid "Canceled page"
+msgstr "Page d'annulation"
 
 #: admin/init.php:170
-msgid "URL for the canceled pages"
-msgstr ""
+msgid "URL for the canceled page"
+msgstr "L'URL de la page d'annulation"
 
 #: admin/init.php:171
-msgid "The pages where the user lands when the payement is canceled."
-msgstr ""
+msgid "The page where the user lands when the payement is canceled."
+msgstr "La page où l'utilisateur arrive quand le paiement a été annulé."
 
 #: admin/init.php:182
 msgid "Fill the IDs you received from the e-Transaction support. "
 msgstr ""
+"Remplir avec l'identifiant que vous avec reçu du support e-Transactions. "
 
 #: admin/init.php:236
 msgid ""
 "Switching in test mode (using preprod servers). No transaction will be "
 "effective."
 msgstr ""
+"Basculer en mode test (en utilisant les serveurs de tests). Aucune "
+"transaction se sera effective."
 
 #: admin/init.php:247
 msgid ""
-"The etransaction needs three pages for managing the CA e-Transaction service."
-" The user lands on this pages in these cases."
+"The etransaction needs three pages for managing the CA e-Transaction "
+"service. The user lands on this page in these cases."
 msgstr ""
+"Le module e-Transaction a besoin de trois pages pour gérer le service CA e-"
+"Transaction. Les utilisateurs arrivent sur cette page dans les trois cas."
 
 #: admin/init.php:258
 msgid ""
-"The etransaction plugin need a validation pages. The user enter here its "
+"The etransaction plugin need a validation page. The user enter here its "
 "email address and give it consenting for the transaction"
 msgstr ""
+"Le module e-Transaction a besoin de la page de validation. Les utilisateurs "
+"entrent leur adresse email et donnent leur consentement pour la transaction"
 
 #: admin/hooks/filters.php:29
 msgid "Warning: Confirmation page is not set"
@@ -220,30 +236,37 @@ msgstr "Annulée"
 
 #: admin/pages/settings_page.php:7
 msgid "Settings Saved"
-msgstr ""
+msgstr "Configuration sauvegardée"
 
 #: admin/pages/settings_page.php:20
 msgid ""
 "The payement accepted landing page is not created. You should create it."
 msgstr ""
+"La page d'acceptation du paiement n'est pas encore crée. Vous devriez le "
+"faire."
 
 #: admin/pages/settings_page.php:29
 msgid ""
 "The payement rejected landing page is not created. You should create it."
 msgstr ""
+"La page de rejet du paiement n'est pas encore crée. Vous devriez le faire."
 
 #: admin/pages/settings_page.php:38
 msgid ""
 "The payement canceled landing page is not created. You should create it."
 msgstr ""
+"La page d'annulation du paiement n'est pas encore crée. Vous devriez le "
+"faire."
 
 #: admin/pages/settings_page.php:47
 msgid "The payement validation page is not created. You should create it."
 msgstr ""
+"La page de validation du paiement n'est pas encore crée. Vous devriez le "
+"faire."
 
 #: admin/pages/settings_page.php:61
 msgid "Save"
-msgstr ""
+msgstr "Sauvegarder"
 
 #: admin/pages/widgets/transaction_list_table.php:17
 msgid "Orders"
@@ -312,6 +335,8 @@ msgstr ""
 #. Description of the plugin
 msgid "Simple products management and paiement using eTransactions (Paybox)"
 msgstr ""
+"Module de gestion des paiements et de produit utilisant eTransactions "
+"(Paybox)"
 
 #. URI of the plugin
 msgid "https://github.com/regisf/wp-etransaction"

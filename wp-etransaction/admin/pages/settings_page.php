@@ -4,7 +4,7 @@ if (!current_user_can('manage_options')) {
 }
 
 if (isset($_GET['settings-updated'])) {
-    add_settings_error('etransactions_messages', 'etransactions_message', __('Settings Saved', 'etransaction-plugin'), 'updated');
+    add_settings_error('etransactions_messages', 'etransactions_message', __('Settings Saved', ETransactions_Tr), 'updated');
 }
 
 $options = get_option(ETransactions_OptionName);
@@ -17,7 +17,7 @@ if (!$accepted) {
     add_settings_error(
         'etransactions',
         'missing-pages',
-        __('The payement accepted landing page is not created. You should create it.', 'etransaction-plugin'),
+        __('The payement accepted landing page is not created. You should create it.', ETransactions_Tr),
         'error'
     );
 }
@@ -26,7 +26,7 @@ if (!$rejected) {
     add_settings_error(
         'etransactions',
         'missing-pages',
-        __('The payement rejected landing page is not created. You should create it.', 'etransaction-plugin'),
+        __('The payement rejected landing page is not created. You should create it.', ETransactions_Tr),
         'error'
     );
 }
@@ -35,7 +35,7 @@ if (!$canceled) {
     add_settings_error(
         'etransactions',
         'missing-pages',
-        __('The payement canceled landing page is not created. You should create it.', 'etransaction-plugin'),
+        __('The payement canceled landing page is not created. You should create it.', ETransactions_Tr),
         'error'
     );
 }
@@ -44,7 +44,7 @@ if (!$validation) {
     add_settings_error(
         'etransactions',
         'missing-pages',
-        __('The payement validation page is not created. You should create it.', 'etransaction-plugin'),
+        __('The payement validation page is not created. You should create it.', ETransactions_Tr),
         'error'
     );
 }
@@ -58,7 +58,7 @@ if (!$validation) {
         <?php
         settings_fields('etransactions');
         do_settings_sections(ETransactions_PageName);
-        submit_button(__('Save', 'etransaction-plugin'));
+        submit_button(__('Save', ETransactions_Tr));
         ?>
     </form>
 

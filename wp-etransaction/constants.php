@@ -1,5 +1,6 @@
 <?php
 
+define('ETransactions_Tr', 'etransaction-plugin');
 define('ETransactions_NonceName', 'etransactions_products');
 define('ETransactions_DbPrefix', 'etransactions_');
 define('ETransactions_PluginPrefix', 'etransaction_');

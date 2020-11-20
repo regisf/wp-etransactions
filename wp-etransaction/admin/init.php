@@ -5,170 +5,170 @@ add_action('admin_init', function () {
 
     add_settings_section(
         'etransactions_section_debug',
-        __('Test mode', 'etransaction-plugin'),
+        __('Test mode', ETransactions_Tr),
         'etransaction_test_mode_page',
         ETransactions_PageName
     );
 
     add_settings_field(
         'etransactions_test_mode_id',
-        __('Test mode', 'etransaction-plugin'),
+        __('Test mode', ETransactions_Tr),
         'etransactions_checkbox_cb',
         ETransactions_PageName,
         'etransactions_section_debug',
         [
             'label_for' => 'test_id',
             'help' => __('<span style="color: red">By checking this option, you will switch you payement system into ' .
-                'to test mode and you will not be able to receive real payement.</span>', 'etransaction-plugin'),
+                'to test mode and you will not be able to receive real payement.</span>', ETransactions_Tr),
         ]
     );
 
     add_settings_field(
         'etransactions_hmac_preprod_key',
-        __('HMAC Preprod Key', 'etransaction-plugin'),
+        __('HMAC Preprod Key', ETransactions_Tr),
         'etransactions_field_cb',
         ETransactions_PageName,
         'etransactions_section_debug',
         [
             'label_for' => 'preprod_key',
-            'help' => __('The secret key generated into the preprod-guest.etransaction.fr/Vision backoffice', 'etransaction-plugin')
+            'help' => __('The secret key generated into the preprod-guest.etransaction.fr/Vision backoffice', ETransactions_Tr)
         ]
     );
 
     add_settings_section(
-        'etransactions_section_settings',               // ID
-        __('Credentials', 'etransaction-plugin'), // Title
-        'etransactions_settings_callback',         // Callback
+        'etransactions_section_settings',
+        __('Credentials', ETransactions_Tr),
+        'etransactions_settings_callback',
         ETransactions_PageName
     );
 
     add_settings_field(
         'etransactions_site_id',
-        __('Site Number', 'etransaction-plugin'),
+        __('Site Number', ETransactions_Tr),
         'etransactions_field_cb',
         ETransactions_PageName,
         'etransactions_section_settings',
         [
             'label_for' => 'site_id',
             'maxlength' => '7',
-            'help' => __('The Site ID given by the e-Transaction support (7 digits max)', 'etransaction-plugin')
+            'help' => __('The Site ID given by the e-Transaction support (7 digits max)', ETransactions_Tr)
         ]
     );
 
     add_settings_field(
         'etransactions_rang_id',
-        __('Rang', 'etransaction-plugin'),
+        __('Rang', ETransactions_Tr),
         'etransactions_field_cb',
         ETransactions_PageName,
         'etransactions_section_settings',
         [
             'label_for' => 'rang_id',
             'maxlength' => '3',
-            'help' => __('The Rang ID given by the e-Transaction support (3 digits max)', 'etransaction-plugin')
+            'help' => __('The Rang ID given by the e-Transaction support (3 digits max)', ETransactions_Tr)
         ]
     );
 
     add_settings_field(
         'etransactions_customer_id',
-        __('Customer', 'etransaction-plugin'),
+        __('Customer', ETransactions_Tr),
         'etransactions_field_cb',
         ETransactions_PageName,
         'etransactions_section_settings',
         [
             'label_for' => 'customer_id',
             'maxlength' => '9',
-            'help' => __('Your customer ID given by the e-Transaction support (from 1 to 9 digitis)', 'etransaction-plugin')
+            'help' => __('Your customer ID given by the e-Transaction support (from 1 to 9 digitis)', ETransactions_Tr)
         ]
     );
 
     add_settings_field(
         'etransactions_secret_key',
-        __('Secret Key', 'etransaction-plugin'),
+        __('Secret Key', ETransactions_Tr),
         'etransactions_field_cb',
         ETransactions_PageName,
         'etransactions_section_settings',
         [
             'label_for' => 'secret_key',
-            'help' => __('The secret key generated into the etransaction.fr backoffice', 'etransaction-plugin')
+            'help' => __('The secret key generated into the etransaction.fr backoffice', ETransactions_Tr)
         ]
     );
 
     add_settings_section(
         'etransactions_section_validate',
-        __('Payement validation pages', 'etransaction-plugin'),
+        __('Payement validation page', ETransactions_Tr),
         'etransactions_validate_page',
         ETransactions_PageName
     );
 
     add_settings_field(
         'etransactions_confirmation_page',
-        __('Confirmation pages', 'etransaction-plugin'),
+        __('Confirmation page', ETransactions_Tr),
         'etransactions_field_cb',
         ETransactions_PageName,
         'etransactions_section_validate',
         [
             'label_for' => ETransactions_OptionConfirmationPage,
-            'placeholder' => __('Confirmation pages url', 'etransaction-plugin'),
-            'help' => __('The URL of the confirmation pages.', 'etransaction-plugin')
+            'placeholder' => __('Confirmation page url', ETransactions_Tr),
+            'help' => __('The URL of the confirmation page.', ETransactions_Tr)
         ]
     );
 
     add_settings_field(
         'etransactions_validation_page',
-        __('Validation pages', 'etransaction-plugin'),
+        __('Validation page', ETransactions_Tr),
         'etransactions_field_cb',
         ETransactions_PageName,
         'etransactions_section_validate',
         [
             'label_for' => 'validation_page',
-            'placeholder' => __('Validation pages url', 'etransaction-plugin'),
-            'help' => __('The URL of the validation pages.', 'etransaction-plugin')
+            'placeholder' => __('Validation page url', ETransactions_Tr),
+            'help' => __('The URL of the validation page.', ETransactions_Tr)
         ]
     );
 
     add_settings_section(
         'etransactions_section_callbacks',               // ID
-        __('Callbacks pages', 'etransaction-plugin'), // Title
+        __('Callbacks page', ETransactions_Tr), // Title
         'etransactions_callback_pages',         // Callback
         ETransactions_PageName
     );
 
     add_settings_field(
         'etransactions_accepted_key',
-        __('Accepted pages', 'etransaction-plugin'),
+        __('Accepted page', ETransactions_Tr),
         'etransactions_field_cb',
         ETransactions_PageName,
         'etransactions_section_callbacks',
         [
             'label_for' => ETransactions_OptionAcceptedLandingPage,
-            'placeholder' => __('URL for the accepted pages', 'etransaction-plugin'),
-            'help' => __('The pages where the user lands when the payement is accepted.', 'etransaction-plugin')
+            'placeholder' => __('URL for the accepted page', ETransactions_Tr),
+            'help' => __('The page where the user lands when the payement is accepted.', ETransactions_Tr)
         ]
     );
 
     add_settings_field(
         ETransactions_PluginPrefix . ETransactions_OptionRejectedLandingPage,
-        __('Rejected pages', 'etransaction-plugin'),
+        __('Rejected page', ETransactions_Tr),
         'etransactions_field_cb',
         ETransactions_PageName,
         'etransactions_section_callbacks',
         [
             'label_for' => ETransactions_OptionRejectedLandingPage,
-            'placeholder' => __('URL for the rejected pages', 'etransaction-plugin'),
-            'help' => __('The pages where the user lands when the payement is rejected by the bank.', 'etransaction-plugin')
+            'placeholder' => __('URL for the rejected page', ETransactions_Tr),
+            'help' => __('The page where the user lands when the payement is rejected by the bank.', ETransactions_Tr)
         ]
     );
 
     add_settings_field(
         'etransactions_canceled_key',
-        __('Canceled pages', 'etransaction-plugin'),
+        __('Canceled page', ETransactions_Tr),
         'etransactions_field_cb',
         ETransactions_PageName,
         'etransactions_section_callbacks',
         [
             'label_for' => ETransactions_OptionCanceledLandingPage,
-            'placeholder' => __('URL for the canceled pages', 'etransaction-plugin'),
-            'help' => __('The pages where the user lands when the payement is canceled.', 'etransaction-plugin')
+            'placeholder' => __('URL for the canceled page', ETransactions_Tr),
+            'help' => __('The page where the user lands when the payement is canceled.', ETransactions_Tr)
         ]
     );
 
@@ -179,7 +179,7 @@ add_action('admin_init', function () {
     {
         ?>
         <p id="<?php echo esc_attr($args['id']); ?>">
-            <?php esc_html_e('Fill the IDs you received from the e-Transaction support. ', 'etransaction-plugin'); ?>
+            <?php esc_html_e('Fill the IDs you received from the e-Transaction support. ', ETransactions_Tr); ?>
         </p>
         <?php
     }
@@ -233,7 +233,7 @@ add_action('admin_init', function () {
         ?>
         <p id="<?php echo sanitize_text_field($args['id']); ?>">
             <?
-            echo __('Switching in test mode (using preprod servers). No transaction will be effective.', 'etransaction-plugin');
+            echo __('Switching in test mode (using preprod servers). No transaction will be effective.', ETransactions_Tr);
             ?>
         </p>
         <?php
@@ -244,7 +244,7 @@ add_action('admin_init', function () {
         ?>
         <p id="<?php echo sanitize_text_field($args['id']); ?>">
             <?
-            echo __('The etransaction needs three pages for managing the CA e-Transaction service. The user lands on this pages in these cases.', 'etransaction-plugin');
+            echo __('The etransaction needs three pages for managing the CA e-Transaction service. The user lands on this page in these cases.', ETransactions_Tr);
             ?>
         </p>
         <?php
@@ -255,7 +255,7 @@ add_action('admin_init', function () {
         ?>
         <p id="<?php echo sanitize_text_field($args['id']); ?>">
             <?
-            echo __('The etransaction plugin need a validation pages. The user enter here its email address and give it consenting for the transaction', 'etransaction-plugin');
+            echo __('The etransaction plugin need a validation page. The user enter here its email address and give it consenting for the transaction', ETransactions_Tr);
             ?>
         </p>
         <?php

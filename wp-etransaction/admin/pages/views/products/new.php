@@ -51,7 +51,7 @@ if (!isset($category)) {
                        style="padding: 0.25rem; width: 25%"
                        placeholder="Enter here the product name"/>
                 <div class="description">
-                    <?php echo esc_html__('The product name as displayed on the web site', 'etransaction-plugin'); ?>
+                    <?php echo esc_html__('The product name as displayed on the web site', ETransactions_Tr); ?>
                 </div>
             </td>
         </tr>
@@ -67,30 +67,30 @@ if (!isset($category)) {
                        style="padding: 0.25rem"
                 />
                 <div class="description">
-                    <?php _e('The product price.', 'etransaction-plugin'); ?>
+                    <?php _e('The product price.', ETransactions_Tr); ?>
                 </div>
             </td>
         </tr>
 
-        <tr>
+        <!-- <tr>
             <th>
                 <label for="id_category">Category:</label>
             </th>
             <td>
                 <input type="text" name="category" id="id_category"
                        value="<?php echo $category; ?>"
-                       placeholder="Enter the product price"
+                       placeholder="Enter the product category"
                        style="padding: 0.25rem"
                 />
                 <div class="description">
-                    <?php _e('The product category.', 'etransaction-plugin'); ?>
+                    <?php _e('The product category.', ETransactions_Tr); ?>
                 </div>
             </td>
-        </tr>
+        </tr> -->
 
         <tr>
             <th>
-                <label for="id_free_amount"><?php _e('Free amount', 'etransaction-plugin'); ?>:</label>
+                <label for="id_free_amount"><?php _e('Free amount', ETransactions_Tr); ?>:</label>
             </th>
             <td>
                 <input type="checkbox" name="free_amount" <?php if ($use_free_amount) {
