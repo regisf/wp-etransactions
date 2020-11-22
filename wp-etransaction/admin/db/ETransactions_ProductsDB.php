@@ -16,6 +16,9 @@ if (!class_exists('ETransactions_ProductDB')) {
             $this->db_product_name = $this->db->prefix . ETransactions_DbPrefix . self::DbName;
         }
 
+        /**
+         * Get the class instance to use it as a singleton
+         */
         public static function get_instance()
         {
             if (self::$instance === null) {
@@ -30,13 +33,10 @@ if (!class_exists('ETransactions_ProductDB')) {
          */
         public function get_products($per_page, $page_number, $status = 'all')
         {
-            $query = "SELECT * FROM `{$this->db_product_name}`";
 
-            if ($status === 'active') {
-                $query .= ' WHERE `active`=true';
-            } else if ($status === 'inactive') {
-                $query .= ' WHERE `active`=false';
-            }
+            $value = var_export($status);
+            $query = "SELECT * FROM `{$this->db_product_name}`" . 
+                        " WHERE `active`= $value"; 
 
             if (!empty($_REQUEST['orderby'])) {
                 $query .= ' ORDER BY ' . esc_sql($_REQUEST['orderby']);

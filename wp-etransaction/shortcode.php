@@ -195,6 +195,9 @@ add_shortcode('etransactions-accepted-page', function ($attrs = [], $content = '
         $ref_value = $result->getReference()->getValue();
         ETransactions_TransactionDB::get_instance()
             ->set_transaction_succeed($ref_value->getValue());
+        
+        
+        Email::send_mail();
     }
 
     return '';

@@ -126,6 +126,8 @@ add_action('admin_init', function () {
         ]
     );
 
+    // Callback pages ---------------------------------------------------------
+
     add_settings_section(
         'etransactions_section_callbacks',               // ID
         __('Callbacks page', ETransactions_Tr), // Title
@@ -143,8 +145,7 @@ add_action('admin_init', function () {
             'label_for' => ETransactions_OptionAcceptedLandingPage,
             'placeholder' => __('URL for the accepted page', ETransactions_Tr),
             'help' => __('The page where the user lands when the payement is accepted.', ETransactions_Tr)
-        ]
-    );
+        ]   );
 
     add_settings_field(
         ETransactions_PluginPrefix . ETransactions_OptionRejectedLandingPage,
@@ -156,8 +157,7 @@ add_action('admin_init', function () {
             'label_for' => ETransactions_OptionRejectedLandingPage,
             'placeholder' => __('URL for the rejected page', ETransactions_Tr),
             'help' => __('The page where the user lands when the payement is rejected by the bank.', ETransactions_Tr)
-        ]
-    );
+        ]);
 
     add_settings_field(
         'etransactions_canceled_key',
@@ -169,9 +169,58 @@ add_action('admin_init', function () {
             'label_for' => ETransactions_OptionCanceledLandingPage,
             'placeholder' => __('URL for the canceled page', ETransactions_Tr),
             'help' => __('The page where the user lands when the payement is canceled.', ETransactions_Tr)
-        ]
-    );
+        ]);
 
+    // Email section ----------------------------------------------------------
+   
+    add_settings_section(
+        'etransactions_section_email',
+        __('Email send', ETransactions_Tr),
+        'etransactions_email',
+        ETransactions_PageName);
+
+    add_settings_field(
+        'etransactions_email_activate',
+        __('Send email', ETransactions_Tr),
+        'etransactions_checkbox_cb',
+        ETransactions_PageName,
+        'etransactions_section_email',
+        ['label_for' => 'email_activate',
+         'help' => __("Send email on each successful transaction") ]);
+
+    add_settings_field('etransactions_email_email', 
+        _('Email to use', ETransactions_Tr), 
+        'etransactions_field_cb', 
+        ETransactions_PageName, 
+        'etransactions_section_email', 
+        [
+            'label_for' => 'email_email', 
+            'placeholder' => __('Enter email receiver address'),
+            'help'=> __("The email address that will received a message for each a success payement. <br>
+            If you don't give an email address, the administrator email will be used.")
+        ]);
+
+    add_settings_field('etransactions_email_title', 
+        _('Message title', ETransactions_Tr), 
+        'etransactions_field_cb', 
+        ETransactions_PageName, 
+        'etransactions_section_email', 
+        [
+            'label_for' => 'email_title_id', 
+            'placeholder' => __('Enter the email message title')
+        ]);
+
+    add_settings_field('etransactions_email_body',
+            __('Message body', ETransactions_Tr),
+            'etransactions_textarea_callback', 
+            ETransactions_PageName,
+            'etransactions_section_email', 
+            [
+                'label_for' => 'email_content', 
+                'placeholder' => __('The email content'),
+                'help' => __("The email content. No tags are allowed here")
+            ]);
+    
     /*
      * Display the CA logo and a message.
      */
@@ -225,6 +274,23 @@ add_action('admin_init', function () {
         <div class="description">
             <?php echo $args['help']; ?>
         </div>
+        <?php
+    }
+
+    function etransactions_textarea_callback($args) 
+    {
+        $options = get_option(ETransactions_OptionName);
+        $label_for = esc_attr($args['label_for']);
+
+        $content = isset($options[$args['label_for']]) 
+            ? $options[$args['label_for']] : '';
+
+        ?>
+        <textarea 
+            id="<?php echo $label_for; ?>"
+            <?php if (isset($args['placeholder'])) { ?>placeholder="<?php echo $args['placeholder']; ?>"<?php } ?>
+            name="etransactions_options[<?php echo $label_for; ?>]"><?php echo $content ?></textarea>
+
         <?php
     }
 
