@@ -3,7 +3,7 @@
  * Plugin Name: CA e-Transactions
  * Plugin URI: https://github.com/regisf/wp-etransaction
  * Description: Simple products management and paiement using eTransactions (Paybox)
- * Version: 1.1.0
+ * Version: 1.220
  * Requires at least: 5.2
  * Requires PHP: 7.2
  * Author: Régis FLORET
