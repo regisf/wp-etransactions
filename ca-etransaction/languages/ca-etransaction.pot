@@ -1,0 +1,318 @@
+# Copyright (C) 2020 Régis FLORET
+# This file is distributed under the same license as the CA e-Transactions plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: CA e-Transactions 1.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-etransaction\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2020-11-23T20:11:26+01:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: etransaction-plugin\n"
+
+#: shortcode.php:15
+msgid "No products active to display"
+msgstr ""
+
+#: shortcode.php:20 admin/pages/widgets/transaction_list_table.php:16
+msgid "Order"
+msgstr ""
+
+#: shortcode.php:63 shortcode.php:150
+msgid "Product:"
+msgstr ""
+
+#: shortcode.php:75
+msgid "Amount you want to give"
+msgstr ""
+
+#: shortcode.php:82
+msgid "Confirm payement"
+msgstr ""
+
+#: shortcode.php:100
+msgid ""
+"Warning: One or more option is not set. No transaction could be executed."
+msgstr ""
+
+#: shortcode.php:163
+msgid "Proceed to payement"
+msgstr ""
+
+#: admin/init.php:8 admin/init.php:15
+msgid "Test mode"
+msgstr ""
+
+#: admin/init.php:21
+msgid "By checking this option, you will switch you payement system into to test mode and you will not be able to receive real payement."
+msgstr ""
+
+#: admin/init.php:28
+msgid "HMAC Preprod Key"
+msgstr ""
+
+#: admin/init.php:34
+msgid ""
+"The secret key generated into the preprod-guest.etransaction.fr/Vision "
+"backoffice"
+msgstr ""
+
+#. ID
+#: admin/init.php:40
+msgid "Credentials"
+msgstr ""
+
+#: admin/init.php:47
+msgid "Site Number"
+msgstr ""
+
+#: admin/init.php:54
+msgid "The Site ID given by the e-Transaction support (7 digits max)"
+msgstr ""
+
+#: admin/init.php:60
+msgid "Rang"
+msgstr ""
+
+#: admin/init.php:67
+msgid "The Rang ID given by the e-Transaction support (3 digits max)"
+msgstr ""
+
+#: admin/init.php:73
+msgid "Customer"
+msgstr ""
+
+#: admin/init.php:80
+msgid ""
+"Your customer ID given by the e-Transaction support (from 1 to 9 digitis)"
+msgstr ""
+
+#: admin/init.php:86
+msgid "Secret Key"
+msgstr ""
+
+#: admin/init.php:92
+msgid "The secret key generated into the etransaction.fr backoffice"
+msgstr ""
+
+#: admin/init.php:98
+msgid "Payement validation page"
+msgstr ""
+
+#: admin/init.php:105
+msgid "Confirmation page"
+msgstr ""
+
+#: admin/init.php:111
+msgid "Confirmation page url"
+msgstr ""
+
+#: admin/init.php:112
+msgid "The URL of the confirmation page."
+msgstr ""
+
+#: admin/init.php:118
+msgid "Validation page"
+msgstr ""
+
+#: admin/init.php:124
+msgid "Validation page url"
+msgstr ""
+
+#: admin/init.php:125
+msgid "The URL of the validation page."
+msgstr ""
+
+#. ID
+#: admin/init.php:131
+msgid "Callbacks page"
+msgstr ""
+
+#: admin/init.php:138
+msgid "Accepted page"
+msgstr ""
+
+#: admin/init.php:144
+msgid "URL for the accepted page"
+msgstr ""
+
+#: admin/init.php:145
+msgid "The page where the user lands when the payement is accepted."
+msgstr ""
+
+#: admin/init.php:151
+msgid "Rejected page"
+msgstr ""
+
+#: admin/init.php:157
+msgid "URL for the rejected page"
+msgstr ""
+
+#: admin/init.php:158
+msgid ""
+"The page where the user lands when the payement is rejected by the bank."
+msgstr ""
+
+#: admin/init.php:164
+msgid "Canceled page"
+msgstr ""
+
+#: admin/init.php:170
+msgid "URL for the canceled page"
+msgstr ""
+
+#: admin/init.php:171
+msgid "The page where the user lands when the payement is canceled."
+msgstr ""
+
+#: admin/init.php:182
+msgid "Fill the IDs you received from the e-Transaction support. "
+msgstr ""
+
+#: admin/init.php:236
+msgid ""
+"Switching in test mode (using preprod servers). No transaction will be "
+"effective."
+msgstr ""
+
+#: admin/init.php:247
+msgid ""
+"The etransaction needs three pages for managing the CA e-Transaction "
+"service. The user lands on this page in these cases."
+msgstr ""
+
+#: admin/init.php:258
+msgid ""
+"The etransaction plugin need a validation page. The user enter here its "
+"email address and give it consenting for the transaction"
+msgstr ""
+
+#: admin/hooks/filters.php:29
+msgid "Warning: Confirmation page is not set"
+msgstr ""
+
+#: admin/pages/transactions_page.php:22
+#: admin/pages/views/products/default.php:17
+#: admin/pages/views/products/default.php:21
+msgid "All"
+msgstr ""
+
+#: admin/pages/transactions_page.php:29
+msgid "Successful"
+msgstr ""
+
+#: admin/pages/transactions_page.php:36
+msgid "Rejected"
+msgstr ""
+
+#: admin/pages/transactions_page.php:43
+msgid "Canceled"
+msgstr ""
+
+#: admin/pages/settings_page.php:7
+msgid "Settings Saved"
+msgstr ""
+
+#: admin/pages/settings_page.php:20
+msgid ""
+"The payement accepted landing page is not created. You should create it."
+msgstr ""
+
+#: admin/pages/settings_page.php:29
+msgid ""
+"The payement rejected landing page is not created. You should create it."
+msgstr ""
+
+#: admin/pages/settings_page.php:38
+msgid ""
+"The payement canceled landing page is not created. You should create it."
+msgstr ""
+
+#: admin/pages/settings_page.php:47
+msgid "The payement validation page is not created. You should create it."
+msgstr ""
+
+
+#: admin/pages/settings_page.php:61
+msgid "Save"
+msgstr ""
+
+#: admin/pages/widgets/transaction_list_table.php:17
+msgid "Orders"
+msgstr ""
+
+#: admin/pages/widgets/transaction_list_table.php:100
+#: admin/pages/widgets/product_list_table.php:122
+msgid "Delete"
+msgstr ""
+
+#: admin/pages/widgets/product_list_table.php:22
+msgid "Product"
+msgstr ""
+
+#: admin/pages/widgets/product_list_table.php:23
+msgid "Products"
+msgstr ""
+
+#: admin/pages/widgets/product_list_table.php:36
+msgid "Free Amount"
+msgstr ""
+
+#: admin/pages/widgets/product_list_table.php:64
+#: admin/pages/views/products/delete_confirm.php:17
+msgid "Yes"
+msgstr ""
+
+#: admin/pages/widgets/product_list_table.php:64
+msgid "No"
+msgstr ""
+
+#: admin/pages/widgets/product_list_table.php:123
+msgid "Toggle Active"
+msgstr ""
+
+#: admin/pages/views/products/default.php:29
+#: admin/pages/views/products/default.php:34
+msgid "Active"
+msgstr ""
+
+#: admin/pages/views/products/default.php:42
+#: admin/pages/views/products/default.php:46
+msgid "Inactive"
+msgstr ""
+
+#: admin/pages/views/products/new.php:54
+msgid "The product name as displayed on the web site"
+msgstr ""
+
+#: admin/pages/views/products/new.php:70
+msgid "The product price."
+msgstr ""
+
+#: admin/pages/views/products/new.php:86
+msgid "The product category."
+msgstr ""
+
+#: admin/pages/views/products/new.php:93
+msgid "Free amount"
+msgstr ""
+
+#. Name of the plugin
+msgid "CA e-Transactions"
+msgstr ""
+
+#. Description of the plugin
+msgid "Simple products management and paiement using eTransactions (Paybox)"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://github.com/regisf/wp-etransaction"
+msgstr ""
+
+#. Author of the plugin
+msgid "Régis FLORET"
+msgstr ""
