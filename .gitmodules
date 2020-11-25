@@ -4,6 +4,3 @@
 [submodule "etransactions"]
 	path = etransactions
 	url = git@github.com:regisf/php-etransactions.git
-[submodule "wp-etransaction/etransactions"]
-	path = wp-etransaction/etransactions
-	url = git@github.com:regisf/php-etransactions.git
