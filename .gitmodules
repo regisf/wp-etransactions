@@ -1,6 +1,0 @@
-[submodule "php-etransactions"]
-	path = php-etransactions
-	url = git@github.com:regisf/php-etransactions.git
-[submodule "etransactions"]
-	path = etransactions
-	url = git@github.com:regisf/php-etransactions.git
