@@ -1,0 +1,3 @@
+[submodule "ca-etransaction/etransactions"]
+	path = ca-etransaction/etransactions
+	url = git@github.com:regisf/php-etransactions.git
