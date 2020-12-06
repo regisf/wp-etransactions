@@ -187,7 +187,7 @@ add_action('admin_init', function () {
          'help' => __("Send email on each successful transaction") ]);
 
     add_settings_field('etransactions_email_email', 
-        _('Email to use', ETransactions_Tr), 
+        __('Email to use', ETransactions_Tr),
         'etransactions_field_cb', 
         ETransactions_PageName, 
         'etransactions_section_email', 
@@ -199,7 +199,7 @@ add_action('admin_init', function () {
         ]);
 
     add_settings_field('etransactions_email_title', 
-        _('Message title', ETransactions_Tr), 
+        __('Message title', ETransactions_Tr),
         'etransactions_field_cb', 
         ETransactions_PageName, 
         'etransactions_section_email', 
@@ -271,7 +271,7 @@ add_action('admin_init', function () {
                 id="<?php echo $label_for; ?>"
                 <?php echo etransaction_option_name($label_for); ?>
                 type="checkbox"
-                <?php if ($options['test_id']) { ?>checked="<?php $options['test_id'] ?>" <?php } ?> />
+                <?php if ($options[$label_for]) { ?>checked="<?php $options[$label_for] ?>" <?php } ?> />
 
         <div class="description">
             <?php echo $args['help']; ?>

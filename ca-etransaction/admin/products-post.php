@@ -9,6 +9,11 @@ add_action('admin_post_add_product',
            ['ETransaction_Actions', 'admin_post_add_product']);
 
 
+function redirect() {
+    wp_redirect(admin_url('admin.php') . '?page=etransactions_products');
+    exit();
+}
+
 /**
  * Action for deleting a product
  */
@@ -40,10 +45,10 @@ add_action('admin_post_edit_product', function () {
     $price = $_REQUEST['price'];
     $active = isset($_REQUEST['active']);
     $free_amount = isset($_REQUEST['free_amount']);
-    $category = $_REQUEST['category'];
+    $category = isset($_REQUEST['category']) ? $_REQUEST['category'] : '';
 
     $productDb = ETransactions_ProductDB::get_instance();
-    $result = $productDb->update($product_id, $name, $price, $active);
+    $result = $productDb->update($product_id, $name, $price, $active, $free_amount, $category);
     if ($result === false) {
         echo "Pas marche: " . $productDb->pkoi();
         die();

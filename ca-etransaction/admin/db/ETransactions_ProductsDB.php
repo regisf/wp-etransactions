@@ -141,6 +141,7 @@ if (!class_exists('ETransactions_ProductDB')) {
             if (count($results)) {
                 return $results[0];
             }
+
             die('This should not append');
         }
 
