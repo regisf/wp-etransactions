@@ -1,18 +1,29 @@
 <?php
 
-require_once __DIR__ . '/etransaction_actions.php';
+/**
+ * Convinent function to redirect on the main page
+ */
+function redirect()
+{
+    wp_redirect(admin_url('admin.php') . '?page=etransactions_products');
+    exit();
+}
 
 /**
  * Action for adding a product
  */
-add_action('admin_post_add_product', 
-           ['ETransaction_Actions', 'admin_post_add_product']);
+add_action('admin_post_add_product', function () {
+    $name = $_REQUEST['name'];
+    $price = $_REQUEST['price'];
+    $active = isset($_REQUEST['active']);
+    $free_amount = isset($_REQUEST['free_amount']);
+    $category = $_REQUEST['category'];
 
+    ETransactions_ProductDB::get_instance()
+        ->insert($name, $price, $active, $free_amount, $category);
 
-function redirect() {
-    wp_redirect(admin_url('admin.php') . '?page=etransactions_products');
-    exit();
-}
+    redirect();
+});
 
 /**
  * Action for deleting a product

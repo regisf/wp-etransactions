@@ -2,7 +2,6 @@
 
 require_once plugin_dir_path(__FILE__) . 'shortcodes/all.php';
 
-
 // List of all products ------------------------------------------------------
 add_shortcode('etransactions-products-list', 'shortcodes\pages\products_list');
 
@@ -10,7 +9,6 @@ add_shortcode('etransactions-products-list', 'shortcodes\pages\products_list');
 add_shortcode('etransactions-confirmation-page', '\shortcodes\pages\confirmation_page');
 
 add_shortcode('etransactions-validation-page', '\shortcodes\pages\validation_page');
-
 
 // Tags ----------------------------------------------------------------------
 add_shortcode('etransactions-product-name', '\shortcodes\tags\product_name');

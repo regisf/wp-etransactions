@@ -10,7 +10,11 @@ function product_price($attrs = [], $content = '')
         return '';
     }
 
-    $product_id = esc_sql($_REQUEST['product']);
+    if (! is_numeric($_REQUEST['product'])) {
+        return '<!-- ' . $_REQUEST['product'] .' -->';
+    }
+
+    $product_id = $_REQUEST['product'];
     $product = \ETransactions_ProductDB::get_instance()->getById($product_id);
 
     return $product->price . '&nbsp;&euro;';

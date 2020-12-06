@@ -136,7 +136,9 @@ if (!class_exists('ETransactions_ProductDB')) {
 
         public function getById($id)
         {
-            $results = $this->db->get_results('SELECT * FROM `' . $this->db_product_name . '` WHERE `product_id`=' . $id);
+            $query = $this->db->prepare(
+                'SELECT * FROM `' . $this->db_product_name . '` WHERE `product_id`=%d', $id);
+            $results = $this->db->get_results($query);
 
             if (count($results)) {
                 return $results[0];

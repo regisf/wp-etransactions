@@ -6,17 +6,22 @@ require_once plugin_dir_path(__FILE__) . '../../admin/db/ETransactions_ProductsD
 require_once plugin_dir_path(__FILE__) . '../../admin/db/ETransactions_TransactionDB.php';
 require_once plugin_dir_path(__FILE__) . '../../etransactions/ETransactions/ETransaction.php';
 
+function is_required_options_exists($options)
+{
+    return (isset($options[ETransactions_OptionSiteID])
+        && isset($options[ETransactions_OptionRangID])
+        && isset($options[ETransactions_OptionCustomerID])
+        && isset($options[ETransactions_OptionSecretKey]));
+}
 
-function validation_page ($attrs = [], $content = '') {
+function validation_page($attrs = [], $content = '')
+{
     if (!isset($_REQUEST['product'])) {
         return '<p>Error: No product id set</p>';
     }
 
     $options = get_option(ETransactions_OptionName);
-    if (!(isset($options[ETransactions_OptionSiteID])
-        && isset($options[ETransactions_OptionRangID])
-        && isset($options[ETransactions_OptionCustomerID])
-        && isset($options[ETransactions_OptionSecretKey]))) {
+    if (!is_required_options_exists($options)) {
         return '<div class="etransactions-warning">' .
             __('Warning: One or more option is not set. No transaction could be executed.', ETransactions_Tr) .
             '</div>';
@@ -26,7 +31,7 @@ function validation_page ($attrs = [], $content = '') {
         'no-label' => true,
     ], $attrs);
 
-    $product_id = esc_sql($_REQUEST['product']);
+    $product_id = sanitize_text_field($_REQUEST['product']);
     $product = \ETransactions_ProductDB::get_instance()->getById($product_id);
 
     $holder = sanitize_text_field($_REQUEST['PBX_PORTEUR']);
@@ -43,7 +48,9 @@ function validation_page ($attrs = [], $content = '') {
             'secret' => $options[ETransactions_OptionSecretKey],
 
             'command' => $result->order_ref,
-            'total' => $product->free_amount !== '1' ? (float)$product->price : (float)sanitize_text_field($_REQUEST['free_amount']),
+            'total' => $product->free_amount !== '1'
+                ? (float)$product->price
+                : (float)sanitize_text_field($_REQUEST['free_amount']),
             'holder' => $result->email,
             'callbacks' => []
         ]);
@@ -68,7 +75,9 @@ function validation_page ($attrs = [], $content = '') {
     $etransaction->setTransactionData($data);
 
     $str = $preprod === true ? '<div class="etransactions-warning">! Caution ! You are in test mode </div>' : '';
-    $str .= '<form action="' . $etransaction->getServerAddress() . '" class="etransactions-product-form" method="post">';
+    $str .= '<form action="'
+        . $etransaction->getServerAddress()
+        . '" class="etransactions-product-form" method="post">';
 
     if ($attrs['no-label'] === false) {
         $str .= '<p class="etransactions-product-desc">

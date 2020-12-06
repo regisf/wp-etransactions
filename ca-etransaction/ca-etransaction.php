@@ -3,7 +3,7 @@
  * Plugin Name: CA e-Transactions
  * Plugin URI: https://github.com/regisf/wp-etransaction
  * Description: Simple products management and paiement using eTransactions (Paybox)
- * Version: 1.220
+ * Version: 1.2.0
  * Requires at least: 5.2
  * Requires PHP: 7.2
  * Author: Régis FLORET
@@ -13,12 +13,12 @@
  * Domain Path: /languages
  */
 
-include_once __DIR__ . '/constants.php';
-require_once __DIR__ . '/admin/init.php';
-require_once __DIR__ . '/admin/menus.php';
-require_once __DIR__ . '/admin/products-post.php';
-require_once __DIR__ . '/admin/hooks/filters.php';
-require_once __DIR__ . '/shortcode.php';
+include_once plugin_dir_path(__FILE__) . 'constants.php';
+require_once plugin_dir_path(__FILE__) . 'admin/init.php';
+require_once plugin_dir_path(__FILE__) . 'admin/menus.php';
+require_once plugin_dir_path(__FILE__) . 'admin/products-post.php';
+require_once plugin_dir_path(__FILE__) . 'admin/hooks/filters.php';
+require_once plugin_dir_path(__FILE__) . 'shortcode.php';
 
 /**
  * Install database on plugin activation
@@ -31,6 +31,11 @@ function etransactions_install_hook()
 }
 register_activation_hook(__FILE__, 'etransactions_install_hook');
 
-add_action('plugins_loaded', function() {
-    load_plugin_textdomain(ETransactions_Tr, FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
-});
+function etransactions_plugin_loaded()
+{
+    load_plugin_textdomain(
+        ETransactions_Tr,
+        FALSE,
+        'ca-etransaction/languages');
+}
+add_action('plugin_loaded', 'etransactions_plugin_loaded');

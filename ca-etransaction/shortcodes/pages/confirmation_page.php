@@ -5,7 +5,6 @@ namespace shortcodes\pages;
 require_once plugin_dir_path(__FILE__) . '../../admin/db/ETransactions_ProductsDB.php';
 require_once plugin_dir_path(__FILE__) . '../../etransactions/ETransactions/TransactionResult.php';
 
-
 /**
  * Display confirmation content. In this page, the user must enter its
  * email address for his active consentement
@@ -23,7 +22,7 @@ function confirmation_page ($attrs, $content) {
         'no-label' => true
     ], $attrs);
 
-    $product_id = esc_sql($_REQUEST['product']);
+    $product_id = sanitize_text_field($_REQUEST['product']);
     $product = \ETransactions_ProductDB::get_instance()->getById($product_id);
 
     $options = get_option('etransactions_options');
