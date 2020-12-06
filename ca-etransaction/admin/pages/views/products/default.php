@@ -4,7 +4,7 @@ if (!current_user_can('manage_options')) {
 }
 
 $product_list_table = new ETransactions_Product_List_Table(ETransactions_ProductDB::get_instance());
-$status = isset($_REQUEST['product_status']) ? $_REQUEST['product_status'] : 'all';
+$status = isset($_REQUEST['product_status']) ? sanitize_text_field($_REQUEST['product_status']) : 'all';
 ?>
 
 <a class="page-title-action" href="<?php echo admin_url('admin.php'); ?>?page=etransactions_products&product_action=new">Add</a>

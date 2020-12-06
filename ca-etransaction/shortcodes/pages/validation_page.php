@@ -31,10 +31,10 @@ function validation_page($attrs = [], $content = '')
         'no-label' => true,
     ], $attrs);
 
-    $product_id = sanitize_text_field($_REQUEST['product']);
+    $product_id = sanitize_text_field(sanitize_text_field($_REQUEST['product']));
     $product = \ETransactions_ProductDB::get_instance()->getById($product_id);
 
-    $holder = sanitize_text_field($_REQUEST['PBX_PORTEUR']);
+    $holder = sanitize_text_field(sanitize_text_field($_REQUEST['PBX_PORTEUR']));
     $ref = wp_generate_uuid4();
     $result = \ETransactions_TransactionDB::get_instance()->insert_order($product_id, $holder, $ref, $product->price);
 
@@ -50,7 +50,7 @@ function validation_page($attrs = [], $content = '')
             'command' => $result->order_ref,
             'total' => $product->free_amount !== '1'
                 ? (float)$product->price
-                : (float)sanitize_text_field($_REQUEST['free_amount']),
+                : (float)sanitize_text_field(sanitize_text_field($_REQUEST['free_amount'])),
             'holder' => $result->email,
             'callbacks' => []
         ]);

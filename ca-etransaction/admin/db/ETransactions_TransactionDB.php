@@ -78,8 +78,8 @@ if (!class_exists('ETransactions_TransactionDB')) {
             }
 
             if (!empty($_REQUEST['orderby'])) {
-                $query .= ' ORDER BY ' . esc_sql($_REQUEST['orderby']);
-                $query .= !empty($_REQUEST['order']) ? ' ' . esc_sql($_REQUEST['order']) : ' ASC';
+                $query .= ' ORDER BY ' . sanitize_sql_orderby($_REQUEST['orderby']);
+                $query .= !empty($_REQUEST['order']) ? ' ' . sanitize_sql_orderby($_REQUEST['order']) : ' ASC';
             }
 
             $query .= " LIMIT $per_page" . ' OFFSET ' . ($page_number - 1) * $per_page;

@@ -9,7 +9,7 @@ function product_name ($attrs = [], $content = '') {
         return '';
     }
 
-    $product_id = esc_sql($_REQUEST['product']);
+    $product_id = sanitize_text_field($_REQUEST['product']);
     $product = \ETransactions_ProductDB::get_instance()->getById($product_id);
 
     return stripcslashes($product->name);

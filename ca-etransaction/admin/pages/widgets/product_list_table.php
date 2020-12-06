@@ -132,7 +132,7 @@ if (!class_exists('ETransactions_Product_List_Table')) {
             $hidden = [];
             $sortable = $this->get_sortable_columns();
 
-            $status = isset($_REQUEST['product_status']) ? $_REQUEST['product_status'] : 'all';
+            $status = isset($_REQUEST['product_status']) ? sanitize_text_field($_REQUEST['product_status']) : 'all';
             $perPage = $this->get_items_per_page('records_per_page', 10);
             $currentPage = $this->get_pagenum();
 

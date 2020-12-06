@@ -14,7 +14,7 @@ function product_price($attrs = [], $content = '')
         return '<!-- ' . $_REQUEST['product'] .' -->';
     }
 
-    $product_id = $_REQUEST['product'];
+    $product_id = sanitize_text_field($_REQUEST['product']);
     $product = \ETransactions_ProductDB::get_instance()->getById($product_id);
 
     return $product->price . '&nbsp;&euro;';
