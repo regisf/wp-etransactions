@@ -1,11 +1,13 @@
 <?php
+
 if (!current_user_can('manage_options')) {
     return;
-}
-require_once __DIR__ . '/../db/ETransactions_ProductsDB.php';
+};
+
+require_once plugin_dir_path(__FILE__) . '../db/productsdb.php';
 require_once __DIR__ . '/widgets/product_list_table.php';
 
-$product_db = ETransactions_ProductDB::get_instance();
+$product_db = ETransaction_ProductDB::get_instance();
 $status = isset($_REQUEST['product_status']) ? $_REQUEST['product_status'] : 'all';
 $product_action = isset($_REQUEST['product_action']) ? $_REQUEST['product_action'] : '';
 

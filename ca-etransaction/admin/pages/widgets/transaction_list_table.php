@@ -1,5 +1,7 @@
 <?php
 
+use admin\db\TransactionDB;
+
 if (!class_exists('ETransactions_Transaction_List_Table')) {
     class ETransactions_Transaction_List_Table extends WP_List_Table
     {

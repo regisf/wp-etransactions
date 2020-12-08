@@ -2,7 +2,7 @@
 
 namespace shortcodes\pages;
 
-require_once plugin_dir_path(__FILE__) . '../../admin/db/ETransactions_ProductsDB.php';
+require_once plugin_dir_path(__FILE__) . '../../admin/db/productsdb.php';
 require_once plugin_dir_path(__FILE__) . '../../etransactions/ETransactions/TransactionResult.php';
 
 /**
@@ -23,7 +23,7 @@ function confirmation_page ($attrs, $content) {
     ], $attrs);
 
     $product_id = sanitize_text_field($_REQUEST['product']);
-    $product = \ETransactions_ProductDB::get_instance()->getById($product_id);
+    $product = \ETransaction_ProductDB::get_instance()->getById($product_id);
 
     $options = get_option('etransactions_options');
     $preprod = isset($options['test_id']);

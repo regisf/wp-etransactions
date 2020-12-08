@@ -13,11 +13,14 @@
  * Domain Path: /languages
  */
 
+
 include_once plugin_dir_path(__FILE__) . 'constants.php';
 require_once plugin_dir_path(__FILE__) . 'admin/init.php';
 require_once plugin_dir_path(__FILE__) . 'admin/menus.php';
 require_once plugin_dir_path(__FILE__) . 'admin/products-post.php';
 require_once plugin_dir_path(__FILE__) . 'admin/hooks/filters.php';
+require_once plugin_dir_path(__FILE__) . 'admin/db/transactiondb.php';
+require_once plugin_dir_path(__FILE__) . 'admin/db/productsdb.php';
 require_once plugin_dir_path(__FILE__) . 'shortcode.php';
 
 /**
@@ -25,10 +28,10 @@ require_once plugin_dir_path(__FILE__) . 'shortcode.php';
  */
 function etransactions_install_hook()
 {
-
-    ETransactions_ProductDB::get_instance()->install();
-    ETransactions_TransactionDB::get_instance()->install();
+    ETransaction_ProductDB::get_instance()->install();
+    ETransaction_TransactionDB::get_instance()->install();
 }
+
 register_activation_hook(__FILE__, 'etransactions_install_hook');
 
 function etransactions_plugin_loaded()
@@ -38,4 +41,5 @@ function etransactions_plugin_loaded()
         FALSE,
         'ca-etransaction/languages');
 }
+
 add_action('plugin_loaded', 'etransactions_plugin_loaded');

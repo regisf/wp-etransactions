@@ -1,9 +1,11 @@
 <?php
+
 if (!current_user_can('manage_options')) {
     return;
 }
 
-$product_list_table = new ETransactions_Product_List_Table(ETransactions_ProductDB::get_instance());
+$db_instance = ETransaction_ProductDB::get_instance();
+$product_list_table = new ETransactions_Product_List_Table($db_instance);
 $status = isset($_REQUEST['product_status']) ? sanitize_text_field($_REQUEST['product_status']) : 'all';
 ?>
 
@@ -15,11 +17,11 @@ $status = isset($_REQUEST['product_status']) ? sanitize_text_field($_REQUEST['pr
         <?php if ($status): ?>
             <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_products">
                 <?php echo __("All", ETransactions_Tr); ?>
-                (<?php echo ETransactions_ProductDB::get_instance()->get_all_count(); ?>)
+                (<?php echo $db_instance->get_all_count(); ?>)
             </a>
         <?php else: ?>
             <strong><?php echo __("All", ETransactions_Tr); ?></strong>
-            (<?php echo ETransactions_ProductDB::get_instance()->get_all_count(); ?>)
+            (<?php echo $db_instance->get_all_count(); ?>)
         <?php endif; ?>
     </li>
     |
@@ -27,12 +29,12 @@ $status = isset($_REQUEST['product_status']) ? sanitize_text_field($_REQUEST['pr
         <?php if ('active' !== $status): ?>
             <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_products&product_status=active">
                 <?php echo __("Active", ETransactions_Tr); ?>
-                (<?php echo ETransactions_ProductDB::get_instance()->get_actives_count(); ?>
+                (<?php echo $db_instance->get_actives_count(); ?>
                 )
             </a>
         <?php else: ?>
             <strong><?php echo __("Active", ETransactions_Tr); ?></strong>
-            (<?php echo ETransactions_ProductDB::get_instance()->get_actives_count(); ?>)
+            (<?php echo $db_instance->get_actives_count(); ?>)
         <?php endif; ?>
     </li>
     |
@@ -40,11 +42,11 @@ $status = isset($_REQUEST['product_status']) ? sanitize_text_field($_REQUEST['pr
         <?php if ('inactive' !== $status): ?>
             <a href="<?php echo admin_url('admin.php'); ?>?page=etransactions_products&product_status=inactive">
                 <?php echo __("Inactive", ETransactions_Tr); ?>
-                (<?php echo ETransactions_ProductDB::get_instance()->get_inactives_count(); ?>)
+                (<?php echo $db_instance->get_inactives_count(); ?>)
             </a>
         <?php else: ?>
             <strong><?php echo __("Inactive", ETransactions_Tr); ?></strong>
-            (<?php echo ETransactions_ProductDB::get_instance()->get_inactives_count(); ?>)
+            (<?php echo $db_instance->get_inactives_count(); ?>)
         <?php endif; ?>
 
     </li>

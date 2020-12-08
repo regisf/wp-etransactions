@@ -1,5 +1,8 @@
 <?php
 
+require_once plugin_dir_path(__FILE__) . 'db/productsdb.php';
+require_once plugin_dir_path(__FILE__) . '../etransactions/ETransactions/ETransaction.php';
+
 /**
  * Convinent function to redirect on the main page
  */
@@ -19,7 +22,7 @@ add_action('admin_post_add_product', function () {
     $free_amount = isset($_REQUEST['free_amount']);
     $category = $_REQUEST['category'];
 
-    ETransactions_ProductDB::get_instance()
+    ETransaction_ProductDB::get_instance()
         ->insert($name, $price, $active, $free_amount, $category);
 
     redirect();
@@ -35,7 +38,7 @@ add_action('admin_post_delete_product', function () {
     }
 
     $id = $_REQUEST['product_ID'];
-    $productDb = ETransactions_ProductDB::get_instance();
+    $productDb = ETransaction_ProductDB::get_instance();
     $result = $productDb->deleteById($id);
     if ($result === false) {
         echo "Pas marche: " . $productDb->pkoi();
@@ -58,7 +61,7 @@ add_action('admin_post_edit_product', function () {
     $free_amount = isset($_REQUEST['free_amount']);
     $category = isset($_REQUEST['category']) ? $_REQUEST['category'] : '';
 
-    $productDb = ETransactions_ProductDB::get_instance();
+    $productDb = ETransaction_ProductDB::get_instance();
     $result = $productDb->update($product_id, $name, $price, $active, $free_amount, $category);
     if ($result === false) {
         echo "Pas marche: " . $productDb->pkoi();

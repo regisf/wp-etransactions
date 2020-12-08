@@ -2,8 +2,8 @@
 
 namespace shortcodes\pages;
 
-require_once plugin_dir_path(__FILE__) . '../../admin/db/ETransactions_ProductsDB.php';
-require_once plugin_dir_path(__FILE__) . '../../admin/db/ETransactions_TransactionDB.php';
+require_once plugin_dir_path(__FILE__) . '../../admin/db/productsdb.php';
+require_once plugin_dir_path(__FILE__) . '../../admin/db/transactiondb.php';
 require_once plugin_dir_path(__FILE__) . '../../etransactions/ETransactions/ETransaction.php';
 
 function is_required_options_exists($options)
@@ -32,11 +32,11 @@ function validation_page($attrs = [], $content = '')
     ], $attrs);
 
     $product_id = sanitize_text_field(sanitize_text_field($_REQUEST['product']));
-    $product = \ETransactions_ProductDB::get_instance()->getById($product_id);
+    $product = \ETransaction_ProductDB::get_instance()->getById($product_id);
 
     $holder = sanitize_text_field(sanitize_text_field($_REQUEST['PBX_PORTEUR']));
     $ref = wp_generate_uuid4();
-    $result = \ETransactions_TransactionDB::get_instance()->insert_order($product_id, $holder, $ref, $product->price);
+    $result = \ETransaction_TransactionDB::get_instance()->insert_order($product_id, $holder, $ref, $product->price);
 
     $preprod = isset($options['test_id']);
     $etransaction = new \ETransaction($preprod);

@@ -2,7 +2,7 @@
 
 namespace shortcodes\tags;
 
-require_once plugin_dir_path(__FILE__) . '../../admin/db/ETransactions_ProductsDB.php';
+require_once plugin_dir_path(__FILE__) . '../../admin/db/productsdb.php';
 
 function product_price($attrs = [], $content = '')
 {
@@ -15,7 +15,7 @@ function product_price($attrs = [], $content = '')
     }
 
     $product_id = sanitize_text_field($_REQUEST['product']);
-    $product = \ETransactions_ProductDB::get_instance()->getById($product_id);
+    $product = \ETransaction_ProductDB::get_instance()->getById($product_id);
 
     return $product->price . '&nbsp;&euro;';
 }

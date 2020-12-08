@@ -1,12 +1,13 @@
 <?php
+
 if (!current_user_can('manage_options')) {
     return;
 }
 
-require_once __DIR__ . '/../db/ETransactions_TransactionDB.php';
-require_once __DIR__ . '/widgets/transaction_list_table.php';
+require_once plugin_dir_path(__FILE__) . 'widgets/transaction_list_table.php';
+require_once plugin_dir_path(__FILE__) . '../../admin/db/transactiondb.php';
 
-$transaction_db = ETransactions_TransactionDB::get_instance();
+$transaction_db = ETransaction_TransactionDB::get_instance();
 $order_list_table = new ETransactions_Transaction_List_Table($transaction_db);
 
 ?>

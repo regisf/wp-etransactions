@@ -2,16 +2,21 @@
 
 namespace shortcodes\pages;
 
-require_once plugin_dir_path(__FILE__) . '../../admin/db/ETransactions_ProductsDB.php';
+require_once plugin_dir_path(__FILE__) . '../../etransactions/ETransactions/ETransaction.php';
 
 
 /**
  * Display all the active products from the database
  */
-function products_list ($attrs, $content) {
-    $product_db = \ETransactions_ProductDB::get_instance();
+function products_list($attrs, $content)
+{
+    $product_db = \ETransaction_ProductDB::get_instance();
     $actives = $product_db->get_actives();
     $str = '';
+
+    $attrs = shortcode_atts([
+        'free_amount_label' => __('Free amount')
+    ], $attrs);
 
     if (count($actives) === 0) {
         return '<div class="etransactions-product-empty">' .
