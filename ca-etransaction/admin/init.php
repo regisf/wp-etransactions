@@ -255,11 +255,13 @@ add_action('admin_init', function () {
                     echo $options[$args['label_for']];
                 } ?>"
         />
-
+        <?php
+            if (isset($args['help'])): ?>
         <div class="description">
             <?php echo $args['help']; ?>
         </div>
         <?php
+            endif;
     }
 
     function etransactions_checkbox_cb($args)
@@ -271,7 +273,7 @@ add_action('admin_init', function () {
                 id="<?php echo $label_for; ?>"
                 <?php echo etransaction_option_name($label_for); ?>
                 type="checkbox"
-                <?php if ($options[$label_for]) { ?>checked="<?php $options[$label_for] ?>" <?php } ?> />
+                <?php if (isset($options[$label_for])) { ?>checked="<?php $options[$label_for] ?>" <?php } ?> />
 
         <div class="description">
             <?php echo $args['help']; ?>
