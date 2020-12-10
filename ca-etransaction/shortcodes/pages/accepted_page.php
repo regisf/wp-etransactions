@@ -4,7 +4,6 @@ namespace shortcodes\pages;
 
 require_once plugin_dir_path(__FILE__) . '../../admin/db/transactiondb.php';
 
-
 function accepted_page ($attrs = [], $content = '') {
     $result = \TransactionResult::fromRequest($_REQUEST);
     if ($result !== null) {
@@ -12,7 +11,7 @@ function accepted_page ($attrs = [], $content = '') {
         \ETransaction_TransactionDB::get_instance()
             ->set_transaction_succeed($ref_value->getValue());
 
-        // \Email::send_mail();
+        \ETransaction_Email::send_mail();
     }
 
     return '';
