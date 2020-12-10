@@ -288,7 +288,7 @@ add_action('admin_init', function () {
             ? $options[$args['label_for']] : '';
 
         ?>
-        <textarea 
+        <textarea class="regular-text"
             id="<?php echo $label_for; ?>"
             <?php if (isset($args['placeholder'])) { ?>placeholder="<?php echo $args['placeholder']; ?>"<?php } ?>
             <?php echo etransaction_option_name($label_for); ?>
