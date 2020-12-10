@@ -4,7 +4,7 @@ require_once plugin_dir_path(__FILE__) . 'db/productsdb.php';
 require_once plugin_dir_path(__FILE__) . '../etransactions/ETransactions/ETransaction.php';
 
 /**
- * Convinent function to redirect on the main page
+ * Convenient function to redirect on the main page
  */
 function redirect()
 {
