@@ -4,6 +4,8 @@ require_once plugin_dir_path(__FILE__) . 'shortcodes/all.php';
 
 // List of all products ------------------------------------------------------
 add_shortcode('etransactions-products-list', 'shortcodes\pages\products_list');
+# Alias
+add_shortcode('etransactions-products-page', 'shortcodes\pages\products_list');
 
 // Validation pages
 add_shortcode('etransactions-confirmation-page', 'shortcodes\pages\confirmation_page');

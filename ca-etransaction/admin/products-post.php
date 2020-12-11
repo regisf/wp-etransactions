@@ -54,12 +54,12 @@ add_action('admin_post_edit_product', function () {
         die('Integrity error');
     }
 
-    $product_id = is_integer($_REQUEST['product_ID']);
+    $product_id = sanitize_text_field($_REQUEST['product_ID']);
     $name = sanitize_text_field($_REQUEST['name']);
     $price = sanitize_text_field($_REQUEST['price']);
     $active = isset($_REQUEST['active']);
     $free_amount = isset($_REQUEST['free_amount']);
-    $category = isset($_REQUEST['category']) ? $_REQUEST['category'] : '';
+    $category = sanitize_text_field($_REQUEST['category']);
 
     $productDb = ETransaction_ProductDB::get_instance();
     $result = $productDb->update($product_id, $name, $price, $active, $free_amount, $category);

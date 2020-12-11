@@ -7,7 +7,7 @@ fi
 
 cp LICENSE README.md wp-etransaction
 
-zip wp-etransaction-${1}.zip  wp-etransaction  -x "*/.git" -x "*/.gitignore" -r
-rm wp-etransaction/{README.md,LICENSE}
+zip ca-etransaction-${1}.zip  ca-etransaction  -x "*/.git" -x "*/.gitignore" -r
+rm ca-etransaction/{README.md,LICENSE}
 
 

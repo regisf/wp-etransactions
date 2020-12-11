@@ -72,7 +72,7 @@ if (!isset($category)) {
             </td>
         </tr>
 
-        <!-- <tr>
+        <tr>
             <th>
                 <label for="id_category">Category:</label>
             </th>
@@ -86,7 +86,7 @@ if (!isset($category)) {
                     <?php _e('The product category.', ETransactions_Tr); ?>
                 </div>
             </td>
-        </tr> -->
+        </tr>
 
         <tr>
             <th>

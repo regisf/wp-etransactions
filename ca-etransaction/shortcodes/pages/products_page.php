@@ -10,13 +10,16 @@ require_once plugin_dir_path(__FILE__) . '../../etransactions/ETransactions/ETra
  */
 function products_list($attrs, $content)
 {
-    $product_db = \ETransaction_ProductDB::get_instance();
-    $actives = $product_db->get_actives();
     $str = '';
 
     $attrs = shortcode_atts([
-        'free_amount_label' => __('Free amount')
+        'free_amount_label' => __('Free amount'),
+        'category' => ''
     ], $attrs);
+
+//    die($attrs['category']);
+    $product_db = \ETransaction_ProductDB::get_instance();
+    $actives = $product_db->get_actives($attrs['category']);
 
     if (count($actives) === 0) {
         return '<div class="etransactions-product-empty">' .

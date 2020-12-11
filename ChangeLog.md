@@ -1,5 +1,12 @@
 # Changes for e-Transaction WordPress plugin
 
+* v1.2.1:
+  * Restore dropped category
+
+* v1.2.0:
+  * Add translation
+  * email sending on each transction
+  
 * v1.0.2:
     * Fix plugin uninstallation
     * Fix database upgrade for the same version. The database was altered each 

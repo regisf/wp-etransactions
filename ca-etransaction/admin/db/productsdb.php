@@ -64,9 +64,15 @@ class ETransaction_ProductDB
         return $this->db->get_results($query, 'ARRAY_A');
     }
 
-    public function get_actives()
+    public function get_actives($category='')
     {
-        return $this->db->get_results("SELECT * FROM `{$this->db_product_name}` where active=true");
+        $query = "SELECT * FROM `{$this->db_product_name}` where active=true";
+
+        if ($category !== '') {
+            $query .= ' AND `category`="' . $category . '"';
+        }
+
+        return $this->db->get_results($query);
     }
 
     public function get_count($status)
