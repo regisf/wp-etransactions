@@ -79,7 +79,7 @@ if (!class_exists('ETransactions_Product_List_Table')) {
             $actions = [
                 'edit' => sprintf(
                     '<a href="?page=%s&product_action=%s&product=%s&_wpnonce=%s">Edit</a>',
-                    esc_attr($_REQUEST['page']),
+                    sanitize_text_field($_REQUEST['page']),
                     'edit',
                     absint($item['product_id']),
                     $nonce
@@ -87,7 +87,7 @@ if (!class_exists('ETransactions_Product_List_Table')) {
 
                 'inactive' => sprintf(
                     '<a href="?page=%s&product_action=toggle_active&product=%s&_wpnonce=%s">Set %s</a>',
-                    esc_attr($_REQUEST['page']),
+                    sanitize_text_field($_REQUEST['page']),
                     absint($item['product_id']),
                     $nonce,
                     $action
@@ -95,7 +95,7 @@ if (!class_exists('ETransactions_Product_List_Table')) {
 
                 'delete' => sprintf(
                     '<a href="?page=%s&product_action=%s&product=%s&_wpnonce=%s">Delete</a>',
-                    esc_attr($_REQUEST['page']),
+                    sanitize_text_field($_REQUEST['page']),
                     'delete_confirm',
                     absint($item['product_id']),
                     $nonce

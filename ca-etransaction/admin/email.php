@@ -1,16 +1,22 @@
 <?php
 
-class ETransaction_Email {
-    public static function send_email() {
+class ETransaction_Email
+{
+    public static function send_email()
+    {
         $options = get_option(ETransactions_OptionName);
-        $activate = $options['email_activate'];
+        if (!isset($options->options['email_activate'])) {
+            return false;
+        }
 
-//        wp_email(
-//
-//        );
-    }
+        $title = $options->options['email_title'];
+        $content = $options->options['email_content'];
+        $to = $options->options['email_email'];
 
-    public static function send_test_email($to, $title, $body) {
+        if ($title && $content && $to) {
+            return wp_email($to, $title, $content);
+        }
 
+        return false;
     }
 }

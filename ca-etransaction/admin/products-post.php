@@ -16,11 +16,11 @@ function redirect()
  * Action for adding a product
  */
 add_action('admin_post_add_product', function () {
-    $name = $_REQUEST['name'];
-    $price = $_REQUEST['price'];
+    $name = sanitize_text_field($_REQUEST['name']);
+    $price = sanitize_text_field($_REQUEST['price']);
     $active = isset($_REQUEST['active']);
     $free_amount = isset($_REQUEST['free_amount']);
-    $category = $_REQUEST['category'];
+    $category = sanitize_text_field($_REQUEST['category']);
 
     ETransaction_ProductDB::get_instance()
         ->insert($name, $price, $active, $free_amount, $category);
@@ -37,7 +37,7 @@ add_action('admin_post_delete_product', function () {
         die('Integrity error');
     }
 
-    $id = $_REQUEST['product_ID'];
+    $id = is_integer($_REQUEST['product_ID']);
     $productDb = ETransaction_ProductDB::get_instance();
     $result = $productDb->deleteById($id);
     if ($result === false) {
@@ -54,9 +54,9 @@ add_action('admin_post_edit_product', function () {
         die('Integrity error');
     }
 
-    $product_id = $_REQUEST['product_ID'];
-    $name = $_REQUEST['name'];
-    $price = $_REQUEST['price'];
+    $product_id = is_integer($_REQUEST['product_ID']);
+    $name = sanitize_text_field($_REQUEST['name']);
+    $price = sanitize_text_field($_REQUEST['price']);
     $active = isset($_REQUEST['active']);
     $free_amount = isset($_REQUEST['free_amount']);
     $category = isset($_REQUEST['category']) ? $_REQUEST['category'] : '';

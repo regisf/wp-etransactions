@@ -9,12 +9,12 @@ function product_price($attrs = [], $content = '')
     if (!isset($_REQUEST['product'])) {
         return '';
     }
+    $product_id = sanitize_text_field($_REQUEST['product']);
 
-    if (! is_numeric($_REQUEST['product'])) {
-        return '<!-- ' . $_REQUEST['product'] .' -->';
+    if (! is_numeric($product_id)) {
+        return '<!-- ' . $product_id .' -->';
     }
 
-    $product_id = sanitize_text_field($_REQUEST['product']);
     $product = \ETransaction_ProductDB::get_instance()->getById($product_id);
 
     return $product->price . '&nbsp;&euro;';

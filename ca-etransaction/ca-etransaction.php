@@ -13,7 +13,6 @@
  * Domain Path: /languages
  */
 
-
 include_once plugin_dir_path(__FILE__) . 'constants.php';
 require_once plugin_dir_path(__FILE__) . 'admin/init.php';
 require_once plugin_dir_path(__FILE__) . 'admin/menus.php';
@@ -22,6 +21,8 @@ require_once plugin_dir_path(__FILE__) . 'admin/hooks/filters.php';
 require_once plugin_dir_path(__FILE__) . 'admin/db/transactiondb.php';
 require_once plugin_dir_path(__FILE__) . 'admin/db/productsdb.php';
 require_once plugin_dir_path(__FILE__) . 'shortcode.php';
+require_once plugin_dir_path(__FILE__) . 'admin/email.php';
+
 
 /**
  * Install database on plugin activation

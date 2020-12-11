@@ -35,7 +35,7 @@ if (!isset($category)) {
     <?php else: ?>
         <input type="hidden" name="action" value="edit_product"/>
         <input type="hidden" name="product_ID"
-               value="<?php echo $_REQUEST['product']; ?>"/>
+               value="<?php echo sanitize_text_field($_REQUEST['product']); ?>"/>
     <?php endif; ?>
     <?php echo apply_filters('etransactions_nonce_input', ETransactions_NonceName); ?>
 

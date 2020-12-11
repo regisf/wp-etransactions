@@ -76,7 +76,7 @@ if (!class_exists('ETransactions_Transaction_List_Table')) {
             $actions = [
                 'delete' => sprintf(
                     '<a href="?page=%s&order_action=%s&order=%s&_wpnonce=%s">Delete</a>',
-                    esc_attr($_REQUEST['page']),
+                    sanitize_text_field($_REQUEST['page']),
                     'delete_confirm',
                     absint($item['order_id']),
                     $nonce
